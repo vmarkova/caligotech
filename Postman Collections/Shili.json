@@ -1,0 +1,170 @@
+{
+  "info": {
+    "_postman_id": "dafbcdca-38df-48c3-ab50-2aeb4f5e5bd8",
+    "name": "Shili",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "_postman_id": "13ee420a-2529-4638-a66a-fc01af98ca13",
+      "name": "Campaign Controller",
+      "description": "Campaign Controller",
+      "item": [
+        {
+          "_postman_id": "0b9a3ca2-f5f8-494d-8b00-90e14223df24",
+          "name": "accept campaign by owner",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"message\": \"string\",\r\n  \"status\": \"string\"\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8192/campaign/{campaignId}/acceptByOwner"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "04dcd6bc-6c75-45be-a365-bf8b8458633d",
+          "name": "accept campaign by Retailer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"message\": \"accepted\",\r\n  \"status\": \"Signed\"\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8192/campaign/5b71da0fd12f8511cd5fd17c/acceptByRetailer"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "b4bc0a80-c960-4c87-81c8-cd953f8e70fd",
+          "name": "avoid campaign",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"message\": \"string\",\r\n  \"status\": \"string\"\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8192/campaign/{campaignId}/avoid/{ownerId}"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "86efc639-665e-44ac-bd8c-d540887e2f6a",
+          "name": "decline campaign by owner",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"message\": \"string\",\r\n  \"status\": \"string\"\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8192/campaign/{campaignId}/declineByOwner"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "4628fad6-cf5e-4032-97ad-df36352683da",
+          "name": "decline campaign by Retailer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"message\": \"string\",\r\n  \"status\": \"string\"\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8192/campaign/{campaignId}/declineByRetailer"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "70561ec7-04ac-4e06-b72e-0176b819c68a",
+          "name": "put campaign on done state",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"message\": \"string\",\r\n  \"status\": \"string\"\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8192/campaign/{campaignId}/done/{ownerId}"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "d483d800-753b-4298-8912-2f110c87ad08",
+          "name": "get clip info",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"clip\": false,\r\n  \"clipFaceValue\": 0,\r\n  \"clipdate\": 0,\r\n  \"count\": 0,\r\n  \"hardClip\": false,\r\n  \"redeem\": false,\r\n  \"redeemFaceValue\": 0,\r\n  \"redeemdate\": 0\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8192/campaign/{campaignId}/clipRedeemInfo"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "c5ef9f24-5d19-4ebb-aca5-963bd4b5b692",
+      "name": "Promotion Controller",
+      "description": null,
+      "item": [
+        {
+          "_postman_id": "4c8242e1-87f5-4a03-b534-fbfae4bc14bc",
+          "name": "get promotion info",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8192 /promotion/{promotionId}"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
