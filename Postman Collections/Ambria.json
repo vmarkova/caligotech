@@ -1,0 +1,340 @@
+{
+  "info": {
+    "_postman_id": "ef40f16e-6ac7-4f17-8cea-7c77483752d3",
+    "name": "Ambria",
+    "description": "Products Management MicroService",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "_postman_id": "38906ed9-bc14-4953-bd4d-2defc678011d",
+      "name": "Get Lists",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "f73eaad5-f584-47d4-8412-31e90dad2eed",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Your test name\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.value).to.eql();",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"type\": \"Tide\",\n    \"items\": [\"123442343\"],\n    \"name\": \"test\",\n    \"description\": \"\",\n    \"brand\": \"\",\n    \"manufacturerId\": \"\"\n}"
+        },
+        "url": {
+          "raw": "http://qa-apps.caligotech.com:8187/lists?id=5b3bdcc8d12f851d520482be",
+          "protocol": "http",
+          "host": [
+            "qa-apps",
+            "caligotech",
+            "com"
+          ],
+          "port": "8187",
+          "path": [
+            "lists"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "5b3bdcc8d12f851d520482be"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "fe064454-837e-44af-88f9-eac323b63f3c",
+          "name": "Get Lists",
+          "originalRequest": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"type\": \"Tide\",\n    \"items\": [\"123442343\"],\n    \"name\": \"test\",\n    \"description\": \"\",\n    \"brand\": \"\",\n    \"manufacturerId\": \"\"\n}"
+            },
+            "url": {
+              "raw": "http://qa-apps.caligotech.com:8187/lists?id=5b3bdcc8d12f851d520482be",
+              "protocol": "http",
+              "host": [
+                "qa-apps",
+                "caligotech",
+                "com"
+              ],
+              "port": "8187",
+              "path": [
+                "lists"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "5b3bdcc8d12f851d520482be"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate",
+              "name": "Cache-Control",
+              "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json;charset=UTF-8",
+              "name": "Content-Type",
+              "description": "The mime type of this content"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 24 Jul 2018 18:52:05 GMT",
+              "name": "Date",
+              "description": "The date and time that the message was sent"
+            },
+            {
+              "key": "Expires",
+              "value": "0",
+              "name": "Expires",
+              "description": "Gives the date/time after which the response is considered stale"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache",
+              "name": "Pragma",
+              "description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked",
+              "name": "Transfer-Encoding",
+              "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff",
+              "name": "X-Content-Type-Options",
+              "description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY",
+              "name": "X-Frame-Options",
+              "description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block",
+              "name": "X-XSS-Protection",
+              "description": "Cross-site scripting (XSS) filter"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\"items\":[{\"type\":\"Tide\",\"name\":\"TideListTest\",\"description\":\"Tide UPCs\",\"brand\":\"Tide\",\"manufacturerId\":\"037000\",\"id\":\"5b3bdcc8d12f851d520482be\",\"responseItems\":[{\"product\":\"037000127840\",\"productSequence\":0,\"currentProduct\":\"037000127840\"},{\"product\":\"037000127864\",\"productSequence\":0,\"currentProduct\":\"037000127864\"}]},{\"type\":\"Gain\",\"name\":\"Gain\",\"description\":\"Gain UPCs\",\"brand\":\"Gain\",\"manufacturerId\":\"037000\",\"id\":\"5b3fb56dd12f851d520482c0\",\"responseItems\":[{\"product\":\"037000127840\",\"productSequence\":0,\"currentProduct\":\"037000127840\"},{\"product\":\"037000127864\",\"productSequence\":0,\"currentProduct\":\"037000127864\"},{\"product\":\"037000194941\",\"productSequence\":0,\"currentProduct\":\"037000194941\"},{\"product\":\"037000212157\",\"productSequence\":0,\"currentProduct\":\"037000212157\"},{\"product\":\"037000212164\",\"productSequence\":0,\"currentProduct\":\"037000212164\"},{\"product\":\"037000224068\",\"productSequence\":0,\"currentProduct\":\"037000224068\"},{\"product\":\"037000230328\",\"productSequence\":0,\"currentProduct\":\"037000230328\"},{\"product\":\"037000230335\",\"productSequence\":0,\"currentProduct\":\"037000230335\"},{\"product\":\"037000230489\",\"productSequence\":0,\"currentProduct\":\"037000230489\"},{\"product\":\"037000853756\",\"productSequence\":0,\"currentProduct\":\"037000853756\"}]},{\"type\":\"Cascadian Farm\",\"name\":\"Cascadian Farm\",\"description\":\"Cascadian Farm UPCs\",\"brand\":\"Cascadian Farm\",\"manufacturerId\":\"037000\",\"id\":\"5b44e66ed12f852c70e4bebe\",\"responseItems\":[{\"product\":\"1800000001\",\"productSequence\":0,\"currentProduct\":\"1800000001\"},{\"product\":\"1800000011\",\"productSequence\":0,\"currentProduct\":\"1800000011\"},{\"product\":\"1800000094\",\"productSequence\":0,\"currentProduct\":\"1800000094\"},{\"product\":\"1800000105\",\"productSequence\":0,\"currentProduct\":\"1800000105\"},{\"product\":\"1800000107\",\"productSequence\":0,\"currentProduct\":\"1800000107\"}]},{\"type\":\"Tide\",\"name\":\"TideListTest\",\"description\":\"Tide UPCs\",\"brand\":\"Tide\",\"manufacturerId\":\"037000\",\"id\":\"5b577008d12f855754d0ce92\",\"responseItems\":[{\"product\":\"037000127840\",\"productSequence\":0,\"currentProduct\":\"037000127840\"},{\"product\":\"037000127864\",\"productSequence\":0,\"currentProduct\":\"037000127864\"}]},{\"type\":\"Alena\",\"name\":\"Alena\",\"description\":\"Alena UPCs\",\"brand\":\"Alena\",\"manufacturerId\":\"037000\",\"id\":\"5b577525d12f855754d0ce93\",\"responseItems\":[{\"product\":\"037000127840\",\"productSequence\":0,\"currentProduct\":\"037000127840\"},{\"product\":\"037000127864\",\"productSequence\":0,\"currentProduct\":\"037000127864\"}]}]}"
+        }
+      ]
+    },
+    {
+      "_postman_id": "809cc918-bd04-4fda-9d66-3b6c2ffc719b",
+      "name": "Get List",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "31d455e3-bca5-4460-983e-558b394ea490",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"type\": \"Tide\",\n    \"items\": [\"123442343\"],\n    \"name\": \"test\",\n    \"description\": \"\",\n    \"brand\": \"\",\n    \"manufacturerId\": \"\"\n}"
+        },
+        "url": "http://qa-apps.caligotech.com:8187/lists/5b280150d12f851d520482b7"
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "df759a0c-df40-42ab-8f8b-a597e0c55200",
+      "name": "Modify the list",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "733728ba-7f29-44ba-a8e4-2bd84dabfe37",
+            "type": "text/javascript",
+            "exec": [
+              "{",
+              "    \"type\": \"Gain\",",
+              "    \"items\": [\"037000127840\",\"037000127864\",\"037000194941\",\"037000212157\",\"037000212164\",\"037000224068\",\"037000230328\",\"037000230335\",\"037000230489\",\"037000853756\"],",
+              "    \"name\": \"Gain\",",
+              "    \"description\": \"Gain UPCs 123\",",
+              "    \"brand\": \"Gain\",",
+              "    \"manufacturerId\": \"037000\"",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"type\": \"Gain\",\n    \"items\": [\"037000127840\",\"037000127864\",\"037000194941\",\"037000212157\",\"037000212164\",\"037000224068\",\"037000230328\",\"037000230335\",\"037000230489\",\"037000853756\"],\n    \"name\": \"Gain\",\n    \"description\": \"Gain UPCs\",\n    \"brand\": \"Gain\",\n    \"manufacturerId\": \"037000\"\n}"
+        },
+        "url": "http://qa-apps.caligotech.com:8187/lists/5b3fb6dad12f851d520482c1"
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "7ddf3677-1c26-4efb-bb6c-9797ea4ce47a",
+      "name": "Add New LIst",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "31d455e3-bca5-4460-983e-558b394ea490",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"type\": \"Tide\",\n    \"items\": [\"123442343\"],\n    \"name\": \"test\",\n    \"description\": \"\",\n    \"brand\": \"\",\n    \"manufacturerId\": \"\"\n}"
+        },
+        "url": "http://qa-apps.caligotech.com:8187/lists"
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "b7f18128-899a-4d38-9761-98c3b4b30c0d",
+      "name": "Delete the list",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "31d455e3-bca5-4460-983e-558b394ea490",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"type\": \"Tide\",\n    \"items\": [\"123442343\"],\n    \"name\": \"test\",\n    \"description\": \"\",\n    \"brand\": \"\",\n    \"manufacturerId\": \"\"\n}"
+        },
+        "url": "http://qa-apps.caligotech.com:8187/lists"
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "96248afc-223e-454e-af18-9d46bbd430d0",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "139bba77-b66d-4df4-a7b0-34a2c577f90f",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "62b5b51e-b747-44d6-80ac-143a1c87e8ba",
+      "key": "Id",
+      "value": "{{id}}",
+      "type": "string"
+    }
+  ]
+}
