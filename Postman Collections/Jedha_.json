@@ -1,0 +1,3475 @@
+{
+  "info": {
+    "_postman_id": "e6a2dd99-ca5c-49d9-ab4c-47af3f00a56c",
+    "name": "Jedha copy",
+    "description": "Promotions Management Microservice",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "_postman_id": "43215260-595f-43c1-8dba-1b5235365f47",
+      "name": "Promo lifecycle",
+      "description": null,
+      "item": [
+        {
+          "_postman_id": "33cda62d-c690-4313-804a-df19fe8692cb",
+          "name": "Post promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "1422a73c-4319-4f86-b97e-f04180d7f535",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "const promo_id = testObject.id;",
+                  "",
+                  "pm.test(\"Id check\", function () {",
+                  "    pm.expect(testObject.id).to.eql(promo_id);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains budgetId\", function() {",
+                  "    const budgetId = testObject.budgetId;",
+                  "    const lengthbudgetId = budgetId.length > 0;",
+                  "    pm.expect(lengthbudgetId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
+                  "    const familyCode = testObject.familyCode;",
+                  "    const lengthfamilyCode = familyCode.length == 3;",
+                  "    pm.expect(lengthfamilyCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains gs1Databar with more than 25 digits\", function() {",
+                  "    const gs1Databar = testObject.gs1Databar;",
+                  "    const lengthgs1Databar = gs1Databar.length > 25;",
+                  "    pm.expect(lengthgs1Databar).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains title\", function() {",
+                  "    const title = testObject.title;",
+                  "    const lengthTitle = title.length > 0;",
+                  "    pm.expect(lengthTitle).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains text\", function() {",
+                  "    const text = testObject.text;",
+                  "    const lengthText = text.length > 0;",
+                  "    pm.expect(lengthText).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains details\", function() {",
+                  "    const details = testObject.details;",
+                  "    const lengthDetails = details.length > 0;",
+                  "    pm.expect(lengthDetails).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains promo code\", function() {",
+                  "    const promoCode = testObject.providerPromotionCode;",
+                  "    const lengthPromoCode = promoCode.length > 0;",
+                  "    pm.expect(lengthPromoCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains images link\", function() {",
+                  "    const images = testObject.images;",
+                  "    const lengthimages = images.length > 0;",
+                  "    pm.expect(lengthimages).to.eql(true);",
+                  "});",
+                  "",
+                  "var schema = {",
+                  "  \"title\" : \"string\",",
+                  "  \"providerPromotionCode\" : \"string\",",
+                  "  \"text\" : \"string\",",
+                  "  \"details\" : \"string\",",
+                  "  \"images\" :\"array\",",
+                  "  \"rule\" : {",
+                  "    \"id\" : null,",
+                  "    \"type\" : \"string\",",
+                  "    \"condition\" : {",
+                  "      \"id\" : null,",
+                  "      \"type\" : \"string\",",
+                  "      \"mpr\" : 1,",
+                  "      \"product\" : {",
+                  "        \"upcs\" : \"array\",",
+                  "        \"brands\" : [ {",
+                  "          \"brand\" : \"string\",",
+                  "          \"products\" : [ \"string\" ]",
+                  "        } ]",
+                  "      }",
+                  "    },",
+                  "    \"reward\" : {",
+                  "      \"type\" : \"string\",",
+                  "      \"id\" : null,",
+                  "      \"value\" : \"integer\",",
+                  "      \"brands\" : [ {",
+                  "          \"brand\" : \"string\",",
+                  "          \"products\" : \"array\"",
+                  "        } ]",
+                  "    }",
+                  "  },",
+                  "  \"startDate\" : \"date\",",
+                  "  \"endDate\" : \"date\",",
+                  "  \"budgetId\" : \"string\",",
+                  "  \"familyCode\" : \"string\",",
+                  "  \"gs1Databar\" : \"string\"",
+                  "  ",
+                  "}",
+                  "",
+                  "",
+                  "pm.test('Schema is valid', function() {",
+                  "  pm.expect(tv4.validate(testObject, schema)).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"Get $0.50 on Ivory Body Wash \",\r\n  \"providerPromotionCode\" : \"131240 \",\r\n  \"text\" : \"OFF ONE Ivory Body Wash (21oz or larger) \",\r\n  \"details\" : \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\r\n  \"images\" : [ \"ivory/5b3e8c36d12f85041119ea07.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"075609195594\", \"075609195358\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"DiscountValueReward\",\r\n      \"id\" : null,\r\n      \"value\" : 50,\r\n      \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-01-01T14:00:00\",\r\n  \"endDate\" : \"2018-01-31T14:00:00\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"130\",\r\n  \"gs1Databar\" : \"81101007560913123933001101303170701\"\r\n  \r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "1cf5c848-b348-4ef2-aa2f-07904873756f",
+          "name": "Get  List Promotions",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "078e5dc0-d930-4b12-a662-044f3692817f",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "const response_json = pm.response.json();",
+                  "pm.environment.set(\"promo_id\", response_json.items[0].id);",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"title\",\r\n  \"text\" : \"text\",\r\n  \"details\" : \"details\",\r\n  \"images\" : [ \"promotions/1.png\", \"promotions/2.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : 123,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-09-22\",\r\n  \"endDate\" : \"2018-12-22\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"999\",\r\n  \"gs1Databar\" : \"811098235223534534\",\r\n  \"providerData\" : {\"key\": \"value\"}\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "539698da-b383-479f-a313-92f34568ef8c",
+          "name": "Get  Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ab9fb098-b03e-4350-9e06-5468a36fff5b",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains budgetId\", function() {",
+                  "    const budgetId = testObject.budgetId;",
+                  "    const lengthbudgetId = budgetId.length > 0;",
+                  "    pm.expect(lengthbudgetId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
+                  "    const familyCode = testObject.familyCode;",
+                  "    const lengthfamilyCode = familyCode.length == 3;",
+                  "    pm.expect(lengthfamilyCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains gs1Databar with more than 25 digits\", function() {",
+                  "    const gs1Databar = testObject.gs1Databar;",
+                  "    const lengthgs1Databar = gs1Databar.length > 25;",
+                  "    pm.expect(lengthgs1Databar).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains title\", function() {",
+                  "    const title = testObject.title;",
+                  "    const lengthTitle = title.length > 0;",
+                  "    pm.expect(lengthTitle).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains id\", function() {",
+                  "    const id = testObject.id;",
+                  "    const lengthId = id.length > 0;",
+                  "    pm.expect(lengthId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains details\", function() {",
+                  "    const details = testObject.details;",
+                  "    const lengthDetails = details.length > 0;",
+                  "    pm.expect(lengthDetails).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains promo code\", function() {",
+                  "    const promoCode = testObject.providerPromotionCode;",
+                  "    const lengthPromoCode = promoCode.length > 0;",
+                  "    pm.expect(lengthPromoCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains images link\", function() {",
+                  "    const images = testObject.images;",
+                  "    const lengthimages = images.length > 0;",
+                  "    pm.expect(lengthimages).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains modifiedBy\", function() {",
+                  "    const modifiedBy = testObject.modifiedBy;",
+                  "    const lengthmodifiedBy = modifiedBy.length > 0;",
+                  "    pm.expect(lengthmodifiedBy).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains modifiedOn\", function() {",
+                  "    const modifiedOnRaw = testObject.modifiedOn;",
+                  "    const modifiedOn = new Date(modifiedOnRaw*1000);",
+                  "    const isADate =  Object.prototype.toString.call(modifiedOn) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains status\", function() {",
+                  "    const status = testObject.status;",
+                  "    const lengthstatus = status.length > 0;",
+                  "    pm.expect(lengthstatus).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Is start date before end date in promotion\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const startDateBeforeEnd = startDate.getTime() < endDate.getTime();",
+                  "    pm.expect(startDateBeforeEnd).to.eql(true);",
+                  "});",
+                  "",
+                  "",
+                  "",
+                  "var schema = {",
+                  "    \"items\": [{",
+                  "        \"brands\": [{",
+                  "            \"brand\": \"string\",",
+                  "            \"products\": \"array\",",
+                  "        }],",
+                  "        \"budgetId\": \"string\",",
+                  "        \"details\": \"string\",",
+                  "        \"endDate\": \"date\",",
+                  "        \"familyCode\": \"string\",",
+                  "        \"gs1Databar\": \"string\",",
+                  "        \"id\": \"string\",",
+                  "        \"images\": \"array\",",
+                  "        \"mfrId\": \"string\",",
+                  "        \"modifiedBy\": \"string\",",
+                  "        \"modifiedOn\": 0,",
+                  "        \"providerData\": \"string\",",
+                  "        \"providerPromotionCode\": \"string\",",
+                  "        \"rule\": \"object\",",
+                  "        \"startDate\": \"date\",",
+                  "        \"status\": \"string\",",
+                  "        \"text\": \"string\",",
+                  "        \"timezone\": {",
+                  "            \"id\": \"string\",",
+                  "            \"rules\": {",
+                  "                \"fixedOffset\": \"boolean\",",
+                  "                \"transitionRules\": \"array\",",
+                  "                \"transitions\": \"array\"",
+                  "            }",
+                  "        },",
+                  "        \"title\": \"string\"",
+                  "    }]",
+                  "}",
+                  "",
+                  "",
+                  "pm.test('Schema is valid', function() {",
+                  "    pm.expect(tv4.validate(testObject, schema)).to.be.true;",
+                  "",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"title\",\r\n  \"text\" : \"text\",\r\n  \"details\" : \"details\",\r\n  \"images\" : [ \"promotions/1.png\", \"promotions/2.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : 123,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-09-22\",\r\n  \"endDate\" : \"2018-12-22\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"999\",\r\n  \"gs1Databar\" : \"811098235223534534\",\r\n  \"providerData\" : {\"key\": \"value\"}\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "ac7aa87b-a629-4eca-8d58-f5cbccd9eeda",
+          "name": "Add Campaign to the Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a15269c2-14da-4f33-b4b0-557be9616aae",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "pm.environment.set(\"camp_id\", testObject.id);",
+                  "",
+                  "//const camp_id = testObject.id;",
+                  "",
+                  "pm.test(\"Promo contains campaign Id\", function() {",
+                  "    const id = testObject.id;",
+                  "    const lengthid = id.length > 0;",
+                  "    pm.expect(lengthid).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains clipByDate\", function() {",
+                  "    const clipByDate = new Date(testObject.clipByDate);",
+                  "    const isADate = Object.prototype.toString.call(clipByDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "/*pm.test(\"Is clip date before end date in promotion\", function() {",
+                  "    const clipByDate = new Date(testObject.clipByDate);",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const clipDateBeforeEnd = clipByDate.getTime() <= endDate.getTime();",
+                  "    pm.expect(clipDateBeforeEnd).to.eql(true);",
+                  "});*/",
+                  "",
+                  "pm.test(\"Promotion Id check\", function () {",
+                  "    pm.expect(testObject.promotionId).to.eql(promo_id);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Promo contains modifiedBy\", function() {",
+                  "    const modifiedBy = testObject.modifiedBy;",
+                  "    const lengthmodifiedBy = modifiedBy.length > 0;",
+                  "    pm.expect(lengthmodifiedBy).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains modifiedOn\", function() {",
+                  "    const modifiedOnRaw = testObject.modifiedOn;",
+                  "    const modifiedOn = new Date(modifiedOnRaw*1000);",
+                  "    const isADate =  Object.prototype.toString.call(modifiedOn) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains status\", function() {",
+                  "    const status = testObject.status;",
+                  "    const lengthstatus = status.length > 0;",
+                  "    pm.expect(lengthstatus).to.eql(true);",
+                  "});",
+                  "",
+                  "var schema = {",
+                  "  \"clipByDate\": \"date\",",
+                  "  \"endDate\": \"date\",",
+                  "  \"id\": \"string\",",
+                  "  \"modifiedBy\": \"string\",",
+                  "  \"modifiedOn\": 0,",
+                  "  \"overrides\": {",
+                  "    \"details\": \"string\",",
+                  "    \"images\": \"array\",",
+                  "    \"rule\": {",
+                  "      \"id\": 0",
+                  "    },",
+                  "    \"text\": \"string\",",
+                  "    \"title\": \"string\"",
+                  "  },",
+                  "  \"promotionId\": \"string\",",
+                  "  \"retailerProfileId\": \"string\",",
+                  "  \"startDate\": \"date\",",
+                  "  \"status\": \"string\",",
+                  "  \"timezone\": \"string\"",
+                  "}",
+                  "",
+                  "pm.test('Schema is valid', function() {",
+                  "  pm.expect(tv4.validate(testObject, schema)).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n \"clipByDate\": \"2019-01-01T14:00:00\",\n \"endDate\": \"2019-01-01T14:00:00\",\n \"overrides\": {\n   \"details\": \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\n   \"images\": [\n     \"Gain laundry detergent/5b6b6bd4d12f8512623c2e8b.png\"\n   ],\n   \"rule\": {\n     \"id\": 0,\"type\": \"SingleRule\"\n   },\n   \"text\": \"Get $0.50 OFF Gain\",\n   \"title\": \"When buy Two Gain laundry detergent\"\n },\n \"retailerProfileId\": \"3\",\n \"startDate\": \"2019-01-01T14:00:00\"\n   }"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "7b6e79f8-d335-49cc-8e94-c0600d971b6e",
+          "name": "Publish Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a1e4da9d-da2b-4087-90b8-57ae3f085246",
+                "type": "text/javascript",
+                "exec": [
+                  "",
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200,201,202,204]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "campaignIds",
+                "value": "camp_id "
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"campaignIds\": [\r\n\t\"{{camp_id}}\"\r\n   ]\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/publish/",
+            "description": "Publish Promotion"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "5460af8f-223e-49d9-b5da-d54143826bff",
+          "name": "Create/update campaigns in bulk",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "b6fc135f-d459-432e-a199-690fba278912",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([201,202,204]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n \"items\": [\n     {\n \"clipByDate\": \"2019-01-01T14:00:00\",\n \"endDate\": \"2019-01-01T14:00:00\",\n \"overrides\": {\n   \"details\": \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\n   \"images\": [\n     \"Gain laundry detergent/5b6b6bd4d12f8512623c2e8b.png\"\n   ],\n   \"rule\": {\n     \"id\": 0,\"type\": \"SingleRule\"\n   },\n   \"text\": \"Get $0.50 OFF Gain\",\n   \"title\": \"When buy Two Gain laundry detergent\"\n },\n \"retailerProfileId\": \"3\",\n \"startDate\": \"2019-01-01T14:00:00\"\n   }\n ]\n}\n\n"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/bulk/campaigns/update"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "e40d3b93-85d9-47d5-91ad-c652dab39700",
+          "name": "Publish Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ac134f37-3dd1-4247-9493-d0d02dcaf74d",
+                "type": "text/javascript",
+                "exec": [
+                  "",
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([201,202,204]);",
+                  "});"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "08040ef1-4b96-4f9a-98dd-833bce277d7a",
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}/publish/",
+            "description": "Publish Campaign"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "91b21d2d-b5c6-4296-a02c-acff7df45d26",
+          "name": "Update promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "b0d15164-3693-4876-8d9d-e2293e7345fc",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"Get ONE Cascadian Farm Cinnamon Crunch Cereal Free\",\r\n  \"providerPromotionCode\" : \"111310 \",\r\n  \"text\" : \"When you buy TWO Cinnamon Crunch Cereal\",\r\n  \"details\" : \"Void if altered, copied, sold, purchased, transferred, exchanged or where prohibited or restricted by law. One coupon per purchase of specified product(s). Good only in USA, APOs & FPOs. CONSUMER: No other coupon may be used with this coupon. Consumer pays any sales tax. RETAILER: General Mills will reimburse you the face value of this coupon plus handling if submitted in compliance with our redemption policy. Copy available upon request. Cash value 1/100 cent. Send to GENERAL MILLS 8, NCH Marketing Services, P.O. Box 880001, El Paso TX 88588-0001 or an authorized clearinghouse.\",\r\n  \"images\" : [ \"Cascadian/5b3e9e81d12f85041119ea09.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"1800000001\",\"1800000011\",\"1800000094\",\"1800000105\",\"1800000107\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"Cascadian Farm\u00a0\",\r\n          \"products\" : [ \"Cinnamon Crunch Cereald\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"1800000001\",\"1800000011\",\"1800000094\",\"1800000105\",\"1800000107\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"Cascadian Farm\",\r\n          \"products\" : [ \"Cinnamon Crunch Cereal\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2019-01-01T14:00:00\",\r\n  \"endDate\" : \"2019-01-01T14:00:00\",\r\n  \"budgetId\" : \"12345\",\r\n  \"familyCode\" : \"412\",\r\n  \"gs1Databar\" : \"811010021908110785310011062090000\"\r\n  \r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}",
+            "description": "Modify a promotion"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "4d4e0849-29ae-497c-9ad5-24d359acfdb4",
+          "name": "Get  Campaigns for promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a3bf5b0d-99b5-4656-9cbe-1d055ac4eccc",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"title\",\r\n  \"text\" : \"text\",\r\n  \"details\" : \"details\",\r\n  \"images\" : [ \"promotions/1.png\", \"promotions/2.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : 123,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-09-22\",\r\n  \"endDate\" : \"2018-12-22\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"999\",\r\n  \"gs1Databar\" : \"811098235223534534\",\r\n  \"providerData\" : {\"key\": \"value\"}\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c2150f87-38c3-46e6-87e3-0c0f71aa70fc",
+          "name": "Get Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "d000a137-8460-4901-bee1-2f1685940188",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "d2ae8013-7098-4eca-a00e-819e65556af6",
+          "name": "Get Campaign (no promo id)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "18e6bb0b-0c42-4919-b6de-5d5bd14e6a64",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/campaigns/{{camp_id}}"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "7f164eea-5019-4945-9e74-03362749c722",
+          "name": "Update Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "34593ce3-a934-4416-8a3e-449b9795cf8d",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n   \"clipByDate\": \"2019-01-30T14:00:00\",\r\n      \"endDate\": \"2019-01-30T14:00:00\",\r\n           \"overrides\": {\r\n        \"details\": \"Detail345345s\",\r\n        \"images\": [\r\n          \"Cascadian/5b3e9e81d12f85041119ea09.png\"\r\n        ],\r\n        \"rule\": {\r\n          \"id\": 0,\"type\": \"SingleRule\"\r\n        },\r\n        \"text\": \"text\",\r\n        \"title\": \"title\"\r\n      },\r\n      \"retailerProfileId\": \"1\",\r\n      \"startDate\": \"2019-01-01T14:00:00\"\r\n      \r\n     \r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}",
+            "description": "Update Campaign"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "89ce9041-b478-4270-a790-c9891ef0636a",
+          "name": "Accept changes for Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "61fe0d87-237d-476d-8356-687ed622172b",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}/accept_changes"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "43f462b0-dfb7-4caa-b072-fe59cb5a9f96",
+          "name": "Pause Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "52a9e167-24a4-4de6-a0ce-a06d69d58ab0",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}/pause"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "793cfd1d-c90e-4854-8607-18cf6cca4bb0",
+          "name": "Delte campaigns in bulk",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "bf780fb1-77d5-49bd-9225-68940b6400fe",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"clipByDate\": \"2018-08-13T19:35:08.181Z\",\n      \"endDate\": \"2018-08-13T19:35:08.181Z\",\n      \"id\": \"string\",\n      \"overrides\": {\n        \"details\": \"string\",\n        \"images\": [\n          \"string\"\n        ],\n        \"rule\": {\n          \"id\": 0\n        },\n        \"text\": \"string\",\n        \"title\": \"string\"\n      },\n      \"retailerProfileId\": \"string\",\n      \"startDate\": \"2018-08-13T19:35:08.181Z\",\n      \"timezone\": \"string\"\n    }\n  ]\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/bulk/campaigns/delete"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "994f08f5-a9f5-4f47-9bf0-8b90c8b79c81",
+          "name": "Reject changes for Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "e83cb239-9fdb-4047-ba38-6a473311b289",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}/reject"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "61e8c8a8-9df7-4f90-bfde-271adb192905",
+          "name": "Void the Campaign ",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "87715677-afa7-4ebd-8338-31e649d97a4e",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}/void"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "b61aa606-08de-4aa9-aed4-346dd0d35194",
+          "name": "Resume Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "321bc7ad-aabb-4d39-a579-a3ba6ab10757",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}/un-pause"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "06f35b1a-9dff-498a-b10c-05d095c14d2b",
+          "name": "Pause the Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "3e0a9575-aba0-4308-94d0-5eafa9f7f2f5",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/pause"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "f2bd7fd6-8dd8-48f2-a7e8-d6fd81f72a15",
+          "name": "Disable the Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "11ef313c-a4b4-4d36-8d3d-76054e612999",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/status/void"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "edec50a9-4c19-421c-bd18-b212517e61c6",
+          "name": "Resume the Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "076832e4-40d2-4101-8613-67056822c7c8",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/un-pause"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "b43a8c43-a6ec-48dd-87c8-6010b0b8647e",
+          "name": "Delete Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "7bd7e90c-2ea8-4950-b02a-41cfba837082",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "d9215606-d83f-47cd-8b5b-f75e5a39f456",
+          "name": "Delete prom",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "90dba702-ba8e-4c5b-acaa-d7b1d4738afb",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 204\", function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});",
+                  "",
+                  "pm.globals.unset(\"id\");",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "81b26f4b-ee2f-495d-b3c3-24eddf058cca",
+          "name": "Add Campaign to the Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "0577acfe-cd34-4a6a-bd44-15cb93c39d91",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "pm.environment.set(\"camp_id\", testObject.id);",
+                  "const promo_id = pm.environment.get(\"promo_id\");",
+                  "",
+                  "//const camp_id = testObject.id;",
+                  "",
+                  "pm.test(\"Promo contains campaign Id\", function() {",
+                  "    const id = testObject.id;",
+                  "    const lengthid = id.length > 0;",
+                  "    pm.expect(lengthid).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains clipByDate\", function() {",
+                  "    const clipByDate = new Date(testObject.clipByDate);",
+                  "    const isADate = Object.prototype.toString.call(clipByDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "/*pm.test(\"Is clip date before end date in promotion\", function() {",
+                  "    const clipByDate = new Date(testObject.clipByDate);",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const clipDateBeforeEnd = clipByDate.getTime() <= endDate.getTime();",
+                  "    pm.expect(clipDateBeforeEnd).to.eql(true);",
+                  "});*/",
+                  "",
+                  "pm.test(\"Promotion Id check\", function () {",
+                  "    //const equalId = Object.prototype.toString.call(promotionId) === promo_id;",
+                  "  //  pm.expect(testObject.promotionId === promo_id).to.eql(true);",
+                  " pm.expect(testObject.promotionId).to.eql(promo_id);",
+                  " //pm.expect(testObject).to.have.property('id', promo_id);",
+                  "});",
+                  "",
+                  "",
+                  "//tests[\"Getting Violation Id\"] = testObject.promotionId === 5b84eda1d12f8534ebf7a2c3;",
+                  "",
+                  "pm.test(\"Promo contains modifiedBy\", function() {",
+                  "    const modifiedBy = testObject.modifiedBy;",
+                  "    const lengthmodifiedBy = modifiedBy.length > 0;",
+                  "    pm.expect(lengthmodifiedBy).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains modifiedOn\", function() {",
+                  "    const modifiedOnRaw = testObject.modifiedOn;",
+                  "    const modifiedOn = new Date(modifiedOnRaw*1000);",
+                  "    const isADate =  Object.prototype.toString.call(modifiedOn) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains status\", function() {",
+                  "    const status = testObject.status;",
+                  "    const lengthstatus = status.length > 0;",
+                  "    pm.expect(lengthstatus).to.eql(true);",
+                  "});",
+                  "",
+                  "var schema = {",
+                  "  \"clipByDate\": \"date\",",
+                  "  \"endDate\": \"date\",",
+                  "  \"id\": \"string\",",
+                  "  \"modifiedBy\": \"string\",",
+                  "  \"modifiedOn\": 0,",
+                  "  \"overrides\": {",
+                  "    \"details\": \"string\",",
+                  "    \"images\": \"array\",",
+                  "    \"rule\": {",
+                  "      \"id\": 0",
+                  "    },",
+                  "    \"text\": \"string\",",
+                  "    \"title\": \"string\"",
+                  "  },",
+                  "  \"promotionId\": \"string\",",
+                  "  \"retailerProfileId\": \"string\",",
+                  "  \"startDate\": \"date\",",
+                  "  \"status\": \"string\",",
+                  "  \"timezone\": \"string\"",
+                  "}",
+                  "",
+                  "pm.test('Schema is valid', function() {",
+                  "  pm.expect(tv4.validate(testObject, schema)).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n \"clipByDate\": \"2019-01-01T14:00:00\",\n \"endDate\": \"2019-01-01T14:00:00\",\n \"overrides\": {\n   \"details\": \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\n   \"images\": [\n     \"Gain laundry detergent/5b6b6bd4d12f8512623c2e8b.png\"\n   ],\n   \"rule\": {\n     \"id\": 0,\"type\": \"SingleRule\"\n   },\n   \"text\": \"Get $0.50 OFF Gain\",\n   \"title\": \"When buy Two Gain laundry detergent\"\n },\n \"retailerProfileId\": \"3\",\n \"startDate\": \"2019-01-01T14:00:00\"\n   }"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "cc2cfd30-dc91-46a6-851f-e20285676066",
+      "name": "Post promotion requests",
+      "description": "Post promotion request (no matter type)",
+      "item": [
+        {
+          "_postman_id": "2c40c446-ba7e-4854-93d3-96a4178d7be6",
+          "name": "Post promotion (Cents OFF)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ede19e00-4e55-430a-8739-2f6e6a49d794",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "var jsonData = pm.response.json();",
+                  "",
+                  "",
+                  "",
+                  "//pm.globals.set(\"promo_id\", jsonData.id);",
+                  "",
+                  "",
+                  "pm.test(\"Promo_id\",  function () {",
+                  "    promo_id=jsonData.id;",
+                  "   console.log(\"Our promo id\", promo_id);",
+                  "});",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"Get $0.50 on Ivory Body Wash \",\r\n  \"providerPromotionCode\" : \"131240 \",\r\n  \"text\" : \"OFF ONE Ivory Body Wash (21oz or larger) \",\r\n  \"details\" : \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\r\n  \"images\" : [ \"ivory/5b3e8c36d12f85041119ea07.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"075609195594\", \"075609195358\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"DiscountValueReward\",\r\n      \"id\" : null,\r\n      \"value\" : 50,\r\n      \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-01-01T14:00:00\",\r\n  \"endDate\" : \"2018-01-31T14:00:00\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"130\",\r\n  \"gs1Databar\" : \"81101007560913123933001101303170701\"\r\n  \r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "ee7f4250-09ea-46dd-863d-e18443dfd574",
+          "name": "Post promotion BXGY",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "c1533eb7-e53f-4317-ba8a-68a4ae38bf35",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "var jsonData = pm.response.json();",
+                  "",
+                  "pm.globals.set(\"id\", jsonData.id);",
+                  "",
+                  "",
+                  "",
+                  "pm.test(\"Promo_id\", function () {",
+                  "    pm.expect(jsonData.id).to.eql(pm.globals.get(\"id\"))",
+                  "});",
+                  "",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"Get Two L\u00c4RABAR Apple Pie FREE\",\r\n  \"providerPromotionCode\" : \"110785 \",\r\n  \"text\" : \"When you buy Three L\u00c4RABAR Banana Bread\",\r\n  \"details\" : \"Void if altered, copied, sold, purchased, transferred, exchanged or where prohibited or restricted by law. One coupon per purchase of specified product(s). Good only in USA, APOs & FPOs. CONSUMER: No other coupon may be used with this coupon. Consumer pays any sales tax. RETAILER: General Mills will reimburse you the face value of this coupon plus handling if submitted in compliance with our redemption policy. Copy available upon request. Cash value 1/100 cent. Send to GENERAL MILLS 8, NCH Marketing Services, P.O. Box 880001, El Paso TX 88588-0001 or an authorized clearinghouse.\",\r\n  \"images\" : [ \"larabar/5b3e9c79d12f85041119ea08.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 3,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"021908402529\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"L\u00c4RABAR\",\r\n          \"products\" : [ \"Banana Bread\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"021908423142\u00a0\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"L\u00c4RABAR\",\r\n          \"products\" : [ \"Apple Pie\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2019-01-01T14:00:00\",\r\n  \"endDate\" : \"2019-01-31T14:00:00\",\r\n  \"budgetId\" : \"123\",\r\n  \"familyCode\" : \"620\",\r\n  \"gs1Databar\" : \"811010021908110785310011062090000\"\r\n  \r\n}"
+            },
+            "url": {
+              "raw": "http://qa-apps.caligotech.com:8188/promotions?bxgy_id={{id}}",
+              "protocol": "http",
+              "host": [
+                "qa-apps",
+                "caligotech",
+                "com"
+              ],
+              "port": "8188",
+              "path": [
+                "promotions"
+              ],
+              "query": [
+                {
+                  "key": "bxgy_id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "2fc015a1-8213-4bd8-8ad4-8b309c6d7d48",
+          "name": "Post promotion BXGX",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "4629bd92-5429-4b6d-9f2c-2fe6d1a9d0da",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  " var jsonData = pm.response.json();",
+                  "",
+                  "",
+                  "pm.globals.set(\"id\", jsonData.id);",
+                  "pm.test(\"Promo_id\", function () {",
+                  "    pm.expect(jsonData.id).to.eql(pm.globals.get(\"id\"))",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"Get ONE Cascadian Farm Cinnamon Crunch Cereal Free\",\r\n  \"providerPromotionCode\" : \"111307 \",\r\n  \"text\" : \"When you buy TWO Cinnamon Crunch Cereal\",\r\n  \"details\" : \"Void if altered, copied, sold, purchased, transferred, exchanged or where prohibited or restricted by law. One coupon per purchase of specified product(s). Good only in USA, APOs & FPOs. CONSUMER: No other coupon may be used with this coupon. Consumer pays any sales tax. RETAILER: General Mills will reimburse you the face value of this coupon plus handling if submitted in compliance with our redemption policy. Copy available upon request. Cash value 1/100 cent. Send to GENERAL MILLS 8, NCH Marketing Services, P.O. Box 880001, El Paso TX 88588-0001 or an authorized clearinghouse.\",\r\n  \"images\" : [ \"Cascadian/5b3e9e81d12f85041119ea09.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"1800000001\",\"1800000011\",\"1800000094\",\"1800000105\",\"1800000107\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"Cascadian Farm\u00a0\",\r\n          \"products\" : [ \"Cinnamon Crunch Cereald\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"1800000001\",\"1800000011\",\"1800000094\",\"1800000105\",\"1800000107\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"Cascadian Farm\",\r\n          \"products\" : [ \"Cinnamon Crunch Cereal\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2019-01-01T14:00:00\",\r\n  \"endDate\" : \"2019-01-31T14:00:00\",\r\n  \"budgetId\" : \"123\",\r\n  \"familyCode\" : \"411\",\r\n  \"gs1Databar\" : \"811010021908110785310011062090000\"\r\n  \r\n}"
+            },
+            "url": {
+              "raw": "http://qa-apps.caligotech.com:8188/promotions?id={{id}}",
+              "protocol": "http",
+              "host": [
+                "qa-apps",
+                "caligotech",
+                "com"
+              ],
+              "port": "8188",
+              "path": [
+                "promotions"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "d17c659a-79db-4472-a568-fa29759f7670",
+          "name": "Post promotion Basket OFF",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "8d4a70c3-7a3e-4ab2-bce3-d44bda0f115c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  " var jsonData = pm.response.json();",
+                  "",
+                  "pm.globals.set(\"id\", jsonData.id);",
+                  "",
+                  "pm.test(\"Promo_id\", function () {",
+                  "    pm.expect(jsonData.id).to.eql(pm.globals.get(\"id\"))",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"title\",\r\n  \"text\" : \"text\",\r\n  \"details\" : \"details\",\r\n  \"images\" : [ \"promotion/5b61e579d12f8512623c2e7a.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2019-01-01T14:00:00\",\r\n  \"endDate\" : \"2019-01-31T14:00:00\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"familyCode\",\r\n  \"gs1Databar\" : \"gs1Databar\"\r\n  \r\n}"
+            },
+            "url": {
+              "raw": "http://qa-apps.caligotech.com:8188/promotions?id={{id}}",
+              "protocol": "http",
+              "host": [
+                "qa-apps",
+                "caligotech",
+                "com"
+              ],
+              "port": "8188",
+              "path": [
+                "promotions"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}",
+                  "equals": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "a6f46c39-7467-47a3-b058-2bab2b54dc5e",
+          "name": "Post Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "7f37e914-21b9-44a1-8223-9591413fa989",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "const promotion = pm.response.json();",
+                  "pm.globals.set(\"promo_id\", promotion.id);",
+                  "postman.setNextRequest('Get Promotion');",
+                  "// tests from get promotion - validation."
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"Get $0.50 on Ivory Body Wash \",\r\n  \"providerPromotionCode\" : \"131240 \",\r\n  \"text\" : \"OFF ONE Ivory Body Wash (21oz or larger) \",\r\n  \"details\" : \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\r\n  \"images\" : [ \"ivory/5b3e8c36d12f85041119ea07.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"075609195594\", \"075609195358\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"DiscountValueReward\",\r\n      \"id\" : null,\r\n      \"value\" : 50,\r\n      \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-01-01T14:00:00\",\r\n  \"endDate\" : \"2018-01-31T14:00:00\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"130\",\r\n  \"gs1Databar\" : \"81101007560913123933001101303170701\"\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions"
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "a85d9486-b767-4a92-a60b-d09521093be5",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "0fb6dbd6-6ba5-470b-892d-3294274883fc",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "var jsonData = pm.response.json();",
+              "",
+              "",
+              "",
+              "//pm.globals.set(\"promo_id\", jsonData.id);",
+              "",
+              "",
+              "pm.test(\"Promo_id\",  function () {",
+              "    promo_id=jsonData.id;",
+              "   console.log(\"Our promo id\", promo_id);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "_postman_id": "afedd458-1a75-45f8-a854-f716e8a9ad97",
+      "name": "POST requests",
+      "description": null,
+      "item": [
+        {
+          "_postman_id": "9fabdb95-77c7-4140-a7d4-fc2d85e3f7f8",
+          "name": "Post promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "1422a73c-4319-4f86-b97e-f04180d7f535",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "const promo_id = testObject.id;",
+                  "",
+                  "pm.test(\"Id check\", function () {",
+                  "    pm.expect(testObject.id).to.eql(promo_id);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains budgetId\", function() {",
+                  "    const budgetId = testObject.budgetId;",
+                  "    const lengthbudgetId = budgetId.length > 0;",
+                  "    pm.expect(lengthbudgetId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
+                  "    const familyCode = testObject.familyCode;",
+                  "    const lengthfamilyCode = familyCode.length == 3;",
+                  "    pm.expect(lengthfamilyCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains gs1Databar with more than 25 digits\", function() {",
+                  "    const gs1Databar = testObject.gs1Databar;",
+                  "    const lengthgs1Databar = gs1Databar.length > 25;",
+                  "    pm.expect(lengthgs1Databar).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains title\", function() {",
+                  "    const title = testObject.title;",
+                  "    const lengthTitle = title.length > 0;",
+                  "    pm.expect(lengthTitle).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains text\", function() {",
+                  "    const text = testObject.text;",
+                  "    const lengthText = text.length > 0;",
+                  "    pm.expect(lengthText).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains details\", function() {",
+                  "    const details = testObject.details;",
+                  "    const lengthDetails = details.length > 0;",
+                  "    pm.expect(lengthDetails).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains promo code\", function() {",
+                  "    const promoCode = testObject.providerPromotionCode;",
+                  "    const lengthPromoCode = promoCode.length > 0;",
+                  "    pm.expect(lengthPromoCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains images link\", function() {",
+                  "    const images = testObject.images;",
+                  "    const lengthimages = images.length > 0;",
+                  "    pm.expect(lengthimages).to.eql(true);",
+                  "});",
+                  "",
+                  "var schema = {",
+                  "  \"title\" : \"string\",",
+                  "  \"providerPromotionCode\" : \"string\",",
+                  "  \"text\" : \"string\",",
+                  "  \"details\" : \"string\",",
+                  "  \"images\" :\"array\",",
+                  "  \"rule\" : {",
+                  "    \"id\" : null,",
+                  "    \"type\" : \"string\",",
+                  "    \"condition\" : {",
+                  "      \"id\" : null,",
+                  "      \"type\" : \"string\",",
+                  "      \"mpr\" : 1,",
+                  "      \"product\" : {",
+                  "        \"upcs\" : \"array\",",
+                  "        \"brands\" : [ {",
+                  "          \"brand\" : \"string\",",
+                  "          \"products\" : [ \"string\" ]",
+                  "        } ]",
+                  "      }",
+                  "    },",
+                  "    \"reward\" : {",
+                  "      \"type\" : \"string\",",
+                  "      \"id\" : null,",
+                  "      \"value\" : \"integer\",",
+                  "      \"brands\" : [ {",
+                  "          \"brand\" : \"string\",",
+                  "          \"products\" : \"array\"",
+                  "        } ]",
+                  "    }",
+                  "  },",
+                  "  \"startDate\" : \"date\",",
+                  "  \"endDate\" : \"date\",",
+                  "  \"budgetId\" : \"string\",",
+                  "  \"familyCode\" : \"string\",",
+                  "  \"gs1Databar\" : \"string\"",
+                  "  ",
+                  "}",
+                  "",
+                  "",
+                  "pm.test('Schema is valid', function() {",
+                  "  pm.expect(tv4.validate(testObject, schema)).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"Get $0.50 on Ivory Body Wash \",\r\n  \"providerPromotionCode\" : \"131240 \",\r\n  \"text\" : \"OFF ONE Ivory Body Wash (21oz or larger) \",\r\n  \"details\" : \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\r\n  \"images\" : [ \"ivory/5b3e8c36d12f85041119ea07.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"075609195594\", \"075609195358\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"DiscountValueReward\",\r\n      \"id\" : null,\r\n      \"value\" : 50,\r\n      \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-01-01T14:00:00\",\r\n  \"endDate\" : \"2018-01-31T14:00:00\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"130\",\r\n  \"gs1Databar\" : \"81101007560913123933001101303170701\"\r\n  \r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "7ec01e68-839d-4887-aa0c-9fb8ce822699",
+          "name": "Create/update campaigns in bulk",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "490307bb-4a07-4987-bfa6-d031838caf99",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([201,202,204]);",
+                  "});",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n \"items\": [\n     {\n \"clipByDate\": \"2019-01-01T14:00:00\",\n \"endDate\": \"2019-01-01T14:00:00\",\n \"overrides\": {\n   \"details\": \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\n   \"images\": [\n     \"Gain laundry detergent/5b6b6bd4d12f8512623c2e8b.png\"\n   ],\n   \"rule\": {\n     \"id\": 0,\"type\": \"SingleRule\"\n   },\n   \"text\": \"Get $0.50 OFF Gain\",\n   \"title\": \"When buy Two Gain laundry detergent\"\n },\n \"retailerProfileId\": \"3\",\n \"startDate\": \"2019-01-01T14:00:00\"\n   }\n ]\n}\n\n"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/bulk/campaigns/update"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "af66408b-231d-4abf-8ae2-8277a395af22",
+          "name": "Update Campaigns in bulk",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "bbc7b773-1580-4c73-a3a8-ccb35f30529d",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"items\": [\r\n    {\r\n      \"clipByDate\": \"2018-01-31T14:00:00\",\r\n      \"endDate\": \"2018-01-31T14:00:00\",\r\n      \"id\": \"5b4e5313d12f8521c2dedfcd\",\r\n      \"overrides\": {\r\n        \"details\": \"Details\",\r\n        \"images\": [\r\n          \"Cascadian/5b3e9e81d12f85041119ea09.png\"\r\n        ],\r\n        \"rule\": {\r\n          \"id\": 0,\"type\":\"SingleRule\"\r\n        },\r\n        \"text\": \"text\",\r\n        \"title\": \"title\"\r\n      },\r\n      \"retailerProfileId\": \"1\",\r\n      \"startDate\": \"2018-01-01T14:00:00\"\r\n    }\r\n  ]\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/5b47d6fed12f8501f57ed7a4/bulk/campaigns/update"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "65e0fded-baff-433a-bcfa-959cdf91a666",
+          "name": "Add Campaign to the Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a15269c2-14da-4f33-b4b0-557be9616aae",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "pm.environment.set(\"camp_id\", testObject.id);",
+                  "",
+                  "//const camp_id = testObject.id;",
+                  "",
+                  "pm.test(\"Promo contains campaign Id\", function() {",
+                  "    const id = testObject.id;",
+                  "    const lengthid = id.length > 0;",
+                  "    pm.expect(lengthid).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains clipByDate\", function() {",
+                  "    const clipByDate = new Date(testObject.clipByDate);",
+                  "    const isADate = Object.prototype.toString.call(clipByDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "/*pm.test(\"Is clip date before end date in promotion\", function() {",
+                  "    const clipByDate = new Date(testObject.clipByDate);",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const clipDateBeforeEnd = clipByDate.getTime() <= endDate.getTime();",
+                  "    pm.expect(clipDateBeforeEnd).to.eql(true);",
+                  "});*/",
+                  "",
+                  "pm.test(\"Promotion Id check\", function () {",
+                  "    pm.expect(testObject.promotionId).to.eql(promo_id);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Promo contains modifiedBy\", function() {",
+                  "    const modifiedBy = testObject.modifiedBy;",
+                  "    const lengthmodifiedBy = modifiedBy.length > 0;",
+                  "    pm.expect(lengthmodifiedBy).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains modifiedOn\", function() {",
+                  "    const modifiedOnRaw = testObject.modifiedOn;",
+                  "    const modifiedOn = new Date(modifiedOnRaw*1000);",
+                  "    const isADate =  Object.prototype.toString.call(modifiedOn) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains status\", function() {",
+                  "    const status = testObject.status;",
+                  "    const lengthstatus = status.length > 0;",
+                  "    pm.expect(lengthstatus).to.eql(true);",
+                  "});",
+                  "",
+                  "var schema = {",
+                  "  \"clipByDate\": \"date\",",
+                  "  \"endDate\": \"date\",",
+                  "  \"id\": \"string\",",
+                  "  \"modifiedBy\": \"string\",",
+                  "  \"modifiedOn\": 0,",
+                  "  \"overrides\": {",
+                  "    \"details\": \"string\",",
+                  "    \"images\": \"array\",",
+                  "    \"rule\": {",
+                  "      \"id\": 0",
+                  "    },",
+                  "    \"text\": \"string\",",
+                  "    \"title\": \"string\"",
+                  "  },",
+                  "  \"promotionId\": \"string\",",
+                  "  \"retailerProfileId\": \"string\",",
+                  "  \"startDate\": \"date\",",
+                  "  \"status\": \"string\",",
+                  "  \"timezone\": \"string\"",
+                  "}",
+                  "",
+                  "pm.test('Schema is valid', function() {",
+                  "  pm.expect(tv4.validate(testObject, schema)).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n \"clipByDate\": \"2019-01-01T14:00:00\",\n \"endDate\": \"2019-01-01T14:00:00\",\n \"overrides\": {\n   \"details\": \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\n   \"images\": [\n     \"Gain laundry detergent/5b6b6bd4d12f8512623c2e8b.png\"\n   ],\n   \"rule\": {\n     \"id\": 0,\"type\": \"SingleRule\"\n   },\n   \"text\": \"Get $0.50 OFF Gain\",\n   \"title\": \"When buy Two Gain laundry detergent\"\n },\n \"retailerProfileId\": \"3\",\n \"startDate\": \"2019-01-01T14:00:00\"\n   }"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "49729599-d9f5-4ec5-9345-a3cf1f488893",
+          "name": "Accept changes for Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "61fe0d87-237d-476d-8356-687ed622172b",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}/accept_changes"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "86f3d71f-a5d1-4d88-924e-463639f47080",
+          "name": "Pause Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "52a9e167-24a4-4de6-a0ce-a06d69d58ab0",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}/pause"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "bdcaec3f-aeca-4692-b25f-05582177d4bb",
+          "name": "Publish Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ac134f37-3dd1-4247-9493-d0d02dcaf74d",
+                "type": "text/javascript",
+                "exec": [
+                  "",
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([201,202,204]);",
+                  "});"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "08040ef1-4b96-4f9a-98dd-833bce277d7a",
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}/publish/",
+            "description": "Publish Campaign"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "d3f1792c-9147-4421-8909-1e1da8a67184",
+          "name": "Reject changes for Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "e83cb239-9fdb-4047-ba38-6a473311b289",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}/reject"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "2d75db7c-13c8-48d5-8e9a-1c2539540ac3",
+          "name": "Resume Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "321bc7ad-aabb-4d39-a579-a3ba6ab10757",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}/un-pause"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "6239b7e4-ec73-4993-aecd-a22a873dd88a",
+          "name": "Void the Campaign ",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "87715677-afa7-4ebd-8338-31e649d97a4e",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}/void"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "2a292d68-4552-49fb-88cf-0a73acd14b6e",
+          "name": "Pause the Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "3e0a9575-aba0-4308-94d0-5eafa9f7f2f5",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/pause"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "a2426311-8a96-4c22-99cd-7f8fde42ac82",
+          "name": "Publish Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a1e4da9d-da2b-4087-90b8-57ae3f085246",
+                "type": "text/javascript",
+                "exec": [
+                  "",
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200,201,202,204]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "campaignIds",
+                "value": "camp_id "
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"campaignIds\": [\r\n\t\"{{camp_id}}\"\r\n   ]\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/publish/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "8cb05e45-4663-4c97-a242-df238ce75d81",
+          "name": "Disable the Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "11ef313c-a4b4-4d36-8d3d-76054e612999",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/status/void"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "01cd8ed9-62c4-4d9e-bcff-545d9d6fb7ab",
+          "name": "Resume the Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "076832e4-40d2-4101-8613-67056822c7c8",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/un-pause"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "c43efc90-c333-4d29-9367-6339d3f2512d",
+      "name": "GET requests",
+      "description": null,
+      "item": [
+        {
+          "_postman_id": "a8edddcd-a787-4b42-9f49-5d6a7cc20267",
+          "name": "Get  Promotions",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "c0a25675-772b-49b5-8864-b9858cad1c5f",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"title\",\r\n  \"text\" : \"text\",\r\n  \"details\" : \"details\",\r\n  \"images\" : [ \"promotions/1.png\", \"promotions/2.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : 123,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-09-22\",\r\n  \"endDate\" : \"2018-12-22\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"999\",\r\n  \"gs1Databar\" : \"811098235223534534\",\r\n  \"providerData\" : {\"key\": \"value\"}\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "75fa2f33-a6d0-459f-bfc7-949aeb7f8814",
+          "name": "Get  Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ab9fb098-b03e-4350-9e06-5468a36fff5b",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains budgetId\", function() {",
+                  "    const budgetId = testObject.budgetId;",
+                  "    const lengthbudgetId = budgetId.length > 0;",
+                  "    pm.expect(lengthbudgetId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
+                  "    const familyCode = testObject.familyCode;",
+                  "    const lengthfamilyCode = familyCode.length == 3;",
+                  "    pm.expect(lengthfamilyCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains gs1Databar with more than 25 digits\", function() {",
+                  "    const gs1Databar = testObject.gs1Databar;",
+                  "    const lengthgs1Databar = gs1Databar.length > 25;",
+                  "    pm.expect(lengthgs1Databar).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains title\", function() {",
+                  "    const title = testObject.title;",
+                  "    const lengthTitle = title.length > 0;",
+                  "    pm.expect(lengthTitle).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains id\", function() {",
+                  "    const id = testObject.id;",
+                  "    const lengthId = id.length > 0;",
+                  "    pm.expect(lengthId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains details\", function() {",
+                  "    const details = testObject.details;",
+                  "    const lengthDetails = details.length > 0;",
+                  "    pm.expect(lengthDetails).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains promo code\", function() {",
+                  "    const promoCode = testObject.providerPromotionCode;",
+                  "    const lengthPromoCode = promoCode.length > 0;",
+                  "    pm.expect(lengthPromoCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains images link\", function() {",
+                  "    const images = testObject.images;",
+                  "    const lengthimages = images.length > 0;",
+                  "    pm.expect(lengthimages).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains modifiedBy\", function() {",
+                  "    const modifiedBy = testObject.modifiedBy;",
+                  "    const lengthmodifiedBy = modifiedBy.length > 0;",
+                  "    pm.expect(lengthmodifiedBy).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains modifiedOn\", function() {",
+                  "    const modifiedOnRaw = testObject.modifiedOn;",
+                  "    const modifiedOn = new Date(modifiedOnRaw*1000);",
+                  "    const isADate =  Object.prototype.toString.call(modifiedOn) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains status\", function() {",
+                  "    const status = testObject.status;",
+                  "    const lengthstatus = status.length > 0;",
+                  "    pm.expect(lengthstatus).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Is start date before end date in promotion\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const startDateBeforeEnd = startDate.getTime() < endDate.getTime();",
+                  "    pm.expect(startDateBeforeEnd).to.eql(true);",
+                  "});",
+                  "",
+                  "",
+                  "",
+                  "var schema = {",
+                  "    \"items\": [{",
+                  "        \"brands\": [{",
+                  "            \"brand\": \"string\",",
+                  "            \"products\": \"array\",",
+                  "        }],",
+                  "        \"budgetId\": \"string\",",
+                  "        \"details\": \"string\",",
+                  "        \"endDate\": \"date\",",
+                  "        \"familyCode\": \"string\",",
+                  "        \"gs1Databar\": \"string\",",
+                  "        \"id\": \"string\",",
+                  "        \"images\": \"array\",",
+                  "        \"mfrId\": \"string\",",
+                  "        \"modifiedBy\": \"string\",",
+                  "        \"modifiedOn\": 0,",
+                  "        \"providerData\": \"string\",",
+                  "        \"providerPromotionCode\": \"string\",",
+                  "        \"rule\": \"object\",",
+                  "        \"startDate\": \"date\",",
+                  "        \"status\": \"string\",",
+                  "        \"text\": \"string\",",
+                  "        \"timezone\": {",
+                  "            \"id\": \"string\",",
+                  "            \"rules\": {",
+                  "                \"fixedOffset\": \"boolean\",",
+                  "                \"transitionRules\": \"array\",",
+                  "                \"transitions\": \"array\"",
+                  "            }",
+                  "        },",
+                  "        \"title\": \"string\"",
+                  "    }]",
+                  "}",
+                  "",
+                  "",
+                  "pm.test('Schema is valid', function() {",
+                  "    pm.expect(tv4.validate(testObject, schema)).to.be.true;",
+                  "",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"title\",\r\n  \"text\" : \"text\",\r\n  \"details\" : \"details\",\r\n  \"images\" : [ \"promotions/1.png\", \"promotions/2.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : 123,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-09-22\",\r\n  \"endDate\" : \"2018-12-22\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"999\",\r\n  \"gs1Databar\" : \"811098235223534534\",\r\n  \"providerData\" : {\"key\": \"value\"}\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "b84ae0a8-c797-408e-a4e8-827b58144ea4",
+          "name": "Get  Campaigns for promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a3bf5b0d-99b5-4656-9cbe-1d055ac4eccc",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"title\",\r\n  \"text\" : \"text\",\r\n  \"details\" : \"details\",\r\n  \"images\" : [ \"promotions/1.png\", \"promotions/2.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : 123,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-09-22\",\r\n  \"endDate\" : \"2018-12-22\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"999\",\r\n  \"gs1Databar\" : \"811098235223534534\",\r\n  \"providerData\" : {\"key\": \"value\"}\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "f0c0172e-a584-469c-ae57-972b2bf50b3b",
+          "name": "Get Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "d000a137-8460-4901-bee1-2f1685940188",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "08bfa72a-8ffe-4173-8f66-5ecd29eb999a",
+          "name": "Get Campaign (no promo id)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "18e6bb0b-0c42-4919-b6de-5d5bd14e6a64",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/campaigns/{{camp_id}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "9ae39cb9-b6c4-4457-bb3e-3a217442db81",
+      "name": "DELETE requests",
+      "description": null,
+      "item": [
+        {
+          "_postman_id": "6e153d83-764b-4fe1-9b8e-e245871e80d9",
+          "name": "Delete prom",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "4f8de77f-4cb7-473e-b235-f27ff0ea3d23",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 204\", function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});",
+                  "",
+                  "pm.globals.unset(\"promo_id\");",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "d12358a5-4d78-40b4-9b21-4ee6e3f466b8",
+          "name": "Delete Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "7bd7e90c-2ea8-4950-b02a-41cfba837082",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "ed92d46c-fd95-462f-90df-d3a52e730633",
+      "name": "UPDATE requests",
+      "description": null,
+      "item": [
+        {
+          "_postman_id": "897a8987-e61d-47a7-8f10-d558e3e449ba",
+          "name": "Update promotion",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"Get ONE Cascadian Farm Cinnamon Crunch Cereal Free\",\r\n  \"providerPromotionCode\" : \"111310 \",\r\n  \"text\" : \"When you buy TWO Cinnamon Crunch Cereal\",\r\n  \"details\" : \"Void if altered, copied, sold, purchased, transferred, exchanged or where prohibited or restricted by law. One coupon per purchase of specified product(s). Good only in USA, APOs & FPOs. CONSUMER: No other coupon may be used with this coupon. Consumer pays any sales tax. RETAILER: General Mills will reimburse you the face value of this coupon plus handling if submitted in compliance with our redemption policy. Copy available upon request. Cash value 1/100 cent. Send to GENERAL MILLS 8, NCH Marketing Services, P.O. Box 880001, El Paso TX 88588-0001 or an authorized clearinghouse.\",\r\n  \"images\" : [ \"Cascadian/5b3e9e81d12f85041119ea09.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"1800000001\",\"1800000011\",\"1800000094\",\"1800000105\",\"1800000107\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"Cascadian Farm\u00a0\",\r\n          \"products\" : [ \"Cinnamon Crunch Cereald\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"1800000001\",\"1800000011\",\"1800000094\",\"1800000105\",\"1800000107\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"Cascadian Farm\",\r\n          \"products\" : [ \"Cinnamon Crunch Cereal\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2019-01-01T14:00:00\",\r\n  \"endDate\" : \"2019-01-01T14:00:00\",\r\n  \"budgetId\" : \"12345\",\r\n  \"familyCode\" : \"412\",\r\n  \"gs1Databar\" : \"811010021908110785310011062090000\"\r\n  \r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/5b47dbb2d12f8501f57ed7a5"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "1ec2d322-a0df-43fe-8dff-4686760eb475",
+          "name": "Update Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "34593ce3-a934-4416-8a3e-449b9795cf8d",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n   \"clipByDate\": \"2019-01-30T14:00:00\",\r\n      \"endDate\": \"2019-01-30T14:00:00\",\r\n           \"overrides\": {\r\n        \"details\": \"Details\",\r\n        \"images\": [\r\n          \"Cascadian/5b3e9e81d12f85041119ea09.png\"\r\n        ],\r\n        \"rule\": {\r\n          \"id\": 0,\"type\": \"SingleRule\"\r\n        },\r\n        \"text\": \"text\",\r\n        \"title\": \"title\"\r\n      },\r\n      \"retailerProfileId\": \"1\",\r\n      \"startDate\": \"2019-01-01T14:00:00\"\r\n      \r\n     \r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/5b47dbb2d12f8501f57ed7a5/campaigns/5b47dc4dd12f8501f57ed7b2",
+            "description": "Update Campaign"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "95ae5857-5c7f-4370-8d43-77cd3ed042b5",
+      "name": "TC-1 Publish DRAFT promo with S campaign",
+      "description": "Publish DRAFT promotion with single campaign ",
+      "item": [
+        {
+          "_postman_id": "93dcc983-7d5e-4573-a26b-0c2fadba7062",
+          "name": "Post promotion Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ce02b76a-b470-4ca6-9dea-d055fe9813fa",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "//const promo_id = testObject.id;",
+                  "",
+                  "pm.environment.set(\"promo_id\", testObject.id);",
+                  "",
+                  "",
+                  "/*pm.test(\"Id check\", function () {",
+                  "    pm.expect(testObject.id).to.eql(promo_id);",
+                  "});*/",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains budgetId\", function() {",
+                  "    const budgetId = testObject.budgetId;",
+                  "    const lengthbudgetId = budgetId.length > 0;",
+                  "    pm.expect(lengthbudgetId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
+                  "    const familyCode = testObject.familyCode;",
+                  "    const lengthfamilyCode = familyCode.length == 3;",
+                  "    pm.expect(lengthfamilyCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains gs1Databar with more than 25 digits\", function() {",
+                  "    const gs1Databar = testObject.gs1Databar;",
+                  "    const lengthgs1Databar = gs1Databar.length > 25;",
+                  "    pm.expect(lengthgs1Databar).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains title\", function() {",
+                  "    const title = testObject.title;",
+                  "    const lengthTitle = title.length > 0;",
+                  "    pm.expect(lengthTitle).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains text\", function() {",
+                  "    const text = testObject.text;",
+                  "    const lengthText = text.length > 0;",
+                  "    pm.expect(lengthText).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains details\", function() {",
+                  "    const details = testObject.details;",
+                  "    const lengthDetails = details.length > 0;",
+                  "    pm.expect(lengthDetails).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains promo code\", function() {",
+                  "    const promoCode = testObject.providerPromotionCode;",
+                  "    const lengthPromoCode = promoCode.length > 0;",
+                  "    pm.expect(lengthPromoCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains images link\", function() {",
+                  "    const images = testObject.images;",
+                  "    const lengthimages = images.length > 0;",
+                  "    pm.expect(lengthimages).to.eql(true);",
+                  "});",
+                  "",
+                  "var schema = {",
+                  "  \"title\" : \"string\",",
+                  "  \"providerPromotionCode\" : \"string\",",
+                  "  \"text\" : \"string\",",
+                  "  \"details\" : \"string\",",
+                  "  \"images\" :\"array\",",
+                  "  \"rule\" : {",
+                  "    \"id\" : null,",
+                  "    \"type\" : \"string\",",
+                  "    \"condition\" : {",
+                  "      \"id\" : null,",
+                  "      \"type\" : \"string\",",
+                  "      \"mpr\" : 1,",
+                  "      \"product\" : {",
+                  "        \"upcs\" : \"array\",",
+                  "        \"brands\" : [ {",
+                  "          \"brand\" : \"string\",",
+                  "          \"products\" : [ \"string\" ]",
+                  "        } ]",
+                  "      }",
+                  "    },",
+                  "    \"reward\" : {",
+                  "      \"type\" : \"string\",",
+                  "      \"id\" : null,",
+                  "      \"value\" : \"integer\",",
+                  "      \"brands\" : [ {",
+                  "          \"brand\" : \"string\",",
+                  "          \"products\" : \"array\"",
+                  "        } ]",
+                  "    }",
+                  "  },",
+                  "  \"startDate\" : \"date\",",
+                  "  \"endDate\" : \"date\",",
+                  "  \"budgetId\" : \"string\",",
+                  "  \"familyCode\" : \"string\",",
+                  "  \"gs1Databar\" : \"string\"",
+                  "  ",
+                  "}",
+                  "",
+                  "",
+                  "pm.test('Schema is valid', function() {",
+                  "  pm.expect(tv4.validate(testObject, schema)).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"Get $0.50 on Ivory Body Wash \",\r\n  \"providerPromotionCode\" : \"131240 \",\r\n  \"text\" : \"OFF ONE Ivory Body Wash (21oz or larger) \",\r\n  \"details\" : \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\r\n  \"images\" : [ \"ivory/5b3e8c36d12f85041119ea07.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"075609195594\", \"075609195358\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"DiscountValueReward\",\r\n      \"id\" : null,\r\n      \"value\" : 50,\r\n      \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-01-01T14:00:00\",\r\n  \"endDate\" : \"2018-01-31T14:00:00\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"130\",\r\n  \"gs1Databar\" : \"81101007560913123933001101303170701\"\r\n  \r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "8c65e122-bbca-420c-8c7b-c2edf080e1b2",
+          "name": "Add Campaign to the Promotion Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "0577acfe-cd34-4a6a-bd44-15cb93c39d91",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "pm.environment.set(\"camp_id\", testObject.id);",
+                  "const promo_id = pm.environment.get(\"promo_id\");",
+                  "",
+                  "//const camp_id = testObject.id;",
+                  "",
+                  "pm.test(\"Promo contains campaign Id\", function() {",
+                  "    const id = testObject.id;",
+                  "    const lengthid = id.length > 0;",
+                  "    pm.expect(lengthid).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains clipByDate\", function() {",
+                  "    const clipByDate = new Date(testObject.clipByDate);",
+                  "    const isADate = Object.prototype.toString.call(clipByDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "/*pm.test(\"Is clip date before end date in promotion\", function() {",
+                  "    const clipByDate = new Date(testObject.clipByDate);",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const clipDateBeforeEnd = clipByDate.getTime() <= endDate.getTime();",
+                  "    pm.expect(clipDateBeforeEnd).to.eql(true);",
+                  "});*/",
+                  "",
+                  "pm.test(\"Promotion Id check\", function () {",
+                  "    //const equalId = Object.prototype.toString.call(promotionId) === promo_id;",
+                  "  //  pm.expect(testObject.promotionId === promo_id).to.eql(true);",
+                  " pm.expect(testObject.promotionId).to.eql(promo_id);",
+                  " //pm.expect(testObject).to.have.property('id', promo_id);",
+                  "});",
+                  "",
+                  "",
+                  "//tests[\"Getting Violation Id\"] = testObject.promotionId === 5b84eda1d12f8534ebf7a2c3;",
+                  "",
+                  "pm.test(\"Promo contains modifiedBy\", function() {",
+                  "    const modifiedBy = testObject.modifiedBy;",
+                  "    const lengthmodifiedBy = modifiedBy.length > 0;",
+                  "    pm.expect(lengthmodifiedBy).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains modifiedOn\", function() {",
+                  "    const modifiedOnRaw = testObject.modifiedOn;",
+                  "    const modifiedOn = new Date(modifiedOnRaw*1000);",
+                  "    const isADate =  Object.prototype.toString.call(modifiedOn) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains status\", function() {",
+                  "    const status = testObject.status;",
+                  "    const lengthstatus = status.length > 0;",
+                  "    pm.expect(lengthstatus).to.eql(true);",
+                  "});",
+                  "",
+                  "var schema = {",
+                  "  \"clipByDate\": \"date\",",
+                  "  \"endDate\": \"date\",",
+                  "  \"id\": \"string\",",
+                  "  \"modifiedBy\": \"string\",",
+                  "  \"modifiedOn\": 0,",
+                  "  \"overrides\": {",
+                  "    \"details\": \"string\",",
+                  "    \"images\": \"array\",",
+                  "    \"rule\": {",
+                  "      \"id\": 0",
+                  "    },",
+                  "    \"text\": \"string\",",
+                  "    \"title\": \"string\"",
+                  "  },",
+                  "  \"promotionId\": \"string\",",
+                  "  \"retailerProfileId\": \"string\",",
+                  "  \"startDate\": \"date\",",
+                  "  \"status\": \"string\",",
+                  "  \"timezone\": \"string\"",
+                  "}",
+                  "",
+                  "pm.test('Schema is valid', function() {",
+                  "  pm.expect(tv4.validate(testObject, schema)).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n \"clipByDate\": \"2019-01-01T14:00:00\",\n \"endDate\": \"2019-01-01T14:00:00\",\n \"overrides\": {\n   \"details\": \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\n   \"images\": [\n     \"Gain laundry detergent/5b6b6bd4d12f8512623c2e8b.png\"\n   ],\n   \"rule\": {\n     \"id\": 0,\"type\": \"SingleRule\"\n   },\n   \"text\": \"Get $0.50 OFF Gain\",\n   \"title\": \"When buy Two Gain laundry detergent\"\n },\n \"retailerProfileId\": \"3\",\n \"startDate\": \"2019-01-01T14:00:00\"\n   }"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "249a4aa9-c6ae-4bc8-b23c-1496d16fd53b",
+          "name": "Publish Promotion Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a1e4da9d-da2b-4087-90b8-57ae3f085246",
+                "type": "text/javascript",
+                "exec": [
+                  "",
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200,201,202,204]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "campaignIds",
+                "value": "camp_id "
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"campaignIds\": [\r\n\t\"{{camp_id}}\"\r\n   ]\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/publish/",
+            "description": "Publish Promotion"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "b3728a13-7893-413a-9e81-c9ff98244135",
+      "name": "Get  Promotions",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "c0a25675-772b-49b5-8864-b9858cad1c5f",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\" : \"title\",\r\n  \"text\" : \"text\",\r\n  \"details\" : \"details\",\r\n  \"images\" : [ \"promotions/1.png\", \"promotions/2.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : 123,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-09-22\",\r\n  \"endDate\" : \"2018-12-22\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"999\",\r\n  \"gs1Databar\" : \"811098235223534534\",\r\n  \"providerData\" : {\"key\": \"value\"}\r\n}"
+        },
+        "url": "http://qa-apps.caligotech.com:8188/promotions/"
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "23e5251d-4ce3-46bb-b511-3c49d18eb398",
+      "name": "Delete prom",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "4f8de77f-4cb7-473e-b235-f27ff0ea3d23",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 204\", function () {",
+              "    pm.response.to.have.status(204);",
+              "});",
+              "",
+              "pm.globals.unset(\"promo_id\");",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}"
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "1f48b7c6-e529-4b25-ae9d-f64a0cbf14c0",
+      "name": "Delete Campaigns in bulk",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "31d455e3-bca5-4460-983e-558b394ea490",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"items\": [\r\n    \"string\"\r\n  ]\r\n}"
+        },
+        "url": "http://qa-apps.caligotech.com:8188/promotions/5b43d8d7d12f8529501fc4c7/bulk/campaigns/delete"
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "b52d384e-a56c-4d41-8769-c3807e32fa47",
+      "name": "Get  Campaigns",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "a3bf5b0d-99b5-4656-9cbe-1d055ac4eccc",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\" : \"title\",\r\n  \"text\" : \"text\",\r\n  \"details\" : \"details\",\r\n  \"images\" : [ \"promotions/1.png\", \"promotions/2.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : 123,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-09-22\",\r\n  \"endDate\" : \"2018-12-22\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"999\",\r\n  \"gs1Databar\" : \"811098235223534534\",\r\n  \"providerData\" : {\"key\": \"value\"}\r\n}"
+        },
+        "url": "http://qa-apps.caligotech.com:8188/promotions/5b47d6fed12f8501f57ed7a4/campaigns/"
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "8a3fba6f-32c0-45bf-bbec-6978ce27be7d",
+      "name": "Delete Campaign",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "7bd7e90c-2ea8-4950-b02a-41cfba837082",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": "http://qa-apps.caligotech.com:8188/promotions/5b47dbb2d12f8501f57ed7a5/campaigns/5b47dc4dd12f8501f57ed7a8"
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "6b1d57ee-bf39-47bd-8806-cdb06ed2d6b7",
+      "name": "Update promotion",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\" : \"Get ONE Cascadian Farm Cinnamon Crunch Cereal Free\",\r\n  \"providerPromotionCode\" : \"111310 \",\r\n  \"text\" : \"When you buy TWO Cinnamon Crunch Cereal\",\r\n  \"details\" : \"Void if altered, copied, sold, purchased, transferred, exchanged or where prohibited or restricted by law. One coupon per purchase of specified product(s). Good only in USA, APOs & FPOs. CONSUMER: No other coupon may be used with this coupon. Consumer pays any sales tax. RETAILER: General Mills will reimburse you the face value of this coupon plus handling if submitted in compliance with our redemption policy. Copy available upon request. Cash value 1/100 cent. Send to GENERAL MILLS 8, NCH Marketing Services, P.O. Box 880001, El Paso TX 88588-0001 or an authorized clearinghouse.\",\r\n  \"images\" : [ \"Cascadian/5b3e9e81d12f85041119ea09.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"1800000001\",\"1800000011\",\"1800000094\",\"1800000105\",\"1800000107\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"Cascadian Farm\u00a0\",\r\n          \"products\" : [ \"Cinnamon Crunch Cereald\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"1800000001\",\"1800000011\",\"1800000094\",\"1800000105\",\"1800000107\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"Cascadian Farm\",\r\n          \"products\" : [ \"Cinnamon Crunch Cereal\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2019-01-01T14:00:00\",\r\n  \"endDate\" : \"2019-01-01T14:00:00\",\r\n  \"budgetId\" : \"12345\",\r\n  \"familyCode\" : \"412\",\r\n  \"gs1Databar\" : \"811010021908110785310011062090000\"\r\n  \r\n}"
+        },
+        "url": "http://qa-apps.caligotech.com:8188/promotions/5b47dbb2d12f8501f57ed7a5",
+        "description": "Modify a promotion"
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "0df2f861-007a-4412-a474-9048a028053b",
+      "name": "Update Campaigns in bulk",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "bbc7b773-1580-4c73-a3a8-ccb35f30529d",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"items\": [\r\n    {\r\n      \"clipByDate\": \"2018-01-31T14:00:00\",\r\n      \"endDate\": \"2018-01-31T14:00:00\",\r\n      \"id\": \"5b4e5313d12f8521c2dedfcd\",\r\n      \"overrides\": {\r\n        \"details\": \"Details\",\r\n        \"images\": [\r\n          \"Cascadian/5b3e9e81d12f85041119ea09.png\"\r\n        ],\r\n        \"rule\": {\r\n          \"id\": 0,\"type\":\"SingleRule\"\r\n        },\r\n        \"text\": \"text\",\r\n        \"title\": \"title\"\r\n      },\r\n      \"retailerProfileId\": \"1\",\r\n      \"startDate\": \"2018-01-01T14:00:00\"\r\n    }\r\n  ]\r\n}"
+        },
+        "url": "http://qa-apps.caligotech.com:8188/promotions/5b47d6fed12f8501f57ed7a4/bulk/campaigns/update"
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "d55d737b-34d2-4e38-9def-611249cc7978",
+      "name": "Update Campaign",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "34593ce3-a934-4416-8a3e-449b9795cf8d",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n   \"clipByDate\": \"2019-01-30T14:00:00\",\r\n      \"endDate\": \"2019-01-30T14:00:00\",\r\n           \"overrides\": {\r\n        \"details\": \"Detail345345s\",\r\n        \"images\": [\r\n          \"Cascadian/5b3e9e81d12f85041119ea09.png\"\r\n        ],\r\n        \"rule\": {\r\n          \"id\": 0,\"type\": \"SingleRule\"\r\n        },\r\n        \"text\": \"text\",\r\n        \"title\": \"title\"\r\n      },\r\n      \"retailerProfileId\": \"1\",\r\n      \"startDate\": \"2019-01-01T14:00:00\"\r\n      \r\n     \r\n}"
+        },
+        "url": "http://qa-apps.caligotech.com:8188/promotions/5b47dbb2d12f8501f57ed7a5/campaigns/5b47dc4dd12f8501f57ed7b2",
+        "description": "Update Campaign"
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "560324e6-e890-4160-b188-b36d19f3cbfb",
+      "name": "Add Campiagn to the Promotion ",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "c15eaa2a-8ee0-437c-a043-b750c956b857",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"clipByDate\": \"2019-01-01T14:00:00\",\r\n  \"endDate\": \"2019-01-01T14:00:00\",\r\n  \"overrides\": {\r\n    \"details\": \"details\",\r\n    \"images\": [\r\n      \"promotion/5b5645a7d12f856083a47218.png\"\r\n    ],\r\n    \"rule\": {\r\n      \"id\": 0,\"type\": \"SingleRule\"\r\n    },\r\n    \"text\": \"text\",\r\n    \"title\": \"title\"\r\n  },\r\n  \"retailerProfileId\": \"3\",\r\n  \"startDate\": \"2019-01-01T14:00:00\"\r\n}"
+        },
+        "url": "http://qa-apps.caligotech.com:8188/promotions/5b6ddb36d12f857a85415116/campaigns/",
+        "description": "Post Campaign"
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "f1ba606f-25c0-4fae-9012-f7c21d287642",
+      "name": "Add Campiagn to the Promotion  Copy",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "c15eaa2a-8ee0-437c-a043-b750c956b857",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"clipByDate\": \"2019-01-01T14:00:00\",\r\n  \"endDate\": \"2019-01-01T14:00:00\",\r\n  \"overrides\": {\r\n    \"details\": \"details\",\r\n    \"images\": [\r\n      \"promotion/5b5645a7d12f856083a47218.png\"\r\n    ],\r\n    \"rule\": {\r\n      \"id\": 0,\"type\": \"SingleRule\"\r\n    },\r\n    \"text\": \"text\",\r\n    \"title\": \"title\"\r\n  },\r\n  \"retailerProfileId\": \"3\",\r\n  \"startDate\": \"2019-01-01T14:00:00\"\r\n}"
+        },
+        "url": "http://qa-apps.caligotech.com:8188/promotions/5b648c38d12f851fe2d7c4da/campaigns/",
+        "description": "Post Campaign"
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "7c954334-fa63-46c8-a2d3-de1fcee6be07",
+      "name": "Publish Campiagn",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "8d34b341-9e3c-4b18-8e02-c700a2ae9796",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": "http://qa-apps.caligotech.com:8188/promotions/5b47d6fed12f8501f57ed7a4/campaigns/5b4e5313d12f8521c2dedfcf/publish",
+        "description": "Publish Campaign"
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "24c63100-6806-4497-9d20-8bf6828d818d",
+      "name": "Publish Promotion",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "32184f2a-7806-4f65-9451-7a4757eaeeee",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"campaignIds\": [\r\n    \"5b4d1a49d12f851c22fd3022\"\r\n  ]\r\n}"
+        },
+        "url": "http://qa-apps.caligotech.com:8188/promotions/5b6ddb36d12f857a85415116/publish",
+        "description": "Publish Promotion"
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "27ae713f-7633-4765-add9-525137e80b06",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "bd312908-837a-4932-8fad-00ab42937c37",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "77332de9-d34c-4f36-8201-588d9bd37aa0",
+      "key": "promo_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "id": "e7e17608-10b2-427f-b5c5-bc30fd5d628f",
+      "key": "camp_id",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
