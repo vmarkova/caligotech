@@ -1,0 +1,144 @@
+{
+  "info": {
+    "_postman_id": "0c30dd55-f503-46bd-bfbf-0704315a4a63",
+    "name": "Drall",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "_postman_id": "16c00aaa-654b-404c-ad16-55f03ee1f5c0",
+      "name": "Upload a file into dFS as form-data-multipart",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "13c28aa7-6bff-4536-b754-4ec9cc3241fa",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const testObject = pm.response.json();",
+              "",
+              "pm.environment.set(\"hash_id\", testObject.fileId);",
+              "",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "",
+            "value": ""
+          },
+          {
+            "key": "",
+            "value": ""
+          },
+          {
+            "key": "",
+            "value": "",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "sessionValue": "json",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "file",
+              "value": null,
+              "sessionValue": "form-data/multipart",
+              "description": "",
+              "type": "file"
+            },
+            {
+              "key": "",
+              "value": "",
+              "sessionValue": null,
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "http://qa-apps.caligotech.com:8189/dfs"
+      },
+      "response": []
+    },
+    {
+      "_postman_id": "cf4a4ee5-84bb-4b49-8f5e-f99478d82c5b",
+      "name": "Download a file from dFS as binary stream (octet-stream content type)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "34b787ef-c0ed-43de-a7fe-90e8f1527f5d",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json\t"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/octet-stream"
+          }
+        ],
+        "body": {},
+        "url": "http://qa-apps.caligotech.com:8189/dfs/{{hash_id}}"
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "44f3a4a0-badc-4b58-a848-326f35051504",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "212983f0-5f25-46be-b769-6413f9897110",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "ae26cf78-0d0b-4451-b6fb-6c554c3d4802",
+      "key": "hash_id",
+      "value": "",
+      "type": "string",
+      "description": ""
+    }
+  ]
+}
