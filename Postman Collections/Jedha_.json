@@ -3420,40 +3420,6 @@
       "response": []
     },
     {
-      "_postman_id": "f1ba606f-25c0-4fae-9012-f7c21d287642",
-      "name": "Add Campiagn to the Promotion  Copy",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "c15eaa2a-8ee0-437c-a043-b750c956b857",
-            "type": "text/javascript",
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
-              "});"
-            ]
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"clipByDate\": \"2019-01-01T14:00:00\",\r\n  \"endDate\": \"2019-01-01T14:00:00\",\r\n  \"overrides\": {\r\n    \"details\": \"details\",\r\n    \"images\": [\r\n      \"promotion/5b5645a7d12f856083a47218.png\"\r\n    ],\r\n    \"rule\": {\r\n      \"id\": 0,\"type\": \"SingleRule\"\r\n    },\r\n    \"text\": \"text\",\r\n    \"title\": \"title\"\r\n  },\r\n  \"retailerProfileId\": \"3\",\r\n  \"startDate\": \"2019-01-01T14:00:00\"\r\n}"
-        },
-        "url": "http://qa-apps.caligotech.com:8188/promotions/5b648c38d12f851fe2d7c4da/campaigns/",
-        "description": "Post Campaign"
-      },
-      "response": []
-    },
-    {
       "_postman_id": "7c954334-fa63-46c8-a2d3-de1fcee6be07",
       "name": "Publish Campiagn",
       "event": [
