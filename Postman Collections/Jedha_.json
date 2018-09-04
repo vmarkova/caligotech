@@ -3043,40 +3043,6 @@
       "response": []
     },
     {
-      "_postman_id": "24e152f2-7a3e-4894-983a-a845ba029e18",
-      "name": "Download a file from dFS as binary stream (octet-stream content type)",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "34b787ef-c0ed-43de-a7fe-90e8f1527f5d",
-            "type": "text/javascript",
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
-              "});"
-            ]
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json\t"
-          },
-          {
-            "key": "Content-Type",
-            "value": "application/octet-stream"
-          }
-        ],
-        "body": {},
-        "url": "http://qa-apps.caligotech.com:8189/dfs/{{hash_id}}"
-      },
-      "response": []
-    },
-    {
       "_postman_id": "23e5251d-4ce3-46bb-b511-3c49d18eb398",
       "name": "Delete prom",
       "event": [
