@@ -347,8 +347,9 @@
                 "value": "application/json"
               },
               {
-                "key": "campaignIds",
-                "value": "camp_id "
+                "key": "",
+                "value": "",
+                "disabled": true
               }
             ],
             "body": {
@@ -3151,7 +3152,7 @@
           "mode": "raw",
           "raw": "{\r\n  \"title\" : \"title\",\r\n  \"text\" : \"text\",\r\n  \"details\" : \"details\",\r\n  \"images\" : [ \"promotions/1.png\", \"promotions/2.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : 123,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-09-22\",\r\n  \"endDate\" : \"2018-12-22\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"999\",\r\n  \"gs1Databar\" : \"811098235223534534\",\r\n  \"providerData\" : {\"key\": \"value\"}\r\n}"
         },
-        "url": "http://qa-apps.caligotech.com:8188/promotions/5b47d6fed12f8501f57ed7a4/campaigns/"
+        "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/"
       },
       "response": []
     },
