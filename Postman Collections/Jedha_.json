@@ -555,8 +555,9 @@
             "method": "GET",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json"
+                "key": "",
+                "value": "",
+                "disabled": true
               }
             ],
             "body": {
@@ -3033,8 +3034,8 @@
         "method": "GET",
         "header": [
           {
-            "key": "Content-Type",
-            "value": "application/json",
+            "key": "",
+            "value": "",
             "disabled": true
           }
         ],
