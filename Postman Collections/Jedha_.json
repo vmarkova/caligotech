@@ -745,8 +745,9 @@
             "method": "GET",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json"
+                "key": "",
+                "value": "",
+                "disabled": true
               }
             ],
             "body": {
@@ -3189,7 +3190,7 @@
           "mode": "raw",
           "raw": ""
         },
-        "url": "http://qa-apps.caligotech.com:8188/promotions/5b47dbb2d12f8501f57ed7a5/campaigns/5b47dc4dd12f8501f57ed7a8"
+        "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/{{camp_id}}"
       },
       "response": []
     },
