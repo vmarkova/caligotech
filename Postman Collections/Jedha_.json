@@ -167,7 +167,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"title\" : \"Get $0.50 on Ivory Body Wash \",\r\n  \"providerPromotionCode\" : \"131240 \",\r\n  \"text\" : \"OFF ONE Ivory Body Wash (21oz or larger) \",\r\n  \"details\" : \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\r\n  \"images\" : [ \"ivory/5b3e8c36d12f85041119ea07.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"075609195594\", \"075609195358\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"DiscountValueReward\",\r\n      \"id\" : null,\r\n      \"value\" : 50,\r\n      \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-01-01T14:00:00\",\r\n  \"endDate\" : \"2018-01-31T14:00:00\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"130\",\r\n  \"gs1Databar\" : \"81101007560913123933001101303170701\"\r\n  \r\n}"
+              "raw": "{\r\n  \"title\" : \"Get $0.50 on Ivory Body Wash \",\r\n  \"providerPromotionCode\" : \"131240 \",\r\n  \"text\" : \"OFF ONE Ivory Body Wash (21oz or larger) \",\r\n  \"details\" : \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\r\n  \"images\" : [ \"ivory/5b3e8c36d12f85041119ea07.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"WatchVideoCondition\",\r\n      \"url\" : \"www.youtube.com\"\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"DiscountValueReward\",\r\n      \"id\" : null,\r\n      \"value\" : 50,\r\n      \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-01-01T14:00:00\",\r\n  \"endDate\" : \"2018-01-31T14:00:00\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"130\",\r\n  \"gs1Databar\" : \"81101007560913123933001101303170701\"\r\n  \r\n}"
             },
             "url": "http://qa-apps.caligotech.com:8188/promotions/"
           },
@@ -3214,7 +3214,59 @@
         "url": "http://qa-apps.caligotech.com:8188/promotions/5b47dbb2d12f8501f57ed7a5",
         "description": "Modify a promotion"
       },
-      "response": []
+      "response": [
+        {
+          "id": "d786660e-d494-4753-8436-24ac961f99f1",
+          "name": "Update promotion",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"Get ONE Cascadian Farm Cinnamon Crunch Cereal Free\",\r\n  \"providerPromotionCode\" : \"111310 \",\r\n  \"text\" : \"When you buy TWO Cinnamon Crunch Cereal\",\r\n  \"details\" : \"Void if altered, copied, sold, purchased, transferred, exchanged or where prohibited or restricted by law. One coupon per purchase of specified product(s). Good only in USA, APOs & FPOs. CONSUMER: No other coupon may be used with this coupon. Consumer pays any sales tax. RETAILER: General Mills will reimburse you the face value of this coupon plus handling if submitted in compliance with our redemption policy. Copy available upon request. Cash value 1/100 cent. Send to GENERAL MILLS 8, NCH Marketing Services, P.O. Box 880001, El Paso TX 88588-0001 or an authorized clearinghouse.\",\r\n  \"images\" : [ \"Cascadian/5b3e9e81d12f85041119ea09.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"1800000001\",\"1800000011\",\"1800000094\",\"1800000105\",\"1800000107\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"Cascadian Farm\u00a0\",\r\n          \"products\" : [ \"Cinnamon Crunch Cereald\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"1800000001\",\"1800000011\",\"1800000094\",\"1800000105\",\"1800000107\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"Cascadian\",\r\n          \"products\" : [ \"Cinnamon Crunch Cereal\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2020-01-01T14:00:00\",\r\n  \"endDate\" : \"2019-01-01T14:00:00\",\r\n  \"budgetId\" : \"12345\",\r\n  \"familyCode\" : \"412\",\r\n  \"gs1Databar\" : \"811010021908110785310011062090000\"\r\n  \r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/5bad0485d12f8512a3bfd7ac"
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "name": "Connection",
+              "description": "Options that are desired for the connection"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json;charset=UTF-8",
+              "name": "Content-Type",
+              "description": "The mime type of this content"
+            },
+            {
+              "key": "Date",
+              "value": "Thu, 27 Sep 2018 16:29:02 GMT",
+              "name": "Date",
+              "description": "The date and time that the message was sent"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked",
+              "name": "Transfer-Encoding",
+              "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\"startDate\":\"2020-01-01T14:00:00\",\"endDate\":\"2019-01-01T14:00:00\",\"budgetId\":\"12345\",\"familyCode\":\"412\",\"gs1Databar\":\"811010021908110785310011062090000\",\"providerPromotionCode\":\"111310 \",\"title\":\"Get ONE Cascadian Farm Cinnamon Crunch Cereal Free\",\"text\":\"When you buy TWO Cinnamon Crunch Cereal\",\"details\":\"Void if altered, copied, sold, purchased, transferred, exchanged or where prohibited or restricted by law. One coupon per purchase of specified product(s). Good only in USA, APOs & FPOs. CONSUMER: No other coupon may be used with this coupon. Consumer pays any sales tax. RETAILER: General Mills will reimburse you the face value of this coupon plus handling if submitted in compliance with our redemption policy. Copy available upon request. Cash value 1/100 cent. Send to GENERAL MILLS 8, NCH Marketing Services, P.O. Box 880001, El Paso TX 88588-0001 or an authorized clearinghouse.\",\"images\":[\"Cascadian/5b3e9e81d12f85041119ea09.png\"],\"rule\":{\"type\":\"SingleRule\",\"id\":0,\"condition\":{\"type\":\"BuyProductCondition\",\"id\":1,\"mpr\":2,\"product\":{\"upcs\":[\"1800000001\",\"1800000011\",\"1800000094\",\"1800000105\",\"1800000107\"],\"brands\":[{\"brand\":\"Cascadian Farm\u00a0\",\"products\":[\"Cinnamon Crunch Cereald\"]}]}},\"reward\":{\"type\":\"FreeProductReward\",\"id\":2,\"quantity\":1,\"product\":{\"upcs\":[\"1800000001\",\"1800000011\",\"1800000094\",\"1800000105\",\"1800000107\"],\"brands\":[{\"brand\":\"Cascadian\",\"products\":[\"Cinnamon Crunch Cereal\"]}]}}},\"id\":\"5bad0485d12f8512a3bfd7ac\",\"modifiedBy\":\"Admin User\",\"modifiedOn\":1538065742066,\"status\":\"DRAFT\"}"
+        }
+      ]
     },
     {
       "_postman_id": "0df2f861-007a-4412-a474-9048a028053b",
