@@ -3738,7 +3738,15 @@
           "_postman_id": "459fdc17-2cbf-4f61-b72b-19b4ca322e2e",
           "name": "BXGX",
           "description": null,
-          "item": [],
+          "item": [
+            {
+              "_postman_id": "aaea0315-ce04-49d9-b54f-8a92e4223d44",
+              "name": "PLAT-134:Verify BXGX promotion can be created",
+              "description": null,
+              "item": [],
+              "_postman_isSubFolder": true
+            }
+          ],
           "_postman_isSubFolder": true
         }
       ]
