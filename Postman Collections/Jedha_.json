@@ -3014,7 +3014,15 @@
       "_postman_id": "6025435c-1691-474a-8178-426527274230",
       "name": "Create different type promotion",
       "description": "",
-      "item": []
+      "item": [
+        {
+          "_postman_id": "34db83fc-8b9e-48b1-bb7f-247063a657e1",
+          "name": "Rule Types",
+          "description": "",
+          "item": [],
+          "_postman_isSubFolder": true
+        }
+      ]
     },
     {
       "_postman_id": "b3728a13-7893-413a-9e81-c9ff98244135",
