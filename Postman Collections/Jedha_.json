@@ -3021,6 +3021,13 @@
           "description": "",
           "item": [],
           "_postman_isSubFolder": true
+        },
+        {
+          "_postman_id": "eddfc97d-fd9a-404c-be60-f9279b440a4f",
+          "name": "Condition Types",
+          "description": "",
+          "item": [],
+          "_postman_isSubFolder": true
         }
       ]
     },
