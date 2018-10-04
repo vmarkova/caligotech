@@ -3560,7 +3560,15 @@
           "_postman_id": "12797f7f-1749-4bc3-a1c0-018114bf3e52",
           "name": "Cents Off",
           "description": null,
-          "item": [],
+          "item": [
+            {
+              "_postman_id": "e07e6f34-eba2-45c2-a9e4-c94b6fff1394",
+              "name": "PLAT-133:Verify Cents Off promotion can be created",
+              "description": null,
+              "item": [],
+              "_postman_isSubFolder": true
+            }
+          ],
           "_postman_isSubFolder": true
         }
       ]
