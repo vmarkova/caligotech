@@ -3028,6 +3028,13 @@
           "description": "",
           "item": [],
           "_postman_isSubFolder": true
+        },
+        {
+          "_postman_id": "956f023f-744e-4530-9242-6a5683598246",
+          "name": "Reward Types",
+          "description": "",
+          "item": [],
+          "_postman_isSubFolder": true
         }
       ]
     },
