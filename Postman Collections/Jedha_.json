@@ -3916,7 +3916,15 @@
           "_postman_id": "129cbc4c-b9b9-4d27-946c-6d5f4b7662ef",
           "name": "Basket Off",
           "description": null,
-          "item": [],
+          "item": [
+            {
+              "_postman_id": "7a985e56-04fa-4bab-9f68-7f09503d68c7",
+              "name": "PLAT-136:Verify Basket Off promotion can be created",
+              "description": null,
+              "item": [],
+              "_postman_isSubFolder": true
+            }
+          ],
           "_postman_isSubFolder": true
         }
       ]
