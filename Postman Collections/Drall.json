@@ -452,6 +452,12 @@
       ]
     },
     {
+      "_postman_id": "8d5badfc-be88-492e-a825-268bc1acf9a3",
+      "name": "PLAT-116:Verify system return the same hash when same file is uploaded",
+      "description": "",
+      "item": []
+    },
+    {
       "_postman_id": "16c00aaa-654b-404c-ad16-55f03ee1f5c0",
       "name": "Upload a file into dFS as form-data-multipart",
       "event": [
@@ -580,7 +586,7 @@
   ],
   "variable": [
     {
-      "id": "fa14144b-2dfa-4aee-b8ea-db71067a47ed",
+      "id": "616153c8-3743-4c53-97cd-20fe9fb2281c",
       "key": "hash_id",
       "value": "",
       "type": "string",
