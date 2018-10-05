@@ -495,33 +495,15 @@
             "key": "",
             "value": "",
             "disabled": true
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
           }
         ],
         "body": {
-          "mode": "formdata",
-          "formdata": [
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "sessionValue": "json",
-              "description": "",
-              "type": "text"
-            },
-            {
-              "key": "file",
-              "value": null,
-              "sessionValue": "form-data/multipart",
-              "description": "",
-              "type": "file"
-            },
-            {
-              "key": "",
-              "value": "",
-              "sessionValue": null,
-              "description": "",
-              "type": "text"
-            }
-          ]
+          "mode": "raw",
+          "raw": "{\n\t\"name\":\"toDrall.json\",\n\t\"path\":[\"Users/valya/Downloads/toDrall.json\"]\n\t\n}"
         },
         "url": "http://qa-apps.caligotech.com:8189/dfs"
       },
@@ -586,7 +568,7 @@
   ],
   "variable": [
     {
-      "id": "d8cd1b3f-5290-4e6c-9dd1-fcf6c019cb79",
+      "id": "c9c254f2-1156-4ba6-a750-a13a3a5d0bde",
       "key": "hash_id",
       "value": "",
       "type": "string",
