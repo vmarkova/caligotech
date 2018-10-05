@@ -17,7 +17,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "3d8edc0f-0050-4a0c-aad8-0a79ba49b8eb",
+                "id": "88868c2f-c7a6-4ab9-8a41-3933715b53d2",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -52,7 +52,7 @@
                   "    pm.expect(isADate).to.eql(true);",
                   "});",
                   "",
-                  "pm.test(\"Promo contains budgetId\", function() {",
+                  "/*pm.test(\"Promo contains budgetId\", function() {",
                   "    const budgetId = testObject.budgetId;",
                   "    const lengthbudgetId = budgetId.length > 0;",
                   "    pm.expect(lengthbudgetId).to.eql(true);",
@@ -69,7 +69,7 @@
                   "    const lengthgs1Databar = gs1Databar.length > 25;",
                   "    pm.expect(lengthgs1Databar).to.eql(true);",
                   "});",
-                  "",
+                  "*/",
                   "pm.test(\"Promo contains title\", function() {",
                   "    const title = testObject.title;",
                   "    const lengthTitle = title.length > 0;",
@@ -303,21 +303,21 @@
             {
               "listen": "test",
               "script": {
-                "id": "26b4439d-17c8-4f03-afa1-383c40edd6fb",
+                "id": "70a00987-9b08-418c-a0be-d12311770098",
                 "type": "text/javascript",
                 "exec": [
                   "",
                   "pm.test(\"Successful POST request\", function () {",
                   "    pm.expect(pm.response.code).to.be.oneOf([200,201,202,204]);",
                   "});",
-                  "",
+                  "/*",
                   "pm.test(\"Promo is DRAFT or ACTIVE\", function() {",
                   "    pm.expect(testObject.status === \"DRAFT\" || \"ACTIVE\").to.eql(true);",
                   "});",
                   "",
                   "pm.test(\"Promo is not paused\", function() {",
                   "    pm.expect(testObject.status === \"NULL\" || false).to.eql(true);",
-                  "});"
+                  "});*/"
                 ]
               }
             },
@@ -580,7 +580,7 @@
   ],
   "variable": [
     {
-      "id": "1cb39550-dada-4b0f-8d55-afb21a72855f",
+      "id": "fa14144b-2dfa-4aee-b8ea-db71067a47ed",
       "key": "hash_id",
       "value": "",
       "type": "string",
