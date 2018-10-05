@@ -484,26 +484,13 @@
         "method": "POST",
         "header": [
           {
-            "key": "",
-            "value": ""
-          },
-          {
-            "key": "",
-            "value": ""
-          },
-          {
-            "key": "",
-            "value": "",
-            "disabled": true
-          },
-          {
             "key": "Content-Type",
             "value": "application/json"
           }
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n\t\"name\":\"toDrall.json\",\n\t\"path\":[\"Users/valya/Downloads/toDrall.json\"]\n\t\n}"
+          "raw": "{\n\t\"name\":\"toDrall\",\n\t\"path\":[\"/Users/valyamarkova/Downloads\"],\n\t\"content\":\"eyJ2ZXJzaW9uIjoiMS4wIiwicnVsZSI6eyJ0eXBlIjoiU2luZ2xlUnVsZSIsImlkIjowLCJjb25kaXRpb24iOnsidHlwZSI6IkJ1eVByb2R1Y3RDb25kaXRpb24iLCJpZCI6MSwibXByIjoxLCJwcm9kdWN0Ijp7InVwY3MiOlsiMDc1NjA5MTk1NTk0IiwiMDc1NjA5MTk1MzU4Il0sImJyYW5kcyI6W3siYnJhbmQiOiIxIiwicHJvZHVjdHMiOlsiMTIiXX1dfX0sInJld2FyZCI6eyJ0eXBlIjoiRGlzY291bnRWYWx1ZVJld2FyZCIsImlkIjoyLCJ2YWx1ZSI6NTB9fSwibWV0YWRhdGEiOnsidmVyc2lvbiI6IjEuMCIsInRpdGxlIjoiUmV0YWlsZXIgbmVnb3RpYXRpb24gdGVzdCB0ZXN0IDIiLCJ0ZXh0IjoiT0ZGIE9ORSBJdm9yeSBCb2R5IFdhc2ggKDIxb3ogb3IgbGFyZ2VyKSAiLCJkZXRhaWxzIjoiRGVhbGVyOiBTdWJtaXNzaW9uIHRvIFByb2N0ZXIgJiBHYW1ibGUgc2lnbmlmaWVzIGNvbXBsaWFuY2Ugd2l0aCAnUmVxdWlyZW1lbnRzIGZvciBQcm9wZXIgQ291cG9uIFJlZGVtcHRpb24uJyBQbGVhc2UgdmlzaXQgdGhpcyBsaW5rIGZvciBjb3Vwb24gdGVybXMgZm9yIHByb3BlciByZWRlbXB0aW9uOiBodHRwOi8vd3d3LnBnLmNvbS9lbl9VUy9kb3dubG9hZHMvcGFydG5lcnNfc3VwcGxpZXJzL1BHX0NvdXBvbl9UZXJtc19vZl9Qcm9wZXJfUmVkZW1wdGlvbi5wZGYuIExpbWl0IG9mIG9uZSBjb3Vwb24gcGVyIGl0ZW0uIENvbnN1bWVyOiBMaW1pdCBPTkUgY291cG9uIHBlciBwdXJjaGFzZSBvZiBwcm9kdWN0cyBhbmQgcXVhbnRpdGllcyBzdGF0ZWQuIEFueSBvdGhlciB1c2UgY29uc3RpdHV0ZXMgZnJhdWQuIENvdXBvbnMgYXJlIG5vdCBhdXRob3JpemVkIGlmIHB1cmNoYXNpbmcgcHJvZHVjdHMgZm9yIHJlc2FsZS4gWW91IG1heSBwYXkgc2FsZXMgdGF4LiBOb3QgdmFsaWQgaW4gUHVlcnRvIFJpY28uIiwiZmFtaWx5Q29kZSI6IjEzMCIsImdzMURhdGFiYXIiOiI4MTEwMTAwNzU2MDkxMzEyMzkzMzAwMTEwMTMwMzE3MDcwMSIsImltYWdlcyI6WyJpdm9yeS81YjNlOGMzNmQxMmY4NTA0MTExOWVhMDcucG5nIl19fQ==\"\n}"
         },
         "url": "http://qa-apps.caligotech.com:8189/dfs"
       },
@@ -568,7 +555,7 @@
   ],
   "variable": [
     {
-      "id": "c9c254f2-1156-4ba6-a750-a13a3a5d0bde",
+      "id": "6a0ef804-8475-47e5-9f36-d2993dbddd8e",
       "key": "hash_id",
       "value": "",
       "type": "string",
