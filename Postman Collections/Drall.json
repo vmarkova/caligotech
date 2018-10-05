@@ -100,12 +100,12 @@
             "value": "application/json\t"
           },
           {
-            "key": "Content-Type",
+            "key": "Accept",
             "value": "application/octet-stream"
           }
         ],
         "body": {},
-        "url": "http://qa-apps.caligotech.com:8189/dfs/{{hash_id}}"
+        "url": "http://qa-apps.caligotech.com:8189/dfs/{{dfsPromotion}}"
       },
       "response": []
     }
@@ -134,7 +134,7 @@
   ],
   "variable": [
     {
-      "id": "ae26cf78-0d0b-4451-b6fb-6c554c3d4802",
+      "id": "34c92d82-1cc1-452c-b10d-0e36ad6067ab",
       "key": "hash_id",
       "value": "",
       "type": "string",
