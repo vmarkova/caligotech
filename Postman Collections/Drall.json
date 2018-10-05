@@ -6,6 +6,12 @@
   },
   "item": [
     {
+      "_postman_id": "e09417d2-6d4d-4990-9a43-789832080cbb",
+      "name": "PLAT-109:Verify promo hash is created when promotion is published",
+      "description": "",
+      "item": []
+    },
+    {
       "_postman_id": "16c00aaa-654b-404c-ad16-55f03ee1f5c0",
       "name": "Upload a file into dFS as form-data-multipart",
       "event": [
@@ -134,7 +140,7 @@
   ],
   "variable": [
     {
-      "id": "bc337676-c88a-4e08-8b54-68874f708e63",
+      "id": "2ce14bfd-9e40-4c12-ae11-a2a2d998192d",
       "key": "hash_id",
       "value": "",
       "type": "string",
