@@ -502,7 +502,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "92be3783-0b79-4ff2-ab36-64e7945ae283",
+                "id": "3527abc2-c7a5-4ee6-811f-1034d520e952",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -510,11 +510,11 @@
                   "});",
                   "",
                   "const testObject = pm.response.json();",
-                  "",
+                  "let fil = pm.environment.get(\"fileIdToCompare\");",
                   "",
                   "pm.test(\"Check if fileId is same as previous\", function () {",
-                  "    var jsonData = pm.response.json();",
-                  "    pm.expect(testObject.fileId).to.eql(fileIdToCompare);",
+                  "",
+                  "    pm.expect(testObject.fileId === fil).to.eql(true);",
                   "});"
                 ]
               }
@@ -636,7 +636,7 @@
   ],
   "variable": [
     {
-      "id": "66450834-f692-4f07-b99d-59b4e7c3eb96",
+      "id": "c3f52970-ba6f-4b39-a074-38711cbb7cbc",
       "key": "hash_id",
       "value": "",
       "type": "string",
