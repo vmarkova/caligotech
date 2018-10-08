@@ -453,7 +453,7 @@
     },
     {
       "_postman_id": "15705214-15bb-4458-a016-3d0702eb5dad",
-      "name": "PLAT-118:Verify hash can be retrieved",
+      "name": "PLAT-118:Verify hash can be retrieved if promotion is published",
       "description": "",
       "item": [
         {
@@ -858,40 +858,6 @@
                 }
               ]
             }
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "75b5b47b-fa53-4a1a-a6ae-38a662b21101",
-          "name": "Step 5: Get promotion using dfsFileId",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "id": "34b787ef-c0ed-43de-a7fe-90e8f1527f5d",
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status code is 200\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json\t"
-              },
-              {
-                "key": "Accept",
-                "value": "application/octet-stream"
-              }
-            ],
-            "body": {},
-            "url": "http://qa-apps.caligotech.com:8189/dfs/{{dfsPromotion}}"
           },
           "response": []
         }
@@ -1370,7 +1336,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "9d00a54b-7b5f-43a8-bad1-5712778ed295",
+                "id": "0c95e277-57e0-468e-9d10-39b0feb387a8",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -1384,7 +1350,7 @@
                   "console.log(\"dfs here \"+dfs);",
                   "pm.environment.set(\"dfsPromotion\", items.dfsPromotionFileId);",
                   "",
-                  ""
+                  "//check if retrieved promotion dfs hash is different from the one on step 4"
                 ]
               }
             }
@@ -1627,7 +1593,7 @@
   ],
   "variable": [
     {
-      "id": "edb247fe-e875-4f69-a971-33c130efec59",
+      "id": "649e46ce-654b-4ee9-bda2-843b6ff11f97",
       "key": "hash_id",
       "value": "",
       "type": "string",
