@@ -453,7 +453,7 @@
     },
     {
       "_postman_id": "15705214-15bb-4458-a016-3d0702eb5dad",
-      "name": "PLAT-109:Verify promo hash is created when promotion is published Copy",
+      "name": "PLAT-118:Verify hash can be retrieved",
       "description": "",
       "item": [
         {
@@ -895,6 +895,28 @@
           },
           "response": []
         }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "4be972aa-91e3-4450-851c-22b58fddd33c",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "4361a239-47c4-440f-a86a-e6d05dcddf3b",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
       ]
     },
     {
@@ -1308,13 +1330,13 @@
           "response": []
         },
         {
-          "_postman_id": "20a751ab-2d44-4803-b204-549df365f819",
-          "name": "Step 5: Get promotion using dfsFileId",
+          "_postman_id": "64871ede-cab2-455a-8029-b54c9af1a969",
+          "name": "Step 5:Update promotion",
           "event": [
             {
               "listen": "test",
               "script": {
-                "id": "34b787ef-c0ed-43de-a7fe-90e8f1527f5d",
+                "id": "b0d15164-3693-4876-8d9d-e2293e7345fc",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -1325,19 +1347,74 @@
             }
           ],
           "request": {
-            "method": "GET",
+            "method": "PUT",
             "header": [
               {
                 "key": "Content-Type",
-                "value": "application/json\t"
-              },
-              {
-                "key": "Accept",
-                "value": "application/octet-stream"
+                "value": "application/json"
               }
             ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"Get $0.50 on Ivory Body Wash \",\r\n  \"providerPromotionCode\" : \"131240\",\r\n  \"text\" : \"50 OFF ONE Ivory Body Wash (21oz or larger) \",\r\n  \"details\" : \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\r\n  \"images\" : [ \"ivory/5b3e8c36d12f85041119ea07.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"ClipCondition\"\r\n      }\r\n    ,\r\n    \"reward\" : {\r\n      \"type\" : \"DiscountValueReward\",\r\n      \"id\" : null,\r\n      \"value\" : 50,\r\n      \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [\"12\"]\r\n      }]\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-01-01T14:00:00\",\r\n  \"endDate\" : \"2018-01-31T14:00:00\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"130\",\r\n  \"gs1Databar\" : \"81101007560913123933001101303170701\"\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}",
+            "description": "Modify a promotion"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "5db3486a-fb27-40b8-a1bb-179098707caf",
+          "name": "Step 6: Get promotion from MongoDB",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "9d00a54b-7b5f-43a8-bad1-5712778ed295",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "const items = testObject.results[0];",
+                  "console.log(\"items \"+items);",
+                  "let dfs = items.dfsPromotionFileId;",
+                  "console.log(\"dfs here \"+dfs);",
+                  "pm.environment.set(\"dfsPromotion\", items.dfsPromotionFileId);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
             "body": {},
-            "url": "http://qa-apps.caligotech.com:8189/dfs/{{dfsPromotion}}"
+            "url": {
+              "raw": "http://qa-mongodb.caligotech.com:27080/jedha/promotions/_find?criteria={\"_id\":{\"$oid\":\"{{promo_id}}\"}}",
+              "protocol": "http",
+              "host": [
+                "qa-mongodb",
+                "caligotech",
+                "com"
+              ],
+              "port": "27080",
+              "path": [
+                "jedha",
+                "promotions",
+                "_find"
+              ],
+              "query": [
+                {
+                  "key": "criteria",
+                  "value": "{\"_id\":{\"$oid\":\"{{promo_id}}\"}}",
+                  "equals": true
+                }
+              ]
+            }
           },
           "response": []
         }
@@ -1550,7 +1627,7 @@
   ],
   "variable": [
     {
-      "id": "c31c965a-8391-46c2-b0f3-2b02655d526c",
+      "id": "c597d8ac-0485-4efe-bde4-5f76edadf7fe",
       "key": "hash_id",
       "value": "",
       "type": "string",
