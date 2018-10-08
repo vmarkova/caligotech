@@ -1496,6 +1496,440 @@
       ]
     },
     {
+      "_postman_id": "095e19a5-d699-40c9-95bb-0a8143fbde3b",
+      "name": "PLAT-118:Verify hash can be retrieved if promotion is published Copy",
+      "description": "",
+      "item": [
+        {
+          "_postman_id": "03b7c745-0a5f-4505-b5a3-58e21b671ef3",
+          "name": "Step 1:Post promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "88868c2f-c7a6-4ab9-8a41-3933715b53d2",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "//const promo_id = testObject.id;",
+                  "",
+                  "pm.environment.set(\"promo_id\", testObject.id);",
+                  "",
+                  "",
+                  "/*pm.test(\"Id check\", function () {",
+                  "    pm.expect(testObject.id).to.eql(promo_id);",
+                  "});*/",
+                  "",
+                  "pm.test(\"Promo contains Id\", function() {",
+                  "    const Id = testObject.id;",
+                  "    const lengthId = Id.length > 0;",
+                  "    pm.expect(lengthId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "/*pm.test(\"Promo contains budgetId\", function() {",
+                  "    const budgetId = testObject.budgetId;",
+                  "    const lengthbudgetId = budgetId.length > 0;",
+                  "    pm.expect(lengthbudgetId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
+                  "    const familyCode = testObject.familyCode;",
+                  "    const lengthfamilyCode = familyCode.length == 3;",
+                  "    pm.expect(lengthfamilyCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains gs1Databar with more than 25 digits\", function() {",
+                  "    const gs1Databar = testObject.gs1Databar;",
+                  "    const lengthgs1Databar = gs1Databar.length > 25;",
+                  "    pm.expect(lengthgs1Databar).to.eql(true);",
+                  "});",
+                  "*/",
+                  "pm.test(\"Promo contains title\", function() {",
+                  "    const title = testObject.title;",
+                  "    const lengthTitle = title.length > 0;",
+                  "    pm.expect(lengthTitle).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains text\", function() {",
+                  "    const text = testObject.text;",
+                  "    const lengthText = text.length > 0;",
+                  "    pm.expect(lengthText).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains details\", function() {",
+                  "    const details = testObject.details;",
+                  "    const lengthDetails = details.length > 0;",
+                  "    pm.expect(lengthDetails).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains promo code\", function() {",
+                  "    const promoCode = testObject.providerPromotionCode;",
+                  "    const lengthPromoCode = promoCode.length > 0;",
+                  "    pm.expect(lengthPromoCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains images link\", function() {",
+                  "    const images = testObject.images;",
+                  "    const lengthimages = images.length > 0;",
+                  "    pm.expect(lengthimages).to.eql(true);",
+                  "});",
+                  "",
+                  "",
+                  "",
+                  "var schema = {",
+                  "  \"title\" : \"string\",",
+                  "  \"providerPromotionCode\" : \"string\",",
+                  "  \"text\" : \"string\",",
+                  "  \"details\" : \"string\",",
+                  "  \"images\" :\"array\",",
+                  "  \"rule\" : {",
+                  "    \"id\" : null,",
+                  "    \"type\" : \"string\",",
+                  "    \"condition\" : {",
+                  "      \"id\" : null,",
+                  "      \"type\" : \"string\",",
+                  "      \"mpr\" : 1,",
+                  "      \"product\" : {",
+                  "        \"upcs\" : \"array\",",
+                  "        \"brands\" : [ {",
+                  "          \"brand\" : \"string\",",
+                  "          \"products\" : [ \"string\" ]",
+                  "        } ]",
+                  "      }",
+                  "    },",
+                  "    \"reward\" : {",
+                  "      \"type\" : \"string\",",
+                  "      \"id\" : null,",
+                  "      \"value\" : \"integer\",",
+                  "      \"brands\" : [ {",
+                  "          \"brand\" : \"string\",",
+                  "          \"products\" : \"array\"",
+                  "        } ]",
+                  "    }",
+                  "  },",
+                  "  \"startDate\" : \"date\",",
+                  "  \"endDate\" : \"date\",",
+                  "  \"budgetId\" : \"string\",",
+                  "  \"familyCode\" : \"string\",",
+                  "  \"gs1Databar\" : \"string\"",
+                  "  ",
+                  "}",
+                  "",
+                  "",
+                  "pm.test('Schema is valid', function() {",
+                  "  pm.expect(tv4.validate(testObject, schema)).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\" : \"Get $0.50 on Ivory Body Wash \",\r\n  \"providerPromotionCode\" : \"131240 \",\r\n  \"text\" : \"OFF ONE Ivory Body Wash (21oz or larger) \",\r\n  \"details\" : \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\r\n  \"images\" : [ \"ivory/5b3e8c36d12f85041119ea07.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"ClipCondition\"\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"DiscountValueReward\",\r\n      \"id\" : null,\r\n      \"value\" : 50,\r\n      \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-01-01T14:00:00\",\r\n  \"endDate\" : \"2018-01-31T14:00:00\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"130\",\r\n  \"gs1Databar\" : \"81101007560913123933001101303170701\"\r\n  \r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "aa1d989d-2471-4fd1-85d4-aa1bbee892b4",
+          "name": "Step 2:Add Campaign to the Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "132bc4c7-57d1-4f5e-88aa-34137ee46f9e",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "pm.environment.set(\"camp_id\", testObject.id);",
+                  "const promo_id = pm.environment.get(\"promo_id\");",
+                  "",
+                  "//const camp_id = testObject.id;",
+                  "",
+                  "pm.test(\"Promo contains campaign Id\", function() {",
+                  "    const id = testObject.id;",
+                  "    const lengthid = id.length > 0;",
+                  "    pm.expect(lengthid).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains clipByDate\", function() {",
+                  "    const clipByDate = new Date(testObject.clipByDate);",
+                  "    const isADate = Object.prototype.toString.call(clipByDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "/*pm.test(\"Is clip date before end date in promotion\", function() {",
+                  "    const clipByDate = new Date(testObject.clipByDate);",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const clipDateBeforeEnd = clipByDate.getTime() <= endDate.getTime();",
+                  "    pm.expect(clipDateBeforeEnd).to.eql(true);",
+                  "});*/",
+                  "",
+                  "pm.test(\"Promotion Id check\", function () {",
+                  "    //const equalId = Object.prototype.toString.call(promotionId) === promo_id;",
+                  "  //  pm.expect(testObject.promotionId === promo_id).to.eql(true);",
+                  " pm.expect(testObject.promotionId).to.eql(promo_id);",
+                  " //pm.expect(testObject).to.have.property('id', promo_id);",
+                  "});",
+                  "",
+                  "",
+                  "",
+                  "pm.test(\"Promo contains modifiedBy\", function() {",
+                  "    const modifiedBy = testObject.modifiedBy;",
+                  "    const lengthmodifiedBy = modifiedBy.length > 0;",
+                  "    pm.expect(lengthmodifiedBy).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains modifiedOn\", function() {",
+                  "    const modifiedOnRaw = testObject.modifiedOn;",
+                  "    const modifiedOn = new Date(modifiedOnRaw*1000);",
+                  "    const isADate =  Object.prototype.toString.call(modifiedOn) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains status\", function() {",
+                  "    const status = testObject.status;",
+                  "    const lengthstatus = status.length > 0;",
+                  "    pm.expect(lengthstatus).to.eql(true);",
+                  "});",
+                  "",
+                  "var schema = {",
+                  "  \"clipByDate\": \"date\",",
+                  "  \"endDate\": \"date\",",
+                  "  \"id\": \"string\",",
+                  "  \"modifiedBy\": \"string\",",
+                  "  \"modifiedOn\": 0,",
+                  "  \"overrides\": {",
+                  "    \"details\": \"string\",",
+                  "    \"images\": \"array\",",
+                  "    \"rule\": {",
+                  "      \"id\": 0",
+                  "    },",
+                  "    \"text\": \"string\",",
+                  "    \"title\": \"string\"",
+                  "  },",
+                  "  \"promotionId\": \"string\",",
+                  "  \"retailerProfileId\": \"string\",",
+                  "  \"startDate\": \"date\",",
+                  "  \"status\": \"string\",",
+                  "  \"timezone\": \"string\"",
+                  "}",
+                  "",
+                  "pm.test('Schema is valid', function() {",
+                  "  pm.expect(tv4.validate(testObject, schema)).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n \"clipByDate\": \"2019-01-01T14:00:00\",\n \"endDate\": \"2019-01-01T14:00:00\",\n \"overrides\": {\n   \"details\": \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\n   \"images\": [\n     \"Gain laundry detergent/5b6b6bd4d12f8512623c2e8b.png\"\n   ],\n   \"rule\": {\n     \"id\": 0,\"type\": \"SingleRule\"\n   },\n   \"text\": \"Get $0.50 OFF Gain\",\n   \"title\": \"When buy Two Gain laundry detergent\"\n },\n \"retailerProfileId\": \"3\",\n \"startDate\": \"2019-01-01T14:00:00\"\n   }"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "cec738e0-c710-4844-84dc-d25a56061bc9",
+          "name": "Step 3:Publish Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "70a00987-9b08-418c-a0be-d12311770098",
+                "type": "text/javascript",
+                "exec": [
+                  "",
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200,201,202,204]);",
+                  "});",
+                  "/*",
+                  "pm.test(\"Promo is DRAFT or ACTIVE\", function() {",
+                  "    pm.expect(testObject.status === \"DRAFT\" || \"ACTIVE\").to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo is not paused\", function() {",
+                  "    pm.expect(testObject.status === \"NULL\" || false).to.eql(true);",
+                  "});*/"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "23bef111-4e63-41e1-acf6-9b2754add19c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Promo is DRAFT or ACTIVE\", function() {",
+                  "    pm.expect(testObject.status === \"DRAFT\" || \"ACTIVE\").to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo is not paused\", function() {",
+                  "    pm.expect(testObject.status === \"NULL\" || false).to.eql(true);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "",
+                "value": "",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"campaignIds\": [\r\n\t\"{{camp_id}}\"\r\n   ]\r\n}"
+            },
+            "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/publish/",
+            "description": "Publish Promotion"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "cc29de19-560f-44f8-a56d-d67d1b6327e7",
+          "name": "Step 4: Get promotion from MongoDB",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "9d00a54b-7b5f-43a8-bad1-5712778ed295",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "const items = testObject.results[0];",
+                  "console.log(\"items \"+items);",
+                  "let dfs = items.dfsPromotionFileId;",
+                  "console.log(\"dfs here \"+dfs);",
+                  "pm.environment.set(\"dfsPromotion\", items.dfsPromotionFileId);",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "url": {
+              "raw": "http://qa-mongodb.caligotech.com:27080/jedha/promotions/_find?criteria={\"_id\":{\"$oid\":\"{{promo_id}}\"}}",
+              "protocol": "http",
+              "host": [
+                "qa-mongodb",
+                "caligotech",
+                "com"
+              ],
+              "port": "27080",
+              "path": [
+                "jedha",
+                "promotions",
+                "_find"
+              ],
+              "query": [
+                {
+                  "key": "criteria",
+                  "value": "{\"_id\":{\"$oid\":\"{{promo_id}}\"}}",
+                  "equals": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "4be972aa-91e3-4450-851c-22b58fddd33c",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "4361a239-47c4-440f-a86a-e6d05dcddf3b",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
       "_postman_id": "16c00aaa-654b-404c-ad16-55f03ee1f5c0",
       "name": "Upload a file into dFS as form-data-multipart",
       "event": [
@@ -1593,7 +2027,7 @@
   ],
   "variable": [
     {
-      "id": "649e46ce-654b-4ee9-bda2-843b6ff11f97",
+      "id": "d65afa60-be41-46e1-9b72-b0348ede012f",
       "key": "hash_id",
       "value": "",
       "type": "string",
