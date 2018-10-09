@@ -622,7 +622,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "132bc4c7-57d1-4f5e-88aa-34137ee46f9e",
+                "id": "88d85683-adf0-4438-b446-a9ebadc2b663",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -633,7 +633,6 @@
                   "pm.environment.set(\"camp_id\", testObject.id);",
                   "const promo_id = pm.environment.get(\"promo_id\");",
                   "",
-                  "//const camp_id = testObject.id;",
                   "",
                   "pm.test(\"Promo contains campaign Id\", function() {",
                   "    const id = testObject.id;",
@@ -887,7 +886,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "88868c2f-c7a6-4ab9-8a41-3933715b53d2",
+                "id": "139798d2-92a9-433b-9c6b-7d16f0bc1f34",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -895,14 +894,9 @@
                   "});",
                   "",
                   "const testObject = pm.response.json();",
-                  "//const promo_id = testObject.id;",
                   "",
                   "pm.environment.set(\"promo_id\", testObject.id);",
                   "",
-                  "",
-                  "/*pm.test(\"Id check\", function () {",
-                  "    pm.expect(testObject.id).to.eql(promo_id);",
-                  "});*/",
                   "",
                   "pm.test(\"Promo contains Id\", function() {",
                   "    const Id = testObject.id;",
@@ -922,24 +916,6 @@
                   "    pm.expect(isADate).to.eql(true);",
                   "});",
                   "",
-                  "/*pm.test(\"Promo contains budgetId\", function() {",
-                  "    const budgetId = testObject.budgetId;",
-                  "    const lengthbudgetId = budgetId.length > 0;",
-                  "    pm.expect(lengthbudgetId).to.eql(true);",
-                  "});",
-                  "",
-                  "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
-                  "    const familyCode = testObject.familyCode;",
-                  "    const lengthfamilyCode = familyCode.length == 3;",
-                  "    pm.expect(lengthfamilyCode).to.eql(true);",
-                  "});",
-                  "",
-                  "pm.test(\"Promo contains gs1Databar with more than 25 digits\", function() {",
-                  "    const gs1Databar = testObject.gs1Databar;",
-                  "    const lengthgs1Databar = gs1Databar.length > 25;",
-                  "    pm.expect(lengthgs1Databar).to.eql(true);",
-                  "});",
-                  "*/",
                   "pm.test(\"Promo contains title\", function() {",
                   "    const title = testObject.title;",
                   "    const lengthTitle = title.length > 0;",
@@ -1049,7 +1025,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "132bc4c7-57d1-4f5e-88aa-34137ee46f9e",
+                "id": "68951a79-ef33-4fd3-9957-ca8e95366aa0",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -1060,7 +1036,6 @@
                   "pm.environment.set(\"camp_id\", testObject.id);",
                   "const promo_id = pm.environment.get(\"promo_id\");",
                   "",
-                  "//const camp_id = testObject.id;",
                   "",
                   "pm.test(\"Promo contains campaign Id\", function() {",
                   "    const id = testObject.id;",
@@ -1086,18 +1061,9 @@
                   "    pm.expect(isADate).to.eql(true);",
                   "});",
                   "",
-                  "/*pm.test(\"Is clip date before end date in promotion\", function() {",
-                  "    const clipByDate = new Date(testObject.clipByDate);",
-                  "    const endDate = new Date(testObject.endDate);",
-                  "    const clipDateBeforeEnd = clipByDate.getTime() <= endDate.getTime();",
-                  "    pm.expect(clipDateBeforeEnd).to.eql(true);",
-                  "});*/",
                   "",
                   "pm.test(\"Promotion Id check\", function () {",
-                  "    //const equalId = Object.prototype.toString.call(promotionId) === promo_id;",
-                  "  //  pm.expect(testObject.promotionId === promo_id).to.eql(true);",
-                  " pm.expect(testObject.promotionId).to.eql(promo_id);",
-                  " //pm.expect(testObject).to.have.property('id', promo_id);",
+                  "  pm.expect(testObject.promotionId).to.eql(promo_id);",
                   "});",
                   "",
                   "",
@@ -1173,7 +1139,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "9390eb0e-069c-44f9-be36-a5ce53479917",
+                "id": "f4fe6052-6156-4e61-a1a3-6822c9577726",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -1192,7 +1158,6 @@
                   "    if (testObject.dfsPromotionFileId === undefined) {",
                   "        check = true;",
                   "    }",
-                  "    //const lengthId = Id.length > 0;",
                   "    pm.expect(check).to.eql(true);",
                   "});"
                 ]
@@ -1264,7 +1229,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "88868c2f-c7a6-4ab9-8a41-3933715b53d2",
+                "id": "1318d709-c62e-4722-816e-a4447423b12d",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -1272,14 +1237,10 @@
                   "});",
                   "",
                   "const testObject = pm.response.json();",
-                  "//const promo_id = testObject.id;",
                   "",
                   "pm.environment.set(\"promo_id\", testObject.id);",
                   "",
                   "",
-                  "/*pm.test(\"Id check\", function () {",
-                  "    pm.expect(testObject.id).to.eql(promo_id);",
-                  "});*/",
                   "",
                   "pm.test(\"Promo contains Id\", function() {",
                   "    const Id = testObject.id;",
@@ -1299,11 +1260,7 @@
                   "    pm.expect(isADate).to.eql(true);",
                   "});",
                   "",
-                  "/*pm.test(\"Promo contains budgetId\", function() {",
-                  "    const budgetId = testObject.budgetId;",
-                  "    const lengthbudgetId = budgetId.length > 0;",
-                  "    pm.expect(lengthbudgetId).to.eql(true);",
-                  "});",
+                  "",
                   "",
                   "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
                   "    const familyCode = testObject.familyCode;",
@@ -1880,7 +1837,7 @@
   ],
   "variable": [
     {
-      "id": "599ca64f-9366-400d-a6fd-d8c7b323c601",
+      "id": "a4b221db-35de-46de-8f90-65298d6ef70c",
       "key": "hash_id",
       "value": "",
       "type": "string",
