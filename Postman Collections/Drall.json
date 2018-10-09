@@ -463,7 +463,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "88868c2f-c7a6-4ab9-8a41-3933715b53d2",
+                "id": "33973807-1fc9-4a4f-bcb8-419e4647b5eb",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -471,14 +471,11 @@
                   "});",
                   "",
                   "const testObject = pm.response.json();",
-                  "//const promo_id = testObject.id;",
+                  "",
                   "",
                   "pm.environment.set(\"promo_id\", testObject.id);",
                   "",
                   "",
-                  "/*pm.test(\"Id check\", function () {",
-                  "    pm.expect(testObject.id).to.eql(promo_id);",
-                  "});*/",
                   "",
                   "pm.test(\"Promo contains Id\", function() {",
                   "    const Id = testObject.id;",
@@ -1883,7 +1880,7 @@
   ],
   "variable": [
     {
-      "id": "7e526b5d-308b-4f3e-ae72-1d6b03e07bbe",
+      "id": "599ca64f-9366-400d-a6fd-d8c7b323c601",
       "key": "hash_id",
       "value": "",
       "type": "string",
