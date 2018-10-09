@@ -749,21 +749,14 @@
             {
               "listen": "test",
               "script": {
-                "id": "70a00987-9b08-418c-a0be-d12311770098",
+                "id": "6957470e-935c-42c1-89c9-9534a294eb22",
                 "type": "text/javascript",
                 "exec": [
                   "",
                   "pm.test(\"Successful POST request\", function () {",
                   "    pm.expect(pm.response.code).to.be.oneOf([200,201,202,204]);",
                   "});",
-                  "/*",
-                  "pm.test(\"Promo is DRAFT or ACTIVE\", function() {",
-                  "    pm.expect(testObject.status === \"DRAFT\" || \"ACTIVE\").to.eql(true);",
-                  "});",
-                  "",
-                  "pm.test(\"Promo is not paused\", function() {",
-                  "    pm.expect(testObject.status === \"NULL\" || false).to.eql(true);",
-                  "});*/"
+                  ""
                 ]
               }
             },
@@ -1183,7 +1176,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "9d00a54b-7b5f-43a8-bad1-5712778ed295",
+                "id": "9390eb0e-069c-44f9-be36-a5ce53479917",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -1197,7 +1190,14 @@
                   "console.log(\"dfs here \"+dfs);",
                   "pm.environment.set(\"dfsPromotion\", items.dfsPromotionFileId);",
                   "",
-                  ""
+                  "pm.test(\"Promotion doesn't have dfsFileId\", function() {",
+                  "    let check = null;",
+                  "    if (testObject.dfsPromotionFileId === undefined) {",
+                  "        check = true;",
+                  "    }",
+                  "    //const lengthId = Id.length > 0;",
+                  "    pm.expect(check).to.eql(true);",
+                  "});"
                 ]
               }
             }
@@ -1553,21 +1553,14 @@
             {
               "listen": "test",
               "script": {
-                "id": "70a00987-9b08-418c-a0be-d12311770098",
+                "id": "9262fd68-ee70-4d2d-ad2c-fac1cf921a79",
                 "type": "text/javascript",
                 "exec": [
                   "",
                   "pm.test(\"Successful POST request\", function () {",
                   "    pm.expect(pm.response.code).to.be.oneOf([200,201,202,204]);",
                   "});",
-                  "/*",
-                  "pm.test(\"Promo is DRAFT or ACTIVE\", function() {",
-                  "    pm.expect(testObject.status === \"DRAFT\" || \"ACTIVE\").to.eql(true);",
-                  "});",
-                  "",
-                  "pm.test(\"Promo is not paused\", function() {",
-                  "    pm.expect(testObject.status === \"NULL\" || false).to.eql(true);",
-                  "});*/"
+                  ""
                 ]
               }
             },
@@ -1890,7 +1883,7 @@
   ],
   "variable": [
     {
-      "id": "952d876a-1c5c-4164-a261-0cba7b699d3f",
+      "id": "cdae7529-98e1-4679-b790-7676cf62c149",
       "key": "hash_id",
       "value": "",
       "type": "string",
