@@ -1183,7 +1183,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "9d00a54b-7b5f-43a8-bad1-5712778ed295",
+                "id": "9390eb0e-069c-44f9-be36-a5ce53479917",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -1197,7 +1197,14 @@
                   "console.log(\"dfs here \"+dfs);",
                   "pm.environment.set(\"dfsPromotion\", items.dfsPromotionFileId);",
                   "",
-                  ""
+                  "pm.test(\"Promotion doesn't have dfsFileId\", function() {",
+                  "    let check = null;",
+                  "    if (testObject.dfsPromotionFileId === undefined) {",
+                  "        check = true;",
+                  "    }",
+                  "    //const lengthId = Id.length > 0;",
+                  "    pm.expect(check).to.eql(true);",
+                  "});"
                 ]
               }
             }
@@ -1864,40 +1871,6 @@
           "response": []
         }
       ]
-    },
-    {
-      "_postman_id": "cf4a4ee5-84bb-4b49-8f5e-f99478d82c5b",
-      "name": "Download a file from dFS as binary stream (octet-stream content type)",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "34b787ef-c0ed-43de-a7fe-90e8f1527f5d",
-            "type": "text/javascript",
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
-              "});"
-            ]
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json\t"
-          },
-          {
-            "key": "Accept",
-            "value": "application/octet-stream"
-          }
-        ],
-        "body": {},
-        "url": "http://qa-apps.caligotech.com:8189/dfs/{{dfsPromotion}}"
-      },
-      "response": []
     }
   ],
   "event": [
@@ -1924,7 +1897,7 @@
   ],
   "variable": [
     {
-      "id": "e3e4cc22-2ca4-48bd-822c-8a850e7afe3a",
+      "id": "03c7624e-50dc-4a39-9f7f-967dcbb1dbce",
       "key": "hash_id",
       "value": "",
       "type": "string",
