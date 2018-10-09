@@ -157,7 +157,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "132bc4c7-57d1-4f5e-88aa-34137ee46f9e",
+                "id": "5f2180b7-9e90-483f-b84f-d95e14eb24de",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -168,7 +168,6 @@
                   "pm.environment.set(\"camp_id\", testObject.id);",
                   "const promo_id = pm.environment.get(\"promo_id\");",
                   "",
-                  "//const camp_id = testObject.id;",
                   "",
                   "pm.test(\"Promo contains campaign Id\", function() {",
                   "    const id = testObject.id;",
@@ -1799,7 +1798,7 @@
   ],
   "variable": [
     {
-      "id": "f68f37fd-257c-4e9d-90e7-3fcdb68a484f",
+      "id": "0b1d33cf-b200-4331-a1e7-0bef71f11c59",
       "key": "hash_id",
       "value": "",
       "type": "string",
