@@ -1383,7 +1383,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "132bc4c7-57d1-4f5e-88aa-34137ee46f9e",
+                "id": "5ff880c5-2e94-4631-a56d-d61e1dabc4e2",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -1394,7 +1394,6 @@
                   "pm.environment.set(\"camp_id\", testObject.id);",
                   "const promo_id = pm.environment.get(\"promo_id\");",
                   "",
-                  "//const camp_id = testObject.id;",
                   "",
                   "pm.test(\"Promo contains campaign Id\", function() {",
                   "    const id = testObject.id;",
@@ -1420,18 +1419,10 @@
                   "    pm.expect(isADate).to.eql(true);",
                   "});",
                   "",
-                  "/*pm.test(\"Is clip date before end date in promotion\", function() {",
-                  "    const clipByDate = new Date(testObject.clipByDate);",
-                  "    const endDate = new Date(testObject.endDate);",
-                  "    const clipDateBeforeEnd = clipByDate.getTime() <= endDate.getTime();",
-                  "    pm.expect(clipDateBeforeEnd).to.eql(true);",
-                  "});*/",
+                  "",
                   "",
                   "pm.test(\"Promotion Id check\", function () {",
-                  "    //const equalId = Object.prototype.toString.call(promotionId) === promo_id;",
-                  "  //  pm.expect(testObject.promotionId === promo_id).to.eql(true);",
                   " pm.expect(testObject.promotionId).to.eql(promo_id);",
-                  " //pm.expect(testObject).to.have.property('id', promo_id);",
                   "});",
                   "",
                   "",
@@ -1653,7 +1644,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "0c95e277-57e0-468e-9d10-39b0feb387a8",
+                "id": "477d669d-209e-4b75-8373-4d2109276f20",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -1667,7 +1658,7 @@
                   "console.log(\"dfs here \"+dfs);",
                   "pm.environment.set(\"dfsPromotion\", items.dfsPromotionFileId);",
                   "",
-                  "//check if retrieved promotion dfs hash is different from the one on step 4"
+                  ""
                 ]
               }
             }
@@ -1837,7 +1828,7 @@
   ],
   "variable": [
     {
-      "id": "a4b221db-35de-46de-8f90-65298d6ef70c",
+      "id": "5118396e-b516-47b8-9a65-22466e14195e",
       "key": "hash_id",
       "value": "",
       "type": "string",
