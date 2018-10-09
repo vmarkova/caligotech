@@ -17,7 +17,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "88868c2f-c7a6-4ab9-8a41-3933715b53d2",
+                "id": "3c55132f-c220-4675-a6bb-f15101ae0f97",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -25,14 +25,10 @@
                   "});",
                   "",
                   "const testObject = pm.response.json();",
-                  "//const promo_id = testObject.id;",
+                  "",
                   "",
                   "pm.environment.set(\"promo_id\", testObject.id);",
                   "",
-                  "",
-                  "/*pm.test(\"Id check\", function () {",
-                  "    pm.expect(testObject.id).to.eql(promo_id);",
-                  "});*/",
                   "",
                   "pm.test(\"Promo contains Id\", function() {",
                   "    const Id = testObject.id;",
@@ -52,24 +48,6 @@
                   "    pm.expect(isADate).to.eql(true);",
                   "});",
                   "",
-                  "/*pm.test(\"Promo contains budgetId\", function() {",
-                  "    const budgetId = testObject.budgetId;",
-                  "    const lengthbudgetId = budgetId.length > 0;",
-                  "    pm.expect(lengthbudgetId).to.eql(true);",
-                  "});",
-                  "",
-                  "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
-                  "    const familyCode = testObject.familyCode;",
-                  "    const lengthfamilyCode = familyCode.length == 3;",
-                  "    pm.expect(lengthfamilyCode).to.eql(true);",
-                  "});",
-                  "",
-                  "pm.test(\"Promo contains gs1Databar with more than 25 digits\", function() {",
-                  "    const gs1Databar = testObject.gs1Databar;",
-                  "    const lengthgs1Databar = gs1Databar.length > 25;",
-                  "    pm.expect(lengthgs1Databar).to.eql(true);",
-                  "});",
-                  "*/",
                   "pm.test(\"Promo contains title\", function() {",
                   "    const title = testObject.title;",
                   "    const lengthTitle = title.length > 0;",
@@ -166,7 +144,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"title\" : \"Get $0.50 on Ivory Body Wash \",\r\n  \"providerPromotionCode\" : \"131240 \",\r\n  \"text\" : \"OFF ONE Ivory Body Wash (21oz or larger) \",\r\n  \"details\" : \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\r\n  \"images\" : [ \"ivory/5b3e8c36d12f85041119ea07.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"ClipCondition\"\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"DiscountValueReward\",\r\n      \"id\" : null,\r\n      \"value\" : 50,\r\n      \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-01-01T14:00:00\",\r\n  \"endDate\" : \"2018-01-31T14:00:00\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"130\",\r\n  \"gs1Databar\" : \"81101007560913123933001101303170701\"\r\n  \r\n}"
+              "raw": "{\r\n  \"title\" : \"Get $0.50 on Ivory Body Wash \",\r\n  \"providerPromotionCode\" : \"131240 \",\r\n  \"text\" : \"OFF ONE Ivory Body Wash (21oz or larger) \",\r\n  \"details\" : \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\r\n  \"images\" : [ \"ivory/5b3e8c36d12f85041119ea07.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"ClipCondition\"\r\n      },\r\n  \r\n    \"reward\" : {\r\n      \"type\" : \"DiscountValueReward\",\r\n      \"id\" : null,\r\n      \"value\" : 50,\r\n      \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-01-01T14:00:00\",\r\n  \"endDate\" : \"2018-01-31T14:00:00\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"130\",\r\n  \"gs1Databar\" : \"81101007560913123933001101303170701\"\r\n  \r\n}"
             },
             "url": "http://qa-apps.caligotech.com:8188/promotions/"
           },
@@ -303,21 +281,14 @@
             {
               "listen": "test",
               "script": {
-                "id": "70a00987-9b08-418c-a0be-d12311770098",
+                "id": "16174902-ccea-4ff4-8188-033802add3cc",
                 "type": "text/javascript",
                 "exec": [
                   "",
                   "pm.test(\"Successful POST request\", function () {",
                   "    pm.expect(pm.response.code).to.be.oneOf([200,201,202,204]);",
                   "});",
-                  "/*",
-                  "pm.test(\"Promo is DRAFT or ACTIVE\", function() {",
-                  "    pm.expect(testObject.status === \"DRAFT\" || \"ACTIVE\").to.eql(true);",
-                  "});",
-                  "",
-                  "pm.test(\"Promo is not paused\", function() {",
-                  "    pm.expect(testObject.status === \"NULL\" || false).to.eql(true);",
-                  "});*/"
+                  ""
                 ]
               }
             },
@@ -1828,7 +1799,7 @@
   ],
   "variable": [
     {
-      "id": "e0ff01f1-f72d-4694-909e-7c9e39ca8fd1",
+      "id": "f68f37fd-257c-4e9d-90e7-3fcdb68a484f",
       "key": "hash_id",
       "value": "",
       "type": "string",
