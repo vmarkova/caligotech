@@ -1229,7 +1229,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "1318d709-c62e-4722-816e-a4447423b12d",
+                "id": "1c7be94e-d5d3-4c3f-a42e-bd960d7b5018",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {",
@@ -1273,7 +1273,7 @@
                   "    const lengthgs1Databar = gs1Databar.length > 25;",
                   "    pm.expect(lengthgs1Databar).to.eql(true);",
                   "});",
-                  "*/",
+                  "",
                   "pm.test(\"Promo contains title\", function() {",
                   "    const title = testObject.title;",
                   "    const lengthTitle = title.length > 0;",
@@ -1828,7 +1828,7 @@
   ],
   "variable": [
     {
-      "id": "5118396e-b516-47b8-9a65-22466e14195e",
+      "id": "c831df26-3dca-4ebc-94e2-eebed7952d15",
       "key": "hash_id",
       "value": "",
       "type": "string",
