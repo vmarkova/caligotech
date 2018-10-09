@@ -723,16 +723,10 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "23bef111-4e63-41e1-acf6-9b2754add19c",
+                "id": "eb3eca04-08ce-433f-8fe3-3f884cd841b5",
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Promo is DRAFT or ACTIVE\", function() {",
-                  "    pm.expect(testObject.status === \"DRAFT\" || \"ACTIVE\").to.eql(true);",
-                  "});",
-                  "",
-                  "pm.test(\"Promo is not paused\", function() {",
-                  "    pm.expect(testObject.status === \"NULL\" || false).to.eql(true);",
-                  "});"
+                  ""
                 ]
               }
             }
@@ -1786,7 +1780,7 @@
   ],
   "variable": [
     {
-      "id": "4ce09e4c-6d14-43ac-9b79-9dc14df6d586",
+      "id": "9330574f-8430-4045-9e70-cfaf12119546",
       "key": "hash_id",
       "value": "",
       "type": "string",
