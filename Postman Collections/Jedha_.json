@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "e6a2dd99-ca5c-49d9-ab4c-47af3f00a56c",
-    "name": "Jedha",
+    "name": "Jedha - source",
     "description": "Promotions Management Microservice",
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
   },
@@ -716,7 +716,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"title\" : \"Get $0.50 on Ivory Body Wash \",\r\n  \"providerPromotionCode\" : \"131240\",\r\n  \"text\" : \"50 OFF ONE Ivory Body Wash (21oz or larger) \",\r\n  \"details\" : \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\r\n  \"images\" : [ \"ivory/5b3e8c36d12f85041119ea07.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"ClipCondition\"\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"DiscountValueReward\",\r\n      \"id\" : null,\r\n      \"value\" : 50,\r\n      \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [ \"12\" ]\r\n        } ]\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-01-01T14:00:00\",\r\n  \"endDate\" : \"2018-01-31T14:00:00\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"130\",\r\n  \"gs1Databar\" : \"81101007560913123933001101303170701\"\r\n  \r\n}"
+              "raw": "{\r\n  \"title\" : \"Get $0.50 on Ivory Body Wash \",\r\n  \"providerPromotionCode\" : \"131240\",\r\n  \"text\" : \"50 OFF ONE Ivory Body Wash (21oz or larger) \",\r\n  \"details\" : \"Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\r\n  \"images\" : [ \"ivory/5b3e8c36d12f85041119ea07.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : null,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"ClipCondition\"\r\n      }\r\n    ,\r\n    \"reward\" : {\r\n      \"type\" : \"DiscountValueReward\",\r\n      \"id\" : null,\r\n      \"value\" : 50,\r\n      \"brands\" : [ {\r\n          \"brand\" : \"1\",\r\n          \"products\" : [\"12\"]\r\n      }]\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-01-01T14:00:00\",\r\n  \"endDate\" : \"2018-01-31T14:00:00\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"130\",\r\n  \"gs1Databar\" : \"81101007560913123933001101303170701\"\r\n}"
             },
             "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}",
             "description": "Modify a promotion"
@@ -4278,12 +4278,12 @@
           "listen": "test",
           "script": {
             "id": "c0a25675-772b-49b5-8864-b9858cad1c5f",
-            "type": "text/javascript",
             "exec": [
               "pm.test(\"Status code is 200\", function () {",
               "    pm.response.to.have.status(200);",
               "});"
-            ]
+            ],
+            "type": "text/javascript"
           }
         }
       ],
@@ -4303,7 +4303,7 @@
           "mode": "raw",
           "raw": "{\r\n  \"title\" : \"title\",\r\n  \"text\" : \"text\",\r\n  \"details\" : \"details\",\r\n  \"images\" : [ \"promotions/1.png\", \"promotions/2.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : 123,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-09-22\",\r\n  \"endDate\" : \"2018-12-22\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"999\",\r\n  \"gs1Databar\" : \"811098235223534534\",\r\n  \"providerData\" : {\"key\": \"value\"}\r\n}"
         },
-        "url": "http://qa-apps.caligotech.com:8188/promotions/"
+        "url": "http://qa-hlapps.caligotech.com:8188/promotions/5c2e5bd658665443e57bfc5b"
       },
       "response": []
     },
@@ -4392,12 +4392,12 @@
           "listen": "test",
           "script": {
             "id": "a3bf5b0d-99b5-4656-9cbe-1d055ac4eccc",
-            "type": "text/javascript",
             "exec": [
               "pm.test(\"Status code is 200\", function () {",
               "    pm.response.to.have.status(200);",
               "});"
-            ]
+            ],
+            "type": "text/javascript"
           }
         }
       ],
@@ -4416,7 +4416,7 @@
           "mode": "raw",
           "raw": "{\r\n  \"title\" : \"title\",\r\n  \"text\" : \"text\",\r\n  \"details\" : \"details\",\r\n  \"images\" : [ \"promotions/1.png\", \"promotions/2.png\" ],\r\n  \"rule\" : {\r\n    \"id\" : 123,\r\n    \"type\" : \"SingleRule\",\r\n    \"condition\" : {\r\n      \"id\" : null,\r\n      \"type\" : \"BuyProductCondition\",\r\n      \"mpr\" : 2,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    },\r\n    \"reward\" : {\r\n      \"type\" : \"FreeProductReward\",\r\n      \"id\" : null,\r\n      \"quantity\" : 1,\r\n      \"product\" : {\r\n        \"upcs\" : [ \"123\", \"456\", \"789\" ],\r\n        \"brands\" : [ {\r\n          \"brand\" : \"brand_1\",\r\n          \"products\" : [ \"product_1\", \"product_2\" ]\r\n        }, {\r\n          \"brand\" : \"brand_2\",\r\n          \"products\" : [ \"product_3\", \"product_4\" ]\r\n        } ]\r\n      }\r\n    }\r\n  },\r\n  \"startDate\" : \"2018-09-22\",\r\n  \"endDate\" : \"2018-12-22\",\r\n  \"budgetId\" : \"budget_id_1\",\r\n  \"familyCode\" : \"999\",\r\n  \"gs1Databar\" : \"811098235223534534\",\r\n  \"providerData\" : {\"key\": \"value\"}\r\n}"
         },
-        "url": "http://qa-apps.caligotech.com:8188/promotions/{{promo_id}}/campaigns/"
+        "url": "http://qa-hlapps.caligotech.com:8188/promotions/campaigns/5c23f9135866542018eb04a8"
       },
       "response": []
     },
