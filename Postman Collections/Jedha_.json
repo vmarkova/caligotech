@@ -13256,6 +13256,1506 @@
       ]
     },
     {
+      "_postman_id": "44a1caea-5b28-4b11-8276-dce734dc148e",
+      "name": "setup new model samples",
+      "description": "",
+      "item": [
+        {
+          "_postman_id": "e56c16bb-e197-4d88-ac92-d26e98660a86",
+          "name": "Budget",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "b835d24f-abe8-4c6d-b147-e80d67eac1c6",
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "",
+                  "pm.environment.set(\"budgetId\", testObject.id);",
+                  "pm.environment.set(\"budgetML\", testObject.maxLimit);",
+                  "",
+                  "pm.test(\"Budget contains ML\", function() {",
+                  "    const maxLimit = testObject.maxLimit;",
+                  "    const lengthmaxLimit = maxLimit !==  null;",
+                  "    pm.expect(lengthmaxLimit).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Budget contains id\", function() {",
+                  "    const id = testObject.id;",
+                  "    const lengthId = id !==  null;",
+                  "    pm.expect(lengthId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Budget contains name\", function() {",
+                  "    const name = testObject.name;",
+                  "    const lengthname = name.length > 0;",
+                  "    pm.expect(lengthname).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Budget contains description\", function() {",
+                  "    const description = testObject.description;",
+                  "    const lengthDescription = description.length > 0;",
+                  "    pm.expect(lengthDescription).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Budget is CLIP\", function() {",
+                  "    const action = testObject.action;",
+                  "    pm.expect(action).to.eql(\"CLIP\");",
+                  "});",
+                  "",
+                  "pm.test(\"Budget is not suspended\", function() {",
+                  "    const suspended = testObject.suspended;",
+                  "    pm.expect(suspended).to.eql(false);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "485c3853-ffd7-4c0b-9916-ab58eb52dbde",
+                "exec": [
+                  "const budgetJson = pm.request.body.raw;",
+                  "",
+                  "pm.environment.set(\"budgetJson\",budgetJson);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": null,\n  \"action\": \"CLIP\",\n  \"name\": \"promotion budget\",\n  \"description\": \"promotion budget\",\n  \"maxLimit\": \"3\"\n}"
+            },
+            "url": "{{url}}:{{portHoth}}/budget-api/budgets"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9bb1ce55-1741-43d4-a61c-000f8926e1e8",
+          "name": "Promotion_CentsOff",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "3d8edc0f-0050-4a0c-aad8-0a79ba49b8eb",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "",
+                  "pm.environment.set(\"promo_id\", testObject.id);",
+                  "",
+                  "",
+                  "pm.test(\"Promo contains Id\", function() {",
+                  "    const Id = testObject.id;",
+                  "    const lengthId = Id.length > 0;",
+                  "    pm.expect(lengthId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains budgetId\", function() {",
+                  "    const budgetId = testObject.budgetId;",
+                  "    const lengthbudgetId = budgetId.length > 0;",
+                  "    pm.expect(lengthbudgetId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
+                  "    const familyCode = testObject.familyCode;",
+                  "    const lengthfamilyCode = familyCode.length == 3;",
+                  "    pm.expect(lengthfamilyCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains gs1Databar with more than 25 digits\", function() {",
+                  "    const gs1Databar = testObject.gs1Databar;",
+                  "    const lengthgs1Databar = gs1Databar.length > 25;",
+                  "    pm.expect(lengthgs1Databar).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains title\", function() {",
+                  "    const title = testObject.title;",
+                  "    const lengthTitle = title.length > 0;",
+                  "    pm.expect(lengthTitle).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains text\", function() {",
+                  "    const text = testObject.text;",
+                  "    const lengthText = text.length > 0;",
+                  "    pm.expect(lengthText).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains details\", function() {",
+                  "    const details = testObject.details;",
+                  "    const lengthDetails = details.length > 0;",
+                  "    pm.expect(lengthDetails).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains promo code\", function() {",
+                  "    const promoCode = testObject.providerPromotionCode;",
+                  "    const lengthPromoCode = promoCode.length > 0;",
+                  "    pm.expect(lengthPromoCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains images link\", function() {",
+                  "    const images = testObject.images;",
+                  "    const lengthimages = images.length > 0;",
+                  "    pm.expect(lengthimages).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains timezone\", function() {",
+                  "    const timezone = testObject.timezone;",
+                  "    const lengthTimezone = timezone.length > 0;",
+                  "    pm.expect(lengthTimezone).to.eql(true);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Status is Draft\", function () {",
+                  "    const status = testObject.status;",
+                  "    pm.expect(status).to.eql(\"DRAFT\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "3a4fa5f6-99b8-4394-9f35-e3c6d5681b2f",
+                "exec": [
+                  "console.log(\"request body\", pm.request.body.raw);",
+                  "console.log( JSON.parse(pm.request.body.raw));",
+                  "//const promoCentsOffJson = JSON.parse(pm.request.body.raw);",
+                  "const promoCentsOffJson = pm.request.body.raw;",
+                  "",
+                  "pm.environment.set(\"promoCentsOffJson\",promoCentsOffJson);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Get 5$off if Buy 5 Tide Liquid/Tide Pods\",\n    \"providerPromotionCode\": \"131240\",\n    \"text\": \"Buy 5 items Tide Liquid/Tide Pods -> Get 5$ off\",\n    \"details\": \"***Template Samples, API, Jedha Smoke Testing*** Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\n    \"images\": [\n        \"5c2d49835866540cfab23a25\"\n    ],\n    \"conditionRewardGraph\": {\n        \"conditionGroups\": [\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"ClipCondition\"\n                    }\n                ]\n            },\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"BuyProductCondition\",\n                        \"product\": {\n                            \"upcs\": [\n                                \"037000509783\",\n                                \"037000509639\",\n                                \"037000509493\",\n                                \"037000509646\",\n                                \"037000088868\",\n                                \"037000138785\",\n                                \"037000088752\",\n                                \"037000138822\"\n                            ],\n                            \"brands\": [\n                                {\n                                    \"brand\": \"2\",\n                                    \"products\": [\n                                        \"22\",\n                                        \"23\"\n                                    ]\n                                }\n                            ],\n                            \"quantity\":5\n                        }\n                    }\n                ]\n            }\n        ],\n        \"rewardGroups\": [\n            {\n                \"promotionRewards\": [\n                    {\n                        \"type\": \"DiscountValueReward\",\n                        \"value\": \"500\",\n                        \"products\":[]\n\n                    }\n                ]\n            }\n        ],\n        \"conditionRewardNodes\": [\n            {\n                \"conditionGroupElementIndex\": 0,\n                \"rewardGroupElementIndex\": null,\n                \"conditionRewardNodes\": [\n                    {\n                        \"conditionGroupElementIndex\": 1,\n                        \"rewardGroupElementIndex\": 0\n                    }\n                ]\n            }\n        ]\n    },\n    \"startDate\": \"2020-01-01T14:00:00\",\n    \"displayByDate\": \"2021-01-31T14:00:00\",\n    \"endDate\": \"2021-01-31T14:00:00\",\n    \"budgetId\": \"{{budgetId}}\",\n    \"familyCode\": \"130\",\n    \"gs1Databar\": \"81101007560913123933001101303170701\",\n    \"nonNegotiable\": false,\n    \"properties\": {\n        \"templateName\": {\n            \"type\": \"prop_string\",\n            \"value\": \"centsOff\"\n        }\n    },\n    \"timezone\": \"America/Los_Angeles\",\n    \"mfrId\": \"1234567\",\n    \"status\": \"DRAFT\"\n\n}"
+            },
+            "url": "{{url}}:{{portJedha}}/promotions/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "6ff9932e-3f66-4e3c-8cf8-029504994808",
+          "name": "Updated_CentsOff",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "3d8edc0f-0050-4a0c-aad8-0a79ba49b8eb",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "3a4fa5f6-99b8-4394-9f35-e3c6d5681b2f",
+                "exec": [
+                  "console.log(\"request body\", pm.request.body.raw);",
+                  "console.log( JSON.parse(pm.request.body.raw));",
+                  "//const promoCentsOffJson = JSON.parse(pm.request.body.raw);",
+                  "const updCentsOffJson = pm.request.body.raw;",
+                  "",
+                  "pm.environment.set(\"updCentsOffJson\",updCentsOffJson);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Get 5$off if Buy 5 Tide Liquid/Tide Pods\",\n    \"providerPromotionCode\": \"131240\",\n    \"text\": \"UPD-Buy 5 items Tide Liquid/Tide Pods -> Get 5$ off\",\n    \"details\": \"***Template Samples, API, Jedha Smoke Testing*** Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\n    \"images\": [\n        \"5c2d49835866540cfab23a25\"\n    ],\n    \"conditionRewardGraph\": {\n        \"conditionGroups\": [\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"ClipCondition\"\n                    }\n                ]\n            },\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"BuyProductCondition\",\n                        \"product\": {\n                            \"upcs\": [\n                                \"037000509783\",\n                                \"037000509639\",\n                                \"037000509493\",\n                                \"037000509646\",\n                                \"037000088868\",\n                                \"037000138785\",\n                                \"037000088752\",\n                                \"037000138822\"\n                            ],\n                            \"brands\": [\n                                {\n                                    \"brand\": \"2\",\n                                    \"products\": [\n                                        \"22\",\n                                        \"23\"\n                                    ]\n                                }\n                            ],\n                            \"quantity\":5\n                        }\n                    }\n                ]\n            }\n        ],\n        \"rewardGroups\": [\n            {\n                \"promotionRewards\": [\n                    {\n                        \"type\": \"DiscountValueReward\",\n                        \"value\": \"500\",\n                        \"products\":[]\n\n                    }\n                ]\n            }\n        ],\n        \"conditionRewardNodes\": [\n            {\n                \"conditionGroupElementIndex\": 0,\n                \"rewardGroupElementIndex\": null,\n                \"conditionRewardNodes\": [\n                    {\n                        \"conditionGroupElementIndex\": 1,\n                        \"rewardGroupElementIndex\": 0\n                    }\n                ]\n            }\n        ]\n    },\n    \"startDate\": \"2020-01-01T14:00:00\",\n    \"displayByDate\": \"2020-01-31T14:00:00\",\n    \"endDate\": \"2021-01-31T14:00:00\",\n    \"budgetId\": \"{{budgetId}}\",\n    \"familyCode\": \"130\",\n    \"gs1Databar\": \"81101007560913123933001101303170701\",\n    \"nonNegotiable\": false,\n    \"properties\": {\n        \"templateName\": {\n            \"type\": \"prop_string\",\n            \"value\": \"centsOff\"\n        }\n    },\n    \"timezone\": \"America/Los_Angeles\",\n    \"mfrId\": \"1234567\",\n    \"status\": \"DRAFT\"\n\n}"
+            },
+            "url": "{{url}}:{{portJedha}}/promotions/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "5f528358-fbbe-4dd8-8237-c967582f8608",
+          "name": "Add 1 campaign in bulk",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "0577acfe-cd34-4a6a-bd44-15cb93c39d91",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "var testObject = JSON.parse(responseBody);",
+                  "const items = testObject.items;",
+                  "",
+                  "    ",
+                  "const promo_id = pm.environment.get(\"promo_id\");",
+                  "const camp_id = items.map(function (element){ ",
+                  "  return element.id});",
+                  "",
+                  "console.log(\"promo  \",items[0].promotionId);",
+                  "console.log(\"camp  \",items[0].id);",
+                  "console.log(\"items  \",items);",
+                  "",
+                  "pm.environment.set(\"camp_id\", items[0].id);",
+                  "",
+                  "//const camp_id = testObject.id;",
+                  "",
+                  "pm.test(\"Camp contains campaign Id\", function() {",
+                  "  ",
+                  "    const lengthid = camp_id.length > 0;",
+                  "    pm.expect(lengthid).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Camp contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Camp contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains clipByDate\", function() {",
+                  "    const clipByDate = new Date(testObject.clipByDate);",
+                  "    const isADate = Object.prototype.toString.call(clipByDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "/*pm.test(\"Is clip date before end date in promotion\", function() {",
+                  "    const clipByDate = new Date(testObject.clipByDate);",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const clipDateBeforeEnd = clipByDate.getTime() <= endDate.getTime();",
+                  "    pm.expect(clipDateBeforeEnd).to.eql(true);",
+                  "});*/",
+                  "",
+                  "pm.test(\"Promotion Id check\", function () {",
+                  "    //const equalId = Object.prototype.toString.call(promotionId) === promo_id;",
+                  "  //  pm.expect(testObject.promotionId === promo_id).to.eql(true);",
+                  " pm.expect(items[0].promotionId).to.eql(promo_id);",
+                  " //pm.expect(testObject).to.have.property('id', promo_id);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Promo contains modifiedBy\", function() {",
+                  "    const modifiedBy = items[0].modifiedBy;",
+                  "    const lengthmodifiedBy = modifiedBy.length > 0;",
+                  "    pm.expect(lengthmodifiedBy).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains modifiedOn\", function() {",
+                  "    const modifiedOnRaw = items[0].modifiedOn;",
+                  "    const modifiedOn = new Date(modifiedOnRaw*1000);",
+                  "    const isADate =  Object.prototype.toString.call(modifiedOn) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains status\", function() {",
+                  "    const status = items[0].status;",
+                  "    const lengthstatus = status.length > 0;",
+                  "    pm.expect(lengthstatus).to.eql(true);",
+                  "});",
+                  "",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "616c28cd-d8a0-4a41-b9ba-5465763a0eb9",
+                "exec": [
+                  "console.log(\"request body\", pm.request.body.raw);",
+                  "console.log( JSON.parse(pm.request.body.raw));",
+                  "//const promoCentsOffJson = JSON.parse(pm.request.body.raw);",
+                  "const addOneCampBulk = pm.request.body.raw;",
+                  "",
+                  "pm.environment.set(\"addOneCampBulk\",addOneCampBulk);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"startDate\": \"2020-02-20T10:37:42\",\n      \"displayByDate\": \"2020-03-16T10:37:43\",\n      \"endDate\": \"2021-01-17T10:37:45\",\n      \"retailerProfileId\": \"2\",\n      \"campaignGroupId\": \"1\",\n      \"modifiedBy\": \"API User\"\n    }\n  ]\n}"
+            },
+            "url": "{{url}}:{{portJedha}}/promotions/{{promo_id}}/bulk/campaigns/update"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "b8730ab7-acba-419e-99c4-a9010968f45f",
+          "name": "Upd-Add 1 campaign in bulk",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "0577acfe-cd34-4a6a-bd44-15cb93c39d91",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "var testObject = JSON.parse(responseBody);",
+                  "const items = testObject.items;",
+                  "",
+                  "    ",
+                  "const promo_id = pm.environment.get(\"promo_id\");",
+                  "const camp_id = items.map(function (element){ ",
+                  "  return element.id});",
+                  "",
+                  "console.log(\"promo  \",items[0].promotionId);",
+                  "console.log(\"camp  \",items[0].id);",
+                  "console.log(\"items  \",items);",
+                  "",
+                  "pm.environment.set(\"camp_id\", items[0].id);",
+                  "",
+                  "//const camp_id = testObject.id;",
+                  "",
+                  "pm.test(\"Camp contains campaign Id\", function() {",
+                  "  ",
+                  "    const lengthid = camp_id.length > 0;",
+                  "    pm.expect(lengthid).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Camp contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Camp contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains clipByDate\", function() {",
+                  "    const clipByDate = new Date(testObject.clipByDate);",
+                  "    const isADate = Object.prototype.toString.call(clipByDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "/*pm.test(\"Is clip date before end date in promotion\", function() {",
+                  "    const clipByDate = new Date(testObject.clipByDate);",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const clipDateBeforeEnd = clipByDate.getTime() <= endDate.getTime();",
+                  "    pm.expect(clipDateBeforeEnd).to.eql(true);",
+                  "});*/",
+                  "",
+                  "pm.test(\"Promotion Id check\", function () {",
+                  "    //const equalId = Object.prototype.toString.call(promotionId) === promo_id;",
+                  "  //  pm.expect(testObject.promotionId === promo_id).to.eql(true);",
+                  " pm.expect(items[0].promotionId).to.eql(promo_id);",
+                  " //pm.expect(testObject).to.have.property('id', promo_id);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Promo contains modifiedBy\", function() {",
+                  "    const modifiedBy = items[0].modifiedBy;",
+                  "    const lengthmodifiedBy = modifiedBy.length > 0;",
+                  "    pm.expect(lengthmodifiedBy).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains modifiedOn\", function() {",
+                  "    const modifiedOnRaw = items[0].modifiedOn;",
+                  "    const modifiedOn = new Date(modifiedOnRaw*1000);",
+                  "    const isADate =  Object.prototype.toString.call(modifiedOn) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains status\", function() {",
+                  "    const status = items[0].status;",
+                  "    const lengthstatus = status.length > 0;",
+                  "    pm.expect(lengthstatus).to.eql(true);",
+                  "});",
+                  "",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "616c28cd-d8a0-4a41-b9ba-5465763a0eb9",
+                "exec": [
+                  "console.log(\"request body\", pm.request.body.raw);",
+                  "console.log( JSON.parse(pm.request.body.raw));",
+                  "//const promoCentsOffJson = JSON.parse(pm.request.body.raw);",
+                  "const updOneCampBulk = pm.request.body.raw;",
+                  "",
+                  "pm.environment.set(\"updOneCampBulk\",updOneCampBulk);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"startDate\": \"2020-02-20T10:37:42\",\n      \"displayByDate\": \"2020-03-16T10:37:43\",\n      \"endDate\": \"2021-01-18T10:37:45\",\n      \"retailerProfileId\": \"2\",\n      \"campaignGroupId\": \"1\",\n      \"modifiedBy\": \"API User\"\n    }\n  ]\n}"
+            },
+            "url": "{{url}}:{{portJedha}}/promotions/{{promo_id}}/bulk/campaigns/update"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "8ea29f01-d393-4149-a906-b163567274af",
+          "name": "Promotion_BxGx",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "3d8edc0f-0050-4a0c-aad8-0a79ba49b8eb",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "",
+                  "pm.environment.set(\"promo_id\", testObject.id);",
+                  "",
+                  "",
+                  "pm.test(\"Promo contains Id\", function() {",
+                  "    const Id = testObject.id;",
+                  "    const lengthId = Id.length > 0;",
+                  "    pm.expect(lengthId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains budgetId\", function() {",
+                  "    const budgetId = testObject.budgetId;",
+                  "    const lengthbudgetId = budgetId.length > 0;",
+                  "    pm.expect(lengthbudgetId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
+                  "    const familyCode = testObject.familyCode;",
+                  "    const lengthfamilyCode = familyCode.length == 3;",
+                  "    pm.expect(lengthfamilyCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains gs1Databar with more than 25 digits\", function() {",
+                  "    const gs1Databar = testObject.gs1Databar;",
+                  "    const lengthgs1Databar = gs1Databar.length > 25;",
+                  "    pm.expect(lengthgs1Databar).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains title\", function() {",
+                  "    const title = testObject.title;",
+                  "    const lengthTitle = title.length > 0;",
+                  "    pm.expect(lengthTitle).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains text\", function() {",
+                  "    const text = testObject.text;",
+                  "    const lengthText = text.length > 0;",
+                  "    pm.expect(lengthText).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains details\", function() {",
+                  "    const details = testObject.details;",
+                  "    const lengthDetails = details.length > 0;",
+                  "    pm.expect(lengthDetails).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains promo code\", function() {",
+                  "    const promoCode = testObject.providerPromotionCode;",
+                  "    const lengthPromoCode = promoCode.length > 0;",
+                  "    pm.expect(lengthPromoCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains images link\", function() {",
+                  "    const images = testObject.images;",
+                  "    const lengthimages = images.length > 0;",
+                  "    pm.expect(lengthimages).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains timezone\", function() {",
+                  "    const timezone = testObject.timezone;",
+                  "    const lengthTimezone = timezone.length > 0;",
+                  "    pm.expect(lengthTimezone).to.eql(true);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Status is Draft\", function () {",
+                  "    const status = testObject.status;",
+                  "    pm.expect(status).to.eql(\"DRAFT\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "5f67bae3-a083-4cf3-81d4-54469cf7cc4c",
+                "exec": [
+                  "console.log(\"request body\", pm.request.body.raw);",
+                  "console.log( JSON.parse(pm.request.body.raw));",
+                  "//const promoCentsOffJson = JSON.parse(pm.request.body.raw);",
+                  "const promoBxGxJson = pm.request.body.raw;",
+                  "",
+                  "pm.environment.set(\"promoBxGxJson\",promoBxGxJson);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Buy 5 Tide Liquid or Tide Pods and get 1 free\",\n    \"providerPromotionCode\": \"131240\",\n    \"text\": \"Buy 5 Tide Liquid or Tide Pods and get 1 free\",\n    \"details\": \"***Template Samples, API, Jedha Smoke Testing*** Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\n    \"images\": [\n        \"5c2d49835866540cfab23a25\"\n    ],\n    \"conditionRewardGraph\": {\n        \"conditionGroups\": [\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"ClipCondition\"\n                    }\n                ]\n            },\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"BuyProductCondition\",\n                        \"product\": {\n                            \"quantity\": 5,\n                            \"upcs\": [\n                                \"037000509783\",\n                                \"037000509639\",\n                                \"037000509493\",\n                                \"037000509646\",\n                                \"037000088868\",\n                                \"037000138785\",\n                                \"037000088752\",\n                                \"037000138822\"\n                            ],\n                            \"brands\": [\n                                {\n                                    \"brand\": \"2\",\n                                    \"products\": [\n                                        \"22\",\n                                        \"23\"\n                                    ]\n                                }\n                            ]\n                        }\n                    }\n                ]\n            }\n        ],\n        \"rewardGroups\": [\n            {\n                \"promotionRewards\": [\n                    {\n                        \"type\": \"FreeProductReward\",\n                        \"maxValue\": 500,\n                        \"products\": [\n                            {\n                                \"quantity\": 1,\n                                \"upcs\": [\n                                    \"037000509783\",\n                                    \"037000509639\",\n                                    \"037000509493\",\n                                    \"037000509646\",\n                                    \"037000088868\",\n                                    \"037000138785\",\n                                    \"037000088752\",\n                                    \"037000138822\"\n                                ],\n                                \"brands\": [\n                                    {\n                                        \"brand\": \"2\",\n                                        \"products\": [\n                                            \"22\",\n                                            \"23\"\n                                        ]\n                                    }\n                                ]\n                            }\n                        ]\n                    }\n                ]\n            }\n        ],\n        \"conditionRewardNodes\": [\n            {\n                \"conditionGroupElementIndex\": 0,\n                \"rewardGroupElementIndex\": null,\n                \"conditionRewardNodes\": [\n                    {\n                        \"conditionGroupElementIndex\": 1,\n                        \"rewardGroupElementIndex\": 0\n                    }\n                ]\n            }\n        ]\n    },\n    \"startDate\": \"2020-01-01T14:00:00\",\n    \"displayByDate\": \"2020-01-31T14:00:00\",\n    \"endDate\": \"2020-01-31T14:00:00\",\n    \"budgetId\": \"{{budgetId}}\",\n    \"familyCode\": \"130\",\n    \"gs1Databar\": \"81101007560913123933001101303170701\",\n    \"nonNegotiable\": false,\n    \"properties\": {\n        \"templateName\": {\n            \"type\": \"prop_string\",\n            \"value\": \"bxgx\"\n        }\n    },\n    \"timezone\": \"America/Los_Angeles\",\n    \"mfrId\": \"1234567\",\n    \"status\": \"DRAFT\",\n    \"id\": null\n}"
+            },
+            "url": "{{url}}:{{portJedha}}/promotions/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "d45795b8-b2e2-401c-9297-0ea66a150735",
+          "name": "Promotion_BxGy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "3d8edc0f-0050-4a0c-aad8-0a79ba49b8eb",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "",
+                  "pm.environment.set(\"promo_id\", testObject.id);",
+                  "",
+                  "",
+                  "pm.test(\"Promo contains Id\", function() {",
+                  "    const Id = testObject.id;",
+                  "    const lengthId = Id.length > 0;",
+                  "    pm.expect(lengthId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains budgetId\", function() {",
+                  "    const budgetId = testObject.budgetId;",
+                  "    const lengthbudgetId = budgetId.length > 0;",
+                  "    pm.expect(lengthbudgetId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
+                  "    const familyCode = testObject.familyCode;",
+                  "    const lengthfamilyCode = familyCode.length == 3;",
+                  "    pm.expect(lengthfamilyCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains gs1Databar with more than 25 digits\", function() {",
+                  "    const gs1Databar = testObject.gs1Databar;",
+                  "    const lengthgs1Databar = gs1Databar.length > 25;",
+                  "    pm.expect(lengthgs1Databar).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains title\", function() {",
+                  "    const title = testObject.title;",
+                  "    const lengthTitle = title.length > 0;",
+                  "    pm.expect(lengthTitle).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains text\", function() {",
+                  "    const text = testObject.text;",
+                  "    const lengthText = text.length > 0;",
+                  "    pm.expect(lengthText).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains details\", function() {",
+                  "    const details = testObject.details;",
+                  "    const lengthDetails = details.length > 0;",
+                  "    pm.expect(lengthDetails).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains promo code\", function() {",
+                  "    const promoCode = testObject.providerPromotionCode;",
+                  "    const lengthPromoCode = promoCode.length > 0;",
+                  "    pm.expect(lengthPromoCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains images link\", function() {",
+                  "    const images = testObject.images;",
+                  "    const lengthimages = images.length > 0;",
+                  "    pm.expect(lengthimages).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains timezone\", function() {",
+                  "    const timezone = testObject.timezone;",
+                  "    const lengthTimezone = timezone.length > 0;",
+                  "    pm.expect(lengthTimezone).to.eql(true);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Status is Draft\", function () {",
+                  "    const status = testObject.status;",
+                  "    pm.expect(status).to.eql(\"DRAFT\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "92cf64f0-ae28-40bf-8c05-705531efa967",
+                "exec": [
+                  "console.log(\"request body\", pm.request.body.raw);",
+                  "console.log( JSON.parse(pm.request.body.raw));",
+                  "//const promoCentsOffJson = JSON.parse(pm.request.body.raw);",
+                  "const promoBxGyJson = pm.request.body.raw;",
+                  "",
+                  "pm.environment.set(\"promoBxGyJson\",promoBxGyJson);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Buy 5 Tide Liquid and get 1 Tide Pods free\",\n    \"providerPromotionCode\": \"131240\",\n    \"text\": \"Buy 5 Tide Liquid and get 1 Tide Pods free\",\n    \"details\": \"***Template Samples, API, Jedha Smoke Testing*** Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\n    \"images\": [\n        \"5c2d49835866540cfab23a25\"\n    ],\n    \"conditionRewardGraph\": {\n        \"conditionGroups\": [\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"ClipCondition\"\n                    }\n                ]\n            },\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"BuyProductCondition\",\n                        \"product\": {\n                            \"quantity\": 5,\n                            \"upcs\": [\n                                \"037000509783\",\n                                \"037000509639\",\n                                \"037000509493\",\n                                \"037000509646\",\n                                \"037000088868\",\n                                \"037000138785\",\n                                \"037000088752\",\n                                \"037000138822\"\n                            ],\n                            \"brands\": [\n                                {\n                                    \"brand\": \"2\",\n                                    \"products\": [\n                                        \"22\"\n                                    ]\n                                }\n                            ]\n                        }\n                    }\n                ]\n            }\n        ],\n        \"rewardGroups\": [\n            {\n                \"promotionRewards\": [\n                    {\n                        \"type\": \"FreeProductReward\",\n                        \"maxValue\": \"500\",\n                        \"products\": [\n                            {\n                                \"quantity\": \"1\",\n                                \"upcs\": [\n                                    \"037000509783\",\n                                    \"037000509639\",\n                                    \"037000509493\",\n                                    \"037000509646\",\n                                    \"037000088868\",\n                                    \"037000138785\",\n                                    \"037000088752\",\n                                    \"037000138822\"\n                                ],\n                                \"brands\": [\n                                    {\n                                        \"brand\": \"2\",\n                                        \"products\": [\n                                            \"23\"\n                                        ]\n                                    }\n                                ]\n                            }\n                        ]\n                    }\n                ]\n            }\n        ],\n        \"conditionRewardNodes\": [\n            {\n                \"conditionGroupElementIndex\": 0,\n                \"rewardGroupElementIndex\": null,\n                \"conditionRewardNodes\": [\n                    {\n                        \"conditionGroupElementIndex\": 1,\n                        \"rewardGroupElementIndex\": 0\n                    }\n                ]\n            }\n        ]\n    },\n    \"startDate\": \"2020-01-01T14:00:00\",\n    \"displayByDate\": \"2020-01-31T14:00:00\",\n    \"endDate\": \"2020-01-31T14:00:00\",\n    \"budgetId\": \"{{budgetId}}\",\n    \"familyCode\": \"130\",\n    \"gs1Databar\": \"81101007560913123933001101303170701\",\n    \"nonNegotiable\": false,\n    \"properties\": {\n        \"templateName\": {\n            \"type\": \"prop_string\",\n            \"value\": \"bxgy\"\n        }\n    },\n    \"timezone\": \"America/Los_Angeles\",\n    \"mfrId\": \"1234567\",\n    \"status\": \"DRAFT\",\n    \"id\": null\n}"
+            },
+            "url": "{{url}}:{{portJedha}}/promotions/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c9685c4b-d8e9-4bbf-9c1e-9d1837034f4e",
+          "name": "Promotion_BasketOff",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "3d8edc0f-0050-4a0c-aad8-0a79ba49b8eb",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "",
+                  "pm.environment.set(\"promo_id\", testObject.id);",
+                  "",
+                  "",
+                  "pm.test(\"Promo contains Id\", function() {",
+                  "    const Id = testObject.id;",
+                  "    const lengthId = Id.length > 0;",
+                  "    pm.expect(lengthId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains budgetId\", function() {",
+                  "    const budgetId = testObject.budgetId;",
+                  "    const lengthbudgetId = budgetId.length > 0;",
+                  "    pm.expect(lengthbudgetId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
+                  "    const familyCode = testObject.familyCode;",
+                  "    const lengthfamilyCode = familyCode.length == 3;",
+                  "    pm.expect(lengthfamilyCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains gs1Databar with more than 25 digits\", function() {",
+                  "    const gs1Databar = testObject.gs1Databar;",
+                  "    const lengthgs1Databar = gs1Databar.length > 25;",
+                  "    pm.expect(lengthgs1Databar).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains title\", function() {",
+                  "    const title = testObject.title;",
+                  "    const lengthTitle = title.length > 0;",
+                  "    pm.expect(lengthTitle).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains text\", function() {",
+                  "    const text = testObject.text;",
+                  "    const lengthText = text.length > 0;",
+                  "    pm.expect(lengthText).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains details\", function() {",
+                  "    const details = testObject.details;",
+                  "    const lengthDetails = details.length > 0;",
+                  "    pm.expect(lengthDetails).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains promo code\", function() {",
+                  "    const promoCode = testObject.providerPromotionCode;",
+                  "    const lengthPromoCode = promoCode.length > 0;",
+                  "    pm.expect(lengthPromoCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains images link\", function() {",
+                  "    const images = testObject.images;",
+                  "    const lengthimages = images.length > 0;",
+                  "    pm.expect(lengthimages).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains timezone\", function() {",
+                  "    const timezone = testObject.timezone;",
+                  "    const lengthTimezone = timezone.length > 0;",
+                  "    pm.expect(lengthTimezone).to.eql(true);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Status is Draft\", function () {",
+                  "    const status = testObject.status;",
+                  "    pm.expect(status).to.eql(\"DRAFT\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "2ba26457-225a-45e5-84e2-7af90822fc3b",
+                "exec": [
+                  "console.log(\"request body\", pm.request.body.raw);",
+                  "console.log( JSON.parse(pm.request.body.raw));",
+                  "//const promoCentsOffJson = JSON.parse(pm.request.body.raw);",
+                  "const promoBasketOffJson = pm.request.body.raw;",
+                  "",
+                  "pm.environment.set(\"promoBasketOffJson\",promoBasketOffJson);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Buy 5 Tide Liquid get 10% off basket\",\n    \"providerPromotionCode\": \"131240\",\n    \"text\": \"Buy 5 Tide Liquid get 10% off basket\",\n    \"details\": \"***Template Samples, API, Jedha Smoke Testing*** Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\n    \"images\": [\n        \"5c2d49835866540cfab23a25\"\n    ],\n    \"conditionRewardGraph\": {\n        \"conditionGroups\": [\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"ClipCondition\"\n                    }\n                ]\n            },\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"BuyProductCondition\",\n                        \"product\": {\n                        \t\"quantity\":5,\n                            \"upcs\": [\n                                \"037000509783\",\n                                \"037000509639\",\n                                \"037000509493\",\n                                \"037000509646\",\n                                \"037000088868\",\n                                \"037000138785\",\n                                \"037000088752\",\n                                \"037000138822\"\n                            ],\n                            \"brands\": [\n                                {\n                                    \"brand\": \"2\",\n                                    \"products\": [\n                                        \"22\"\n                                    ]\n                                }\n                            ]\n                        }\n                    }\n                ]\n            }\n        ],\n        \"rewardGroups\": [\n            {\n                \"promotionRewards\": [\n                    {\n                        \"type\": \"DiscountPrcReward\",\n                        \"value\":\"100\",\n                        \"maxValue\": \"500\",\n                         \"products\": [{\n                         \t\"quantity\":1,\n                            \"upcs\": [\n                                \"037000509783\",\n                                \"037000509639\",\n                                \"037000509493\",\n                                \"037000509646\",\n                                \"037000088868\",\n                                \"037000138785\",\n                                \"037000088752\",\n                                \"037000138822\"\n                            ],\n                            \"brands\": [\n                                {\n                                    \"brand\": \"2\",\n                                    \"products\": [\n                                       \n                                        \"23\"\n                                    ]\n                                }\n                            ]\n                        }\n]\n                    }\n                ]\n            }\n        ],\n        \"conditionRewardNodes\": [\n            {\n                \"conditionGroupElementIndex\": 0,\n                \"rewardGroupElementIndex\": null,\n                \"conditionRewardNodes\": [\n                    {\n                        \"conditionGroupElementIndex\": 1,\n                        \"rewardGroupElementIndex\": 0\n                    }\n                ]\n            }\n        ]\n    },\n    \"startDate\": \"2020-01-01T14:00:00\",\n    \"displayByDate\": \"2020-01-31T14:00:00\",\n    \"endDate\": \"2021-01-31T14:00:00\",\n    \"budgetId\": \"{{budgetId}}\",\n    \"familyCode\": \"130\",\n    \"gs1Databar\": \"81101007560913123933001101303170701\",\n    \"nonNegotiable\": false,\n    \"properties\": {\n        \"templateName\": {\n            \"type\": \"prop_string\",\n            \"value\": \"basketOff\"\n        }\n    },\n    \"timezone\": \"America/Los_Angeles\",\n    \"mfrId\": \"1234567\",\n    \"status\": \"DRAFT\",\n    \"id\": null\n}"
+            },
+            "url": "{{url}}:{{portJedha}}/promotions/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "66951a8c-4ce7-4ef1-b04e-4d49e01bd18c",
+          "name": "Promotion_BuyProductCond_CurrencyRew",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "3d8edc0f-0050-4a0c-aad8-0a79ba49b8eb",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "",
+                  "pm.environment.set(\"promo_id\", testObject.id);",
+                  "",
+                  "",
+                  "pm.test(\"Promo contains Id\", function() {",
+                  "    const Id = testObject.id;",
+                  "    const lengthId = Id.length > 0;",
+                  "    pm.expect(lengthId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains budgetId\", function() {",
+                  "    const budgetId = testObject.budgetId;",
+                  "    const lengthbudgetId = budgetId.length > 0;",
+                  "    pm.expect(lengthbudgetId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
+                  "    const familyCode = testObject.familyCode;",
+                  "    const lengthfamilyCode = familyCode.length == 3;",
+                  "    pm.expect(lengthfamilyCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains gs1Databar with more than 25 digits\", function() {",
+                  "    const gs1Databar = testObject.gs1Databar;",
+                  "    const lengthgs1Databar = gs1Databar.length > 25;",
+                  "    pm.expect(lengthgs1Databar).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains title\", function() {",
+                  "    const title = testObject.title;",
+                  "    const lengthTitle = title.length > 0;",
+                  "    pm.expect(lengthTitle).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains text\", function() {",
+                  "    const text = testObject.text;",
+                  "    const lengthText = text.length > 0;",
+                  "    pm.expect(lengthText).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains details\", function() {",
+                  "    const details = testObject.details;",
+                  "    const lengthDetails = details.length > 0;",
+                  "    pm.expect(lengthDetails).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains promo code\", function() {",
+                  "    const promoCode = testObject.providerPromotionCode;",
+                  "    const lengthPromoCode = promoCode.length > 0;",
+                  "    pm.expect(lengthPromoCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains images link\", function() {",
+                  "    const images = testObject.images;",
+                  "    const lengthimages = images.length > 0;",
+                  "    pm.expect(lengthimages).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains timezone\", function() {",
+                  "    const timezone = testObject.timezone;",
+                  "    const lengthTimezone = timezone.length > 0;",
+                  "    pm.expect(lengthTimezone).to.eql(true);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Status is Draft\", function () {",
+                  "    const status = testObject.status;",
+                  "    pm.expect(status).to.eql(\"DRAFT\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "2ba26457-225a-45e5-84e2-7af90822fc3b",
+                "exec": [
+                  "console.log(\"request body\", pm.request.body.raw);",
+                  "console.log( JSON.parse(pm.request.body.raw));",
+                  "//const promoCentsOffJson = JSON.parse(pm.request.body.raw);",
+                  "const promoBPCCRJson = pm.request.body.raw;",
+                  "",
+                  "pm.environment.set(\"promoBPCCRJson\",promoBPCCRJson);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Buy 5 Tide Liquid get 1000 points\",\n    \"providerPromotionCode\": \"131240\",\n    \"text\": \"Buy 5 Tide Liquid get 1000 points\",\n    \"details\": \"***Template Samples, API, Jedha Smoke Testing*** Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\n    \"images\": [\n        \"5c2d49835866540cfab23a25\"\n    ],\n    \"conditionRewardGraph\": {\n        \"conditionGroups\": [\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"ClipCondition\"\n                    }\n                ]\n            },\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"BuyProductCondition\",\n                        \"product\": {\n                        \t\"quantity\":5,\n                            \"upcs\": [\n                                \"037000509783\",\n                                \"037000509639\",\n                                \"037000509493\",\n                                \"037000509646\",\n                                \"037000088868\",\n                                \"037000138785\",\n                                \"037000088752\",\n                                \"037000138822\"\n                            ],\n                            \"brands\": [\n                                {\n                                    \"brand\": \"2\",\n                                    \"products\": [\n                                        \"22\",\n                                        \"23\"\n                                    ]\n                                }\n                            ]\n                        }\n                    }\n                ]\n            }\n        ],\n        \"rewardGroups\": [\n            {\n                \"promotionRewards\": [\n                    {\n                        \"type\": \"CurrencyReward\",\n                        \"currencyCode\": \"Points\",\n                        \"value\":\"1000\"\n\n                    }\n                ]\n            }\n        ],\n        \"conditionRewardNodes\": [\n            {\n                \"conditionGroupElementIndex\": 0,\n                \"rewardGroupElementIndex\": null,\n                \"conditionRewardNodes\": [\n                    {\n                        \"conditionGroupElementIndex\": 1,\n                        \"rewardGroupElementIndex\": 0\n                    }\n                ]\n            }\n        ]\n    },\n    \"startDate\": \"2020-01-01T14:00:00\",\n    \"displayByDate\": \"2020-01-31T14:00:00\",\n    \"endDate\": \"2020-01-31T14:00:00\",\n    \"budgetId\": \"{{budgetId}}\",\n    \"familyCode\": \"130\",\n    \"gs1Databar\": \"81101007560913123933001101303170701\",\n    \"nonNegotiable\": false,\n    \"properties\": {\n        \"templateName\": {\n            \"type\": \"prop_string\",\n            \"value\": \"custom\"\n        }\n    },\n    \"timezone\": \"America/Los_Angeles\",\n    \"mfrId\": \"1234567\",\n    \"status\": \"DRAFT\",\n    \"id\": null\n}"
+            },
+            "url": "{{url}}:{{portJedha}}/promotions/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "8d4cce5d-8620-424a-8ced-c3b3f494e6db",
+          "name": "Promotion_SpendCurrencyCond_DiscountPrcRew",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "3d8edc0f-0050-4a0c-aad8-0a79ba49b8eb",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "",
+                  "pm.environment.set(\"promo_id\", testObject.id);",
+                  "",
+                  "",
+                  "pm.test(\"Promo contains Id\", function() {",
+                  "    const Id = testObject.id;",
+                  "    const lengthId = Id.length > 0;",
+                  "    pm.expect(lengthId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains budgetId\", function() {",
+                  "    const budgetId = testObject.budgetId;",
+                  "    const lengthbudgetId = budgetId.length > 0;",
+                  "    pm.expect(lengthbudgetId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
+                  "    const familyCode = testObject.familyCode;",
+                  "    const lengthfamilyCode = familyCode.length == 3;",
+                  "    pm.expect(lengthfamilyCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains gs1Databar with more than 25 digits\", function() {",
+                  "    const gs1Databar = testObject.gs1Databar;",
+                  "    const lengthgs1Databar = gs1Databar.length > 25;",
+                  "    pm.expect(lengthgs1Databar).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains title\", function() {",
+                  "    const title = testObject.title;",
+                  "    const lengthTitle = title.length > 0;",
+                  "    pm.expect(lengthTitle).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains text\", function() {",
+                  "    const text = testObject.text;",
+                  "    const lengthText = text.length > 0;",
+                  "    pm.expect(lengthText).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains details\", function() {",
+                  "    const details = testObject.details;",
+                  "    const lengthDetails = details.length > 0;",
+                  "    pm.expect(lengthDetails).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains promo code\", function() {",
+                  "    const promoCode = testObject.providerPromotionCode;",
+                  "    const lengthPromoCode = promoCode.length > 0;",
+                  "    pm.expect(lengthPromoCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains images link\", function() {",
+                  "    const images = testObject.images;",
+                  "    const lengthimages = images.length > 0;",
+                  "    pm.expect(lengthimages).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains timezone\", function() {",
+                  "    const timezone = testObject.timezone;",
+                  "    const lengthTimezone = timezone.length > 0;",
+                  "    pm.expect(lengthTimezone).to.eql(true);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Status is Draft\", function () {",
+                  "    const status = testObject.status;",
+                  "    pm.expect(status).to.eql(\"DRAFT\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "2ba26457-225a-45e5-84e2-7af90822fc3b",
+                "exec": [
+                  "console.log(\"request body\", pm.request.body.raw);",
+                  "console.log( JSON.parse(pm.request.body.raw));",
+                  "//const promoCentsOffJson = JSON.parse(pm.request.body.raw);",
+                  "const promoSCCDPRJson = pm.request.body.raw;",
+                  "",
+                  "pm.environment.set(\"promoSCCDPRJson\",promoSCCDPRJson);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Spend 1$ on Tide prod get 10% off basket\",\n    \"providerPromotionCode\": \"131240\",\n    \"text\": \"Spend 1$ on Tide prod get 10% off basket\",\n    \"details\": \"***Template Samples, API, Jedha Smoke Testing*** Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\n    \"images\": [\n        \"5c2d49835866540cfab23a25\"\n    ],\n    \"conditionRewardGraph\": {\n        \"conditionGroups\": [\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"ClipCondition\"\n                    }\n                ]\n            },\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"SpendCondition\",\n                        \"value\": \"100\",\n                        \"currencyCode\": \"USD\",\n                        \"product\": {\n                        \t\"quantity\":1,\n                            \"upcs\": [\n                                \"037000509783\",\n                                \"037000509639\",\n                                \"037000509493\",\n                                \"037000509646\",\n                                \"037000088868\",\n                                \"037000138785\",\n                                \"037000088752\",\n                                \"037000138822\"\n                            ],\n                            \"brands\": [\n                                {\n                                    \"brand\": \"2\",\n                                    \"products\": [\n                                        \"22\"\n                                    ]\n                                }\n                            ]\n                        }\n                    }\n                ]\n            }\n        ],\n        \"rewardGroups\": [\n            {\n                \"promotionRewards\": [\n                    {\n                        \"type\": \"DiscountPrcReward\",\n                        \"value\": \"10\",\n                        \"maxValue\": \"500\",\n                        \"products\": [\n                            {\n                                \"quantity\": 1,\n                                \"upcs\": [\n                                    \"037000509783\",\n                                    \"037000509639\",\n                                    \"037000509493\",\n                                    \"037000509646\",\n                                    \"037000088868\",\n                                    \"037000138785\",\n                                    \"037000088752\",\n                                    \"037000138822\"\n                                ],\n                                \"brands\": [\n                                    {\n                                        \"brand\": \"2\",\n                                        \"products\": [\n                                            \"23\"\n                                        ]\n                                    }\n                                ]\n                            }\n                        ]\n                    }\n                ]\n            }\n        ],\n        \"conditionRewardNodes\": [\n            {\n                \"conditionGroupElementIndex\": 0,\n                \"rewardGroupElementIndex\": null,\n                \"conditionRewardNodes\": [\n                    {\n                        \"conditionGroupElementIndex\": 1,\n                        \"rewardGroupElementIndex\": 0\n                    }\n                ]\n            }\n        ]\n    },\n    \"startDate\": \"2020-01-01T14:00:00\",\n    \"displayByDate\": \"2020-01-31T14:00:00\",\n    \"endDate\": \"2020-01-31T14:00:00\",\n    \"budgetId\": \"{{budgetId}}\",\n    \"familyCode\": \"130\",\n    \"gs1Databar\": \"81101007560913123933001101303170701\",\n    \"nonNegotiable\": false,\n    \"properties\": {\n        \"templateName\": {\n            \"type\": \"prop_string\",\n            \"value\": \"custom\"\n        }\n    },\n    \"timezone\": \"America/Los_Angeles\",\n    \"mfrId\": \"1234567\",\n    \"status\": \"DRAFT\",\n    \"id\": null\n}"
+            },
+            "url": "{{url}}:{{portJedha}}/promotions/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "efb392c8-fe6a-4a40-9d8d-529eede5d9c1",
+          "name": "Promotion_SpendPointsCond_DiscountValueRew",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "3d8edc0f-0050-4a0c-aad8-0a79ba49b8eb",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "",
+                  "pm.environment.set(\"promo_id\", testObject.id);",
+                  "",
+                  "",
+                  "pm.test(\"Promo contains Id\", function() {",
+                  "    const Id = testObject.id;",
+                  "    const lengthId = Id.length > 0;",
+                  "    pm.expect(lengthId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains budgetId\", function() {",
+                  "    const budgetId = testObject.budgetId;",
+                  "    const lengthbudgetId = budgetId.length > 0;",
+                  "    pm.expect(lengthbudgetId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
+                  "    const familyCode = testObject.familyCode;",
+                  "    const lengthfamilyCode = familyCode.length == 3;",
+                  "    pm.expect(lengthfamilyCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains gs1Databar with more than 25 digits\", function() {",
+                  "    const gs1Databar = testObject.gs1Databar;",
+                  "    const lengthgs1Databar = gs1Databar.length > 25;",
+                  "    pm.expect(lengthgs1Databar).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains title\", function() {",
+                  "    const title = testObject.title;",
+                  "    const lengthTitle = title.length > 0;",
+                  "    pm.expect(lengthTitle).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains text\", function() {",
+                  "    const text = testObject.text;",
+                  "    const lengthText = text.length > 0;",
+                  "    pm.expect(lengthText).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains details\", function() {",
+                  "    const details = testObject.details;",
+                  "    const lengthDetails = details.length > 0;",
+                  "    pm.expect(lengthDetails).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains promo code\", function() {",
+                  "    const promoCode = testObject.providerPromotionCode;",
+                  "    const lengthPromoCode = promoCode.length > 0;",
+                  "    pm.expect(lengthPromoCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains images link\", function() {",
+                  "    const images = testObject.images;",
+                  "    const lengthimages = images.length > 0;",
+                  "    pm.expect(lengthimages).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains timezone\", function() {",
+                  "    const timezone = testObject.timezone;",
+                  "    const lengthTimezone = timezone.length > 0;",
+                  "    pm.expect(lengthTimezone).to.eql(true);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Status is Draft\", function () {",
+                  "    const status = testObject.status;",
+                  "    pm.expect(status).to.eql(\"DRAFT\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "2ba26457-225a-45e5-84e2-7af90822fc3b",
+                "exec": [
+                  "console.log(\"request body\", pm.request.body.raw);",
+                  "console.log( JSON.parse(pm.request.body.raw));",
+                  "//const promoCentsOffJson = JSON.parse(pm.request.body.raw);",
+                  "const promoSPCDVRJson = pm.request.body.raw;",
+                  "",
+                  "pm.environment.set(\"promoSPCDVRJson\",promoSPCDVRJson);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Spend 100 points get 6$ off off basket\",\n    \"providerPromotionCode\": \"131240\",\n    \"text\": \"Spend 100 points get 10% off basket\",\n    \"details\": \"***Template Samples, API, Jedha Smoke Testing*** Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\n    \"images\": [\n        \"5c2d49835866540cfab23a25\"\n    ],\n    \"conditionRewardGraph\": {\n        \"conditionGroups\": [\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"ClipCondition\"\n                    }\n                ]\n            },\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"SpendCondition\",\n                        \"value\": \"100\",\n                        \"currencyCode\": \"Points\",\n                        \"product\": {\n                            \"quantity\": 1,\n                            \"upcs\": [\n                                \"037000509783\",\n                                \"037000509639\",\n                                \"037000509493\",\n                                \"037000509646\",\n                                \"037000088868\",\n                                \"037000138785\",\n                                \"037000088752\",\n                                \"037000138822\"\n                            ],\n                            \"brands\": [\n                                {\n                                    \"brand\": \"2\",\n                                    \"products\": [\n                                        \"22\"\n                                    ]\n                                }\n                            ]\n                        }\n                    }\n                ]\n            }\n        ],\n        \"rewardGroups\": [\n            {\n                \"promotionRewards\": [\n                    {\n                        \"type\": \"DiscountValueReward\",\n                        \"value\": \"600\",\n                        \"products\": [\n                            {\n                                \"quantity\": 1,\n                                \"upcs\": [\n                                    \"037000509783\",\n                                    \"037000509639\",\n                                    \"037000509493\",\n                                    \"037000509646\",\n                                    \"037000088868\",\n                                    \"037000138785\",\n                                    \"037000088752\",\n                                    \"037000138822\"\n                                ],\n                                \"brands\": [\n                                    {\n                                        \"brand\": \"2\",\n                                        \"products\": [\n                                            \"23\"\n                                        ]\n                                    }\n                                ]\n                            }\n                        ]\n                    }\n                ]\n            }\n        ],\n        \"conditionRewardNodes\": [\n            {\n                \"conditionGroupElementIndex\": 0,\n                \"rewardGroupElementIndex\": null,\n                \"conditionRewardNodes\": [\n                    {\n                        \"conditionGroupElementIndex\": 1,\n                        \"rewardGroupElementIndex\": 0\n                    }\n                ]\n            }\n        ]\n    },\n    \"startDate\": \"2020-01-01T14:00:00\",\n    \"displayByDate\": \"2020-01-31T14:00:00\",\n    \"endDate\": \"2020-01-31T14:00:00\",\n    \"budgetId\": \"{{budgetId}}\",\n    \"familyCode\": \"130\",\n    \"gs1Databar\": \"81101007560913123933001101303170701\",\n    \"nonNegotiable\": false,\n    \"properties\": {\n        \"templateName\": {\n            \"type\": \"prop_string\",\n            \"value\": \"custom\"\n        }\n    },\n    \"timezone\": \"America/Los_Angeles\",\n    \"mfrId\": \"1234567\",\n    \"status\": \"DRAFT\",\n    \"id\": null\n}"
+            },
+            "url": "{{url}}:{{portJedha}}/promotions/"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "2ac3bbce-cfc0-4eca-82f0-1b541b9fcc89",
+          "name": "Promotion_WatchVideoCond_FreeProductRew",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "3d8edc0f-0050-4a0c-aad8-0a79ba49b8eb",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const testObject = pm.response.json();",
+                  "",
+                  "pm.environment.set(\"promo_id\", testObject.id);",
+                  "",
+                  "",
+                  "pm.test(\"Promo contains Id\", function() {",
+                  "    const Id = testObject.id;",
+                  "    const lengthId = Id.length > 0;",
+                  "    pm.expect(lengthId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains start date\", function() {",
+                  "    const startDate = new Date(testObject.startDate);",
+                  "    const isADate = Object.prototype.toString.call(startDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains end date\", function() {",
+                  "    const endDate = new Date(testObject.endDate);",
+                  "    const isADate = Object.prototype.toString.call(endDate) === '[object Date]';",
+                  "    pm.expect(isADate).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains budgetId\", function() {",
+                  "    const budgetId = testObject.budgetId;",
+                  "    const lengthbudgetId = budgetId.length > 0;",
+                  "    pm.expect(lengthbudgetId).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains familyCode with 3 digits\", function() {",
+                  "    const familyCode = testObject.familyCode;",
+                  "    const lengthfamilyCode = familyCode.length == 3;",
+                  "    pm.expect(lengthfamilyCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains gs1Databar with more than 25 digits\", function() {",
+                  "    const gs1Databar = testObject.gs1Databar;",
+                  "    const lengthgs1Databar = gs1Databar.length > 25;",
+                  "    pm.expect(lengthgs1Databar).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains title\", function() {",
+                  "    const title = testObject.title;",
+                  "    const lengthTitle = title.length > 0;",
+                  "    pm.expect(lengthTitle).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains text\", function() {",
+                  "    const text = testObject.text;",
+                  "    const lengthText = text.length > 0;",
+                  "    pm.expect(lengthText).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains details\", function() {",
+                  "    const details = testObject.details;",
+                  "    const lengthDetails = details.length > 0;",
+                  "    pm.expect(lengthDetails).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains promo code\", function() {",
+                  "    const promoCode = testObject.providerPromotionCode;",
+                  "    const lengthPromoCode = promoCode.length > 0;",
+                  "    pm.expect(lengthPromoCode).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains images link\", function() {",
+                  "    const images = testObject.images;",
+                  "    const lengthimages = images.length > 0;",
+                  "    pm.expect(lengthimages).to.eql(true);",
+                  "});",
+                  "",
+                  "pm.test(\"Promo contains timezone\", function() {",
+                  "    const timezone = testObject.timezone;",
+                  "    const lengthTimezone = timezone.length > 0;",
+                  "    pm.expect(lengthTimezone).to.eql(true);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Status is Draft\", function () {",
+                  "    const status = testObject.status;",
+                  "    pm.expect(status).to.eql(\"DRAFT\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "2ba26457-225a-45e5-84e2-7af90822fc3b",
+                "exec": [
+                  "console.log(\"request body\", pm.request.body.raw);",
+                  "console.log( JSON.parse(pm.request.body.raw));",
+                  "//const promoCentsOffJson = JSON.parse(pm.request.body.raw);",
+                  "const promoWVCFPRJson = pm.request.body.raw;",
+                  "",
+                  "pm.environment.set(\"promoWVCFPRJson\",promoWVCFPRJson);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Watch video get free Tide Pods\",\n    \"providerPromotionCode\": \"131240\",\n    \"text\": \"Spend 100 points get 10% off basket\",\n    \"details\": \"***Template Samples, API, Jedha Smoke Testing*** Dealer: Submission to Procter & Gamble signifies compliance with 'Requirements for Proper Coupon Redemption.' Please visit this link for coupon terms for proper redemption: http://www.pg.com/en_US/downloads/partners_suppliers/PG_Coupon_Terms_of_Proper_Redemption.pdf. Limit of one coupon per item. Consumer: Limit ONE coupon per purchase of products and quantities stated. Any other use constitutes fraud. Coupons are not authorized if purchasing products for resale. You may pay sales tax. Not valid in Puerto Rico.\",\n    \"images\": [\n        \"5c2d49835866540cfab23a25\"\n    ],\n    \"conditionRewardGraph\": {\n        \"conditionGroups\": [\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"ClipCondition\"\n                    }\n                ]\n            },\n            {\n                \"promotionConditions\": [\n                    {\n                        \"type\": \"WatchVideoCondition\",\n                        \"url\": \"http:/youtube.com\"\n                    }\n                ]\n            }\n        ],\n        \"rewardGroups\": [\n            {\n                \"promotionRewards\": [\n                    {\n                        \"type\": \"FreeProductReward\",\n                        \"maxValue\": \"500\",\n                        \"product\": [\n                            {\n                                \"quantity\": \"1\",\n                                \"upcs\": [\n                                    \"037000509783\",\n                                    \"037000509639\",\n                                    \"037000509493\",\n                                    \"037000509646\",\n                                    \"037000088868\",\n                                    \"037000138785\",\n                                    \"037000088752\",\n                                    \"037000138822\"\n                                ],\n                                \"brands\": [\n                                    {\n                                        \"brand\": \"2\",\n                                        \"products\": [\n                                            \"22\",\n                                            \"23\"\n                                        ]\n                                    }\n                                ]\n                            }\n                        ]\n                    }\n                ]\n            }\n        ],\n        \"conditionRewardNodes\": [\n            {\n                \"conditionGroupElementIndex\": 0,\n                \"rewardGroupElementIndex\": null,\n                \"conditionRewardNodes\": [\n                    {\n                        \"conditionGroupElementIndex\": 1,\n                        \"rewardGroupElementIndex\": 0\n                    }\n                ]\n            }\n        ]\n    },\n    \"startDate\": \"2020-01-01T14:00:00\",\n    \"displayByDate\": \"2020-01-31T14:00:00\",\n    \"endDate\": \"2020-01-31T14:00:00\",\n    \"budgetId\": \"{{budgetId}}\",\n    \"familyCode\": \"130\",\n    \"gs1Databar\": \"81101007560913123933001101303170701\",\n    \"nonNegotiable\": false,\n    \"properties\": {\n        \"templateName\": {\n            \"type\": \"prop_string\",\n            \"value\": \"custom\"\n        }\n    },\n    \"timezone\": \"America/Los_Angeles\",\n    \"mfrId\": \"1234567\",\n    \"status\": \"DRAFT\",\n    \"id\": null\n}"
+            },
+            "url": "{{url}}:{{portJedha}}/promotions/"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "_postman_id": "b3728a13-7893-413a-9e81-c9ff98244135",
       "name": "Get  Promotions",
       "event": [
